@@ -15,9 +15,10 @@ import {
   Briefcase, 
   Camera 
 } from 'lucide-react';
+import { useInView } from '@/hooks/use-in-view';
 
 const ServicesGrid = () => {
-  const [sectionVisible, setSectionVisible] = useState(false);
+  const [sectionRef, sectionVisible] = useInView({ threshold: 0.2 });
 
   const services = [
     {
@@ -106,13 +107,8 @@ const ServicesGrid = () => {
     }
   ];
 
-  useEffect(() => {
-    const timer = setTimeout(() => setSectionVisible(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <section className="py-20 px-6 bg-muted/30">
+    <section ref={sectionRef} className="py-20 px-6 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">

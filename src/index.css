@@ -165,8 +165,9 @@
   }
   
   .card-hover:hover {
-    box-shadow: 0 8px 32px 0 rgba(80, 120, 200, 0.10), 0 1.5px 6px 0 rgba(80, 120, 200, 0.08);
-    background: rgba(245, 250, 255, 0.7);
+    box-shadow: 0 12px 36px 0 rgba(80, 120, 200, 0.18), 0 2px 8px 0 rgba(80, 120, 200, 0.12);
+    background: rgba(245, 250, 255, 0.85);
+    transform: scale(1.035) translateY(-8px);
   }
   
   .elastic-hover {
@@ -226,6 +227,11 @@
   .shine-button:hover::before {
     left: 130%;
     transition: left 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+
+  .shine-button:hover {
+    background: #1a2238 !important;
+    color: #fff !important;
   }
 }
 
