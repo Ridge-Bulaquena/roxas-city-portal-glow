@@ -233,6 +233,19 @@
     background: #1a2238 !important;
     color: #fff !important;
   }
+
+  .section-underline {
+    height: 1px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--chart-1)));
+    margin: 0 auto;
+    transition: width 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+    width: 96px;
+    max-width: 100%;
+  }
+
+  .group:hover .section-underline {
+    width: 100%;
+  }
 }
 
 /* Times Now font-face (fallback to Times New Roman if not available) */
