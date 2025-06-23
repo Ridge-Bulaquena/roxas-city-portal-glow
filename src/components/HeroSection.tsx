@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { CarouselApi } from '@/components/ui/carousel';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
@@ -8,7 +7,7 @@ const slides = [
     headline: 'WELCOME RESIDENT',
     subtext: 'Your City, Your Voice, Your Future',
     description: 'Roxas City Connect empowers every citizen to participate in building our community. Access city services, share your ideas, and stay connected with your local government.',
-    ctas: ['Get Started', 'City Services', 'Share Feedback'],
+    ctas: ['Get Started', 'City Services'],
   },
   {
     headline: 'YOUR CITY, YOUR VOICE.',
@@ -37,39 +36,14 @@ const slides = [
   },
 ];
 
-const SLIDE_DURATION = 2000;
+const SLIDE_DURATION = 500;
 
-const TypewriterGradient = ({ text, speed = 40, className = '' }) => {
-  const [displayed, setDisplayed] = useState('');
-  useEffect(() => {
-    setDisplayed('');
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed(text.slice(0, i + 1));
-      i++;
-      if (i >= text.length) clearInterval(interval);
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text, speed]);
-  return (
-    <span
-      className={`inline-block bg-gradient-to-r from-slate-400 via-blue-300 to-blue-900 bg-[length:200%_100%] bg-clip-text text-transparent animate-gradient-shimmer ${className}`}
-      style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-    >
-      {displayed}
-    </span>
-  );
-};
-
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-export default function HeroSection() {
+const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [typewriterDone, setTypewriterDone] = useState(false);
-  const [subtitleVisible, setSubtitleVisible] = useState(false);
-  const [descVisible, setDescVisible] = useState(false);
-  const [buttonVisible, setButtonVisible] = useState(false);
+  const [showSubtitle, setShowSubtitle] = useState(false);
+  const [showDesc, setShowDesc] = useState(false);
+  const [showBtn1, setShowBtn1] = useState(false);
+  const [showBtn2, setShowBtn2] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -79,25 +53,23 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
-    setTypewriterDone(false);
-    setSubtitleVisible(false);
-    setDescVisible(false);
-    setButtonVisible(false);
-    const typeTime = prefersReducedMotion() ? 0 : slides[currentSlide].headline.length * 40 + 200;
-    const subtitleTimer = setTimeout(() => setSubtitleVisible(true), prefersReducedMotion() ? 0 : typeTime + 200);
-    const descTimer = setTimeout(() => setDescVisible(true), prefersReducedMotion() ? 0 : typeTime + 400);
-    const btnTimer = setTimeout(() => setButtonVisible(true), prefersReducedMotion() ? 0 : typeTime + 600);
-    const doneTimer = setTimeout(() => setTypewriterDone(true), prefersReducedMotion() ? 0 : typeTime);
+    setShowSubtitle(false);
+    setShowDesc(false);
+    setShowBtn1(false);
+    setShowBtn2(false);
+    const subtitleTimer = setTimeout(() => setShowSubtitle(true), 150);
+    const descTimer = setTimeout(() => setShowDesc(true), 300);
+    const btn1Timer = setTimeout(() => setShowBtn1(true), 450);
+    const btn2Timer = setTimeout(() => setShowBtn2(true), 600);
     return () => {
       clearTimeout(subtitleTimer);
       clearTimeout(descTimer);
-      clearTimeout(btnTimer);
-      clearTimeout(doneTimer);
+      clearTimeout(btn1Timer);
+      clearTimeout(btn2Timer);
     };
   }, [currentSlide]);
 
   const slide = slides[currentSlide];
-  const ctas = slide.ctas || [];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
@@ -106,80 +78,122 @@ export default function HeroSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={slide.headline}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -40 }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="space-y-8"
             >
-              {/* Title */}
+              {/* Title with typewriter steps and shimmer */}
               <motion.h1
-                className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-3xl md:text-6xl lg:text-7xl uppercase"
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-3xl md:text-6xl lg:text-7xl uppercase shimmer-gradient"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0 }}
+                style={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  borderRight: '2px solid #aee7ff',
+                  animation: `typing 0.5s steps(20, end) 1 both, shimmer 1.5s linear infinite`,
+                  background: 'linear-gradient(90deg, slategray, #aee7ff, #1a2238)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                  WebkitTextFillColor: 'transparent',
+                }}
               >
-                <TypewriterGradient text={slide.headline} speed={prefersReducedMotion() ? 0 : 40} />
+                {slide.headline}
               </motion.h1>
               {/* Subtitle */}
-              <motion.p
-                className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                {slide.subtext}
-              </motion.p>
+              <AnimatePresence>
+                {showSubtitle && (
+                  <motion.p
+                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2, delay: 0 }}
+                  >
+                    {slide.subtext}
+                  </motion.p>
+                )}
+              </AnimatePresence>
               {/* Description */}
-              {slide.description && (
-                      <motion.p
-                  className="mb-6 max-w-2xl mx-auto text-center text-lg text-muted-foreground"
-                  initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                      >
-                  {slide.description}
-                      </motion.p>
-                    )}
+              <AnimatePresence>
+                {showDesc && slide.description && (
+                  <motion.p
+                    className="mb-6 max-w-2xl mx-auto text-center text-lg text-muted-foreground"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2, delay: 0 }}
+                  >
+                    {slide.description}
+                  </motion.p>
+                )}
+              </AnimatePresence>
               {/* CTAs */}
-              <motion.div
-                className="w-full flex flex-wrap justify-center gap-4 mt-2"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-              >
-                {ctas.map((cta, i) => (
-                      <motion.div
-                    key={cta}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3, delay: 0.15 * i }}
-                    style={{ display: 'inline-block' }}
+              <div className="w-full flex flex-wrap justify-center gap-4 mt-2">
+                <AnimatePresence>
+                  {showBtn1 && slide.ctas[0] && (
+                    <motion.div
+                      key={slide.ctas[0]}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2, delay: 0 }}
+                      style={{ display: 'inline-block' }}
+                    >
+                      <Button
+                        size="lg"
+                        className="service-btn-glass px-7 py-3 text-base font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full min-w-[120px] max-w-[220px]"
+                        style={{ whiteSpace: 'nowrap' }}
                       >
-                        <Button
-                          size="lg"
-                      className="service-btn-glass px-7 py-3 text-base font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full min-w-[120px] max-w-[220px]"
-                      style={{ whiteSpace: 'nowrap' }}
-                        >
-                      {cta}
-                        </Button>
-                      </motion.div>
-                ))}
-              </motion.div>
+                        {slide.ctas[0]}
+                      </Button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {showBtn2 && slide.ctas[1] && (
+                    <motion.div
+                      key={slide.ctas[1]}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2, delay: 0 }}
+                      style={{ display: 'inline-block' }}
+                    >
+                      <Button
+                        size="lg"
+                        className="service-btn-glass px-7 py-3 text-base font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full min-w-[120px] max-w-[220px]"
+                        style={{ whiteSpace: 'nowrap' }}
+                      >
+                        {slide.ctas[1]}
+                      </Button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
-                  </AnimatePresence>
-                </div>
+          </AnimatePresence>
+        </div>
       </div>
       <style>{`
-        @keyframes gradient-shimmer {
+        @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+        }
+        @keyframes shimmer {
           0% { background-position: 0% 50%; }
           100% { background-position: 100% 50%; }
         }
-        .animate-gradient-shimmer {
-          animation: gradient-shimmer 4s linear infinite;
+        .shimmer-gradient {
+          background-size: 200% 100%;
         }
       `}</style>
     </section>
   );
-}
+};
+
+export default HeroSection;
