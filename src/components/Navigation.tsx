@@ -38,14 +38,36 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(true);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    let lastScrollY = 0;
+    const delta = 20;
+    const topBarHeight = 50;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.pageYOffset;
+      
+      // Check if we've scrolled past the delta threshold
+      if (Math.abs(currentScrollY - lastScrollY) <= delta) return;
+      
+      // Determine scroll direction and update nav visibility
+      if (currentScrollY > lastScrollY && currentScrollY > topBarHeight) {
+        // Scrolling down - hide nav
+        setIsNavVisible(false);
+      } else {
+        // Scrolling up - show nav
+        setIsNavVisible(true);
+      }
+      
+      // Update scrolled state for styling
+      setIsScrolled(currentScrollY > 20);
+      lastScrollY = currentScrollY;
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -233,8 +255,8 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
 
   return (
     <>
-      {/* Topmost Thin Bar */}
-      <div className="w-full h-[50px] flex items-center justify-between px-4 text-xs font-medium bg-[#0038A8] text-[#AEDFF7] sticky top-0 z-50">
+      {/* Topmost Thin Bar - Always Fixed */}
+      <div className="w-full h-[50px] flex items-center justify-between px-4 text-xs font-medium bg-[#0038A8] text-[#AEDFF7] fixed top-0 left-0 right-0 z-[1000]">
         {/* Left: Quick Links */}
         <div className="flex items-center gap-4">
           <a href="/" className="hover:text-[#D0EFFF] transition-colors">Home</a>
@@ -268,8 +290,18 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-[#AEDFF7] text-[#AEDFF7] font-semibold hover:bg-[#AEDFF7] hover:text-[#0038A8] transition-colors" style={{fontSize: 13}}>Register</a>
         </div>
       </div>
-      {/* Main Navigation Bar */}
-      <nav className={`fixed top-[50px] left-0 right-0 z-40 transition-all duration-300 bg-[#14274E] h-[60px] flex items-center`}>
+      
+      {/* Main Navigation Bar - Slides up/down based on scroll */}
+      <motion.nav 
+        className="fixed top-[50px] left-0 right-0 z-40 bg-[#14274E] h-[60px] flex items-center"
+        initial={{ y: 0 }}
+        animate={{ y: isNavVisible ? 0 : -60 }}
+        transition={{ 
+          duration: 0.35, 
+          ease: "easeOut"
+        }}
+        style={{ willChange: 'transform' }}
+      >
         <div className="max-w-7xl mx-auto px-6 md:px-4 w-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
@@ -394,7 +426,24 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
             </div>
           )}
         </div>
-      </nav>
+      </motion.nav>
+      
+      {/* Spacer to prevent content from hiding behind fixed nav */}
+      <div className="h-[110px]"></div>
+      
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          .nav-slide {
+            transition: none !important;
+          }
+          
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+      `}</style>
     </>
   );
 };
