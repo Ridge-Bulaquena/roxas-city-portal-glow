@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselApi } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselApi } from '@/components/ui/carousel';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // TypewriterCascade: animates each letter with typewriter, scale, hover, and exit
@@ -31,19 +31,35 @@ const TypewriterCascade = ({ text, delay = 0, restartKey = 0 }) => {
 
 const slides = [
   {
-    headline: 'Empowering Roxas Citizens',
-    subtext: 'Access city services, updates, and participate in local governance. Your involvement shapes our future.',
-    cta: 'Explore Services',
+    headline: 'Welcome Resident',
+    subtext: 'Your City, Your Voice, Your Future',
+    description: 'Roxas City Connect empowers every citizen to participate in building our community. Access city services, share your ideas, and stay connected with your local government.',
+    ctas: ['Get Started', 'City Services', 'Share Feedback'],
   },
   {
-    headline: 'Transparent Governance',
-    subtext: 'Track budgets, projects, and performance. We believe in open data and accountable leadership.',
-    cta: 'View Transparency',
+    headline: 'Your City, Your Voice.',
+    subtext: 'Real-time platforms for public participation in governance.',
+    ctas: ['Get Started', 'Learn More'],
   },
   {
-    headline: 'Your Voice Matters',
-    subtext: 'Join community discussions, submit feedback, and help build a better Roxas for everyone.',
-    cta: 'Join the Conversation',
+    headline: 'Transparency That Inspires Trust.',
+    subtext: 'Budgets, projects, and decisions — visible and accountable.',
+    ctas: ['View Budget', 'Open Data'],
+  },
+  {
+    headline: 'Smart Services for Every Citizen.',
+    subtext: 'Access health, education, permits, and more — faster, simpler.',
+    ctas: ['Explore Services', 'Get Started'],
+  },
+  {
+    headline: 'A Government That Listens.',
+    subtext: 'Submit feedback, report issues, and shape policies online.',
+    ctas: ['Share Feedback', 'Report Issue'],
+  },
+  {
+    headline: 'Innovation Rooted in Community.',
+    subtext: 'Built by and for the people of Roxas, with civic technology.',
+    ctas: ['Learn More', 'Join Community'],
   },
 ];
 
@@ -64,7 +80,7 @@ const HeroSection = () => {
         const next = (active + 1) % slides.length;
         emblaApi.current.scrollTo(next);
       }
-    }, 2000);
+    }, 7000);
     return () => {
       if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
     };
@@ -91,28 +107,49 @@ const HeroSection = () => {
             {slides.map((slide, idx) => (
               <CarouselItem key={slide.headline}>
                 <div className="flex flex-col items-center justify-center min-h-[40vh]">
-                  <h1
-                    className="mb-12 hero-timesnow text-[#1a2238] font-bold w-full text-center whitespace-nowrap md:whitespace-nowrap overflow-hidden text-3xl md:text-6xl lg:text-7xl"
-                    style={{
-                      textOverflow: 'ellipsis',
-                      overflowWrap: 'break-word',
-                      wordBreak: 'break-word',
-                      lineHeight: 1.1,
-                    }}
-                  >
-                    <TypewriterCascade text={slide.headline} delay={0.2} restartKey={restartKey + idx * 100} />
-                  </h1>
+                  <AnimatePresence mode="wait">
+                    <motion.h1
+                      key={restartKey + '-headline'}
+                      className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-3xl md:text-6xl lg:text-7xl"
+                      style={{
+                        textOverflow: 'ellipsis',
+                        overflowWrap: 'break-word',
+                        wordBreak: 'break-word',
+                        lineHeight: 1.1,
+                      }}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -30 }}
+                      transition={{ duration: 0.7, ease: 'easeInOut' }}
+                    >
+                      {slide.headline}
+                    </motion.h1>
+                  </AnimatePresence>
                   <AnimatePresence>
                     {subtitleVisible && (
                       <motion.p
                         key={restartKey + '-subtitle'}
-                        className="hero-timesnow-sub mb-8 max-w-2xl mx-auto text-center"
+                        className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.4, delay: 0.2 }}
                       >
                         {slide.subtext}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {slide.description && subtitleVisible && (
+                      <motion.p
+                        key={restartKey + '-desc'}
+                        className="mb-6 max-w-2xl mx-auto text-center text-lg text-muted-foreground"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.4, delay: 0.35 }}
+                      >
+                        {slide.description}
                       </motion.p>
                     )}
                   </AnimatePresence>
@@ -123,15 +160,18 @@ const HeroSection = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="w-full flex justify-center"
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                        className="w-full flex flex-wrap justify-center gap-4"
                       >
-                        <Button
-                          size="lg"
-                          className="px-8 py-4 text-lg font-semibold hover-glow elastic-hover animate-glow-pulse hover:animate-none rounded-full"
-                        >
-                          {slide.cta}
-                        </Button>
+                        {slide.ctas && slide.ctas.map((cta, i) => (
+                          <Button
+                            key={cta}
+                            size="lg"
+                            className="service-btn-glass px-8 py-4 text-lg font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full"
+                          >
+                            {cta}
+                          </Button>
+                        ))}
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -139,8 +179,6 @@ const HeroSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
         </Carousel>
       </div>
     </section>
