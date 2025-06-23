@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -156,7 +155,7 @@ const ServicesGrid = () => {
                   <CardDescription className="text-sm">
                     {service.description}
                   </CardDescription>
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full shine-button">
                     {service.buttonText}
                   </Button>
                 </CardContent>

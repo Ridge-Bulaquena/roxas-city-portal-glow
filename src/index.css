@@ -143,6 +143,7 @@
     @apply transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-2 hover:bg-accent;
     position: relative;
     overflow: hidden;
+    z-index: 1;
   }
   
   .card-hover::before {
@@ -154,11 +155,18 @@
     height: 200%;
     background: linear-gradient(45deg, transparent, rgba(161, 208, 243, 0.1), transparent);
     transform: translateX(-100%) translateY(-100%) rotate(45deg);
-    transition: transform 0.6s ease-out;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    pointer-events: none;
+    z-index: 2;
   }
   
   .card-hover:hover::before {
     transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+  
+  .card-hover:hover {
+    box-shadow: 0 8px 32px 0 rgba(80, 120, 200, 0.10), 0 1.5px 6px 0 rgba(80, 120, 200, 0.08);
+    background: rgba(245, 250, 255, 0.7);
   }
   
   .elastic-hover {
@@ -193,6 +201,31 @@
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .shine-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .shine-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.1) 100%);
+    transform: skewX(-20deg);
+    transition: left 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .shine-button:hover::before {
+    left: 130%;
+    transition: left 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
   }
 }
 
