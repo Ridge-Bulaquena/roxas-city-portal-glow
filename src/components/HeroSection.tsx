@@ -132,15 +132,15 @@ export default function HeroSection() {
               </motion.p>
               {/* Description */}
               {slide.description && (
-                <motion.p
+                      <motion.p
                   className="mb-6 max-w-2xl mx-auto text-center text-lg text-muted-foreground"
                   initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                >
+                      >
                   {slide.description}
-                </motion.p>
-              )}
+                      </motion.p>
+                    )}
               {/* CTAs */}
               <motion.div
                 className="w-full flex flex-wrap justify-center gap-4 mt-2"
@@ -149,27 +149,27 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
                 {ctas.map((cta, i) => (
-                  <motion.div
+                      <motion.div
                     key={cta}
                     initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                        animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.3, delay: 0.15 * i }}
                     style={{ display: 'inline-block' }}
-                  >
-                    <Button
-                      size="lg"
+                      >
+                        <Button
+                          size="lg"
                       className="service-btn-glass px-7 py-3 text-base font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full min-w-[120px] max-w-[220px]"
                       style={{ whiteSpace: 'nowrap' }}
-                    >
+                        >
                       {cta}
-                    </Button>
-                  </motion.div>
+                        </Button>
+                      </motion.div>
                 ))}
               </motion.div>
             </motion.div>
-          </AnimatePresence>
-        </div>
+                  </AnimatePresence>
+                </div>
       </div>
       <style>{`
         @keyframes gradient-shimmer {

@@ -28,6 +28,7 @@ import {
   Phone,
   Clock
 } from "lucide-react";
+import MarqueeBanner from "./MarqueeBanner";
 
 interface NavigationProps {
   userType: 'resident' | 'official' | 'visitor';
@@ -341,7 +342,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 <option value="visitor">Visitor</option>
                 <option value="official">Official</option>
               </select>
-            </div>
+          </div>
 
             <Button
               variant="outline"
@@ -400,6 +401,9 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           </div>
         )}
       </div>
+
+      {/* Role-based notification banner */}
+      {userType === 'resident' && <MarqueeBanner />}
     </nav>
   );
 };
