@@ -81,23 +81,6 @@ const TransparencySection = () => {
             </Card>
           ))}
         </div>
-
-        {/* Chart Placeholder */}
-        <Card className={`transition-all duration-1000 ${
-          sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`} style={{ transitionDelay: '1600ms' }}>
-          <CardHeader>
-            <CardTitle className="text-2xl font-semibold text-center">
-              City Performance Overview
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="h-64 flex items-center justify-center">
-            <div className="text-center text-muted-foreground">
-              <div className="w-16 h-16 bg-gradient-to-br from-chart-1 to-chart-2 rounded-full mx-auto mb-4 animate-glow-pulse"></div>
-              <p>Interactive charts and visualizations coming soon</p>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </section>
   );
