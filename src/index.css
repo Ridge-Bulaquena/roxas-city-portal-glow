@@ -140,7 +140,7 @@
   }
   
   .card-hover {
-    @apply transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-2 hover:bg-accent;
+    @apply transition-all duration-200 ease-out hover:shadow-xl hover:-translate-y-2 hover:bg-accent;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -238,29 +238,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: fit-content;
-    margin: 0 auto 2.5rem auto; /* 2.5rem = 40px for extra space below */
-  }
-
-  .section-underline {
-    height: 1px;
-    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--chart-1)));
-    transition: width 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
-    width: 96px;
-    max-width: 100%;
-  }
-
-  .group:hover .section-underline {
     width: 100%;
   }
 
+  .section-underline {
+    height: 4px;
+    width: 64px;
+    background: #1a2238;
+    border-radius: 2px;
+    margin: 0 auto;
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .group:hover .section-underline {
+    width: 400px;
+  }
+
   .service-btn-glass {
-    @apply transition-all duration-300 font-semibold rounded-lg relative overflow-hidden bg-slate-800 text-slate-100 border-none shadow-none;
+    @apply transition-all duration-200 font-semibold relative overflow-hidden border-none shadow-none;
+    background: #818b97 !important;
+    color: #fafafa !important;
+    border-radius: 100px !important;
+    width: 100%;
   }
   .service-btn-glass:hover, .service-btn-glass:focus {
-    background: rgba(30, 41, 59, 0.85); /* slate-800 with opacity */
-    color: #e0e7ef; /* light blue-grey */
-    box-shadow: 0 2px 16px 0 rgba(30, 41, 59, 0.10);
+    background: #1a2238 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px 0 rgba(26, 34, 56, 0.25);
   }
   .service-btn-glass::after {
     content: "";
