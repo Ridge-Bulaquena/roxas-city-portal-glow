@@ -2,6 +2,7 @@
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ServicesGrid from '@/components/ServicesGrid';
+import SlidersSection from '@/components/SlidersSection';
 import TransparencySection from '@/components/TransparencySection';
 import CommunityVoice from '@/components/CommunityVoice';
 import Footer from '@/components/Footer';
@@ -13,6 +14,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <ServicesGrid />
+        <SlidersSection />
         <TransparencySection />
         <CommunityVoice />
       </main>

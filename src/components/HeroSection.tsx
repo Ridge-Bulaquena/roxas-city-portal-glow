@@ -18,7 +18,22 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background to-muted">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+        </video>
+        {/* White gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/70 to-white/50"></div>
+      </div>
+
       {/* Background cityscape effect */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-muted to-transparent"></div>
@@ -63,26 +78,10 @@ const HeroSection = () => {
         }`}>
           <Button 
             size="lg" 
-            className="px-8 py-4 text-lg font-semibold hover-glow elastic-hover animate-glow-pulse hover:animate-none"
+            className="px-8 py-4 text-lg font-semibold hover-glow elastic-hover animate-glow-pulse hover:animate-none rounded-full"
           >
             Explore Your City Portal
           </Button>
-        </div>
-
-        {/* Floating particles effect */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute w-2 h-2 bg-chart-1 rounded-full opacity-30 animate-float`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
-              }}
-            />
-          ))}
         </div>
       </div>
     </section>

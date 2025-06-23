@@ -1,20 +1,20 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [logoVisible, setLogoVisible] = useState(false);
   const [navItemsVisible, setNavItemsVisible] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: 'Health', delay: 500 },
-    { label: 'Education', delay: 1000 },
-    { label: 'Welfare', delay: 1500 },
-    { label: 'Transparency', delay: 2000 },
-    { label: 'Infrastructure', delay: 2500 },
-    { label: 'Environment', delay: 3000 },
-    { label: 'Participation', delay: 3500 },
-    { label: 'Open Data', delay: 4000 }
+    { label: 'Home', delay: 500 },
+    { label: 'Services', delay: 1000 },
+    { label: 'Transparency', delay: 1500 },
+    { label: 'Projects', delay: 2000 },
+    { label: 'News', delay: 2500 },
+    { label: 'Contact', delay: 3000 }
   ];
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Navigation = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -38,7 +38,7 @@ const Navigation = () => {
             </span>
           </div>
 
-          {/* Navigation Items */}
+          {/* Desktop Navigation Items */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
               <a
@@ -57,18 +57,55 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Auth Buttons */}
-          <div className={`flex items-center space-x-4 transition-all duration-600 ${
+          {/* Desktop Auth Buttons */}
+          <div className={`hidden md:flex items-center space-x-4 transition-all duration-600 ${
             navItemsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-          }`} style={{ transitionDelay: '4500ms' }}>
-            <Button variant="ghost" className="elastic-hover">
+          }`} style={{ transitionDelay: '3500ms' }}>
+            <Button variant="ghost" className="elastic-hover rounded-full">
               Login
             </Button>
-            <Button className="elastic-hover hover-glow">
+            <Button className="elastic-hover hover-glow rounded-full">
               Register
             </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href="#"
+                  className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-full transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <div className="pt-4 pb-2 space-y-2">
+                <Button variant="ghost" className="w-full rounded-full">
+                  Login
+                </Button>
+                <Button className="w-full rounded-full">
+                  Register
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
