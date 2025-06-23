@@ -74,7 +74,29 @@ const HeroSection = () => {
   const slide = slides[currentSlide];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+          style={{ zIndex: -2 }}
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+          <source src="/videos/hero-background.webm" type="video/webm" />
+          {/* Fallback background if video doesn't load */}
+        </video>
+        {/* White Overlay */}
+        <div 
+          className="hero-video-overlay absolute inset-0 bg-white/50"
+          style={{ zIndex: -1 }}
+        ></div>
+      </div>
+      
+      {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6 py-32">
         <div className="relative w-full h-full">
           <AnimatePresence mode="wait">
@@ -91,7 +113,7 @@ const HeroSection = () => {
             >
               {/* Title with flexible sizing and gradient shimmer */}
               <motion.h1
-                className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase shimmer-gradient leading-tight"
+                className="mb-6 hero-timesnow text-[#14274E] font-bold w-full text-center overflow-hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase shimmer-gradient leading-tight"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ 
@@ -102,7 +124,7 @@ const HeroSection = () => {
                   whiteSpace: 'normal',
                   wordWrap: 'break-word',
                   maxWidth: '100%',
-                  background: 'linear-gradient(90deg, #64748b, #aee7ff, #1a2238)',
+                  background: 'linear-gradient(90deg, #14274E, #2b5ecf, #1a2238)',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
@@ -118,7 +140,7 @@ const HeroSection = () => {
               <AnimatePresence>
                 {showSubtitle && (
                   <motion.p
-                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-gray-700 font-figtree font-light tracking-wide leading-relaxed"
+                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-[#14274E] font-figtree font-light tracking-wide leading-relaxed"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
@@ -136,7 +158,7 @@ const HeroSection = () => {
               <AnimatePresence>
                 {showDesc && slide.description && (
                   <motion.p
-                    className="mb-6 max-w-2xl mx-auto text-center text-base sm:text-lg text-gray-600 leading-relaxed"
+                    className="mb-6 max-w-2xl mx-auto text-center text-base sm:text-lg text-[#2a2b37] leading-relaxed"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
@@ -167,7 +189,7 @@ const HeroSection = () => {
                     >
                       <Button
                         size="lg"
-                        className="service-btn-glass px-6 sm:px-7 py-3 text-sm sm:text-base font-semibold transition-all duration-200 hover:scale-105 focus:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/60 rounded-full min-w-[120px] max-w-[200px] sm:max-w-[220px]"
+                        className="service-btn-glass px-6 sm:px-7 py-3 text-sm sm:text-base font-semibold transition-all duration-200 hover:scale-105 focus:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#14274E]/60 rounded-full min-w-[120px] max-w-[200px] sm:max-w-[220px]"
                         style={{ 
                           whiteSpace: 'nowrap',
                           willChange: 'transform'
@@ -194,7 +216,7 @@ const HeroSection = () => {
                     >
                       <Button
                         size="lg"
-                        className="service-btn-glass px-6 sm:px-7 py-3 text-sm sm:text-base font-semibold transition-all duration-200 hover:scale-105 focus:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/60 rounded-full min-w-[120px] max-w-[200px] sm:max-w-[220px]"
+                        className="service-btn-glass px-6 sm:px-7 py-3 text-sm sm:text-base font-semibold transition-all duration-200 hover:scale-105 focus:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#14274E]/60 rounded-full min-w-[120px] max-w-[200px] sm:max-w-[220px]"
                         style={{ 
                           whiteSpace: 'nowrap',
                           willChange: 'transform'
@@ -217,6 +239,14 @@ const HeroSection = () => {
           100% { background-position: 100% 50%; }
         }
         
+        .hero-video-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.5);
+          z-index: -1;
+          pointer-events: none;
+        }
+        
         @media (prefers-reduced-motion: reduce) {
           .shimmer-gradient {
             animation: none !important;
@@ -230,17 +260,18 @@ const HeroSection = () => {
         }
         
         .service-btn-glass {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #1a2238;
+          border: 2px solid rgba(20, 39, 78, 0.2);
+          color: #14274E;
           font-weight: 600;
         }
         
         .service-btn-glass:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.3);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          background: rgba(255, 255, 255, 1);
+          border-color: rgba(20, 39, 78, 0.4);
+          box-shadow: 0 8px 32px rgba(20, 39, 78, 0.15);
+          color: #14274E;
         }
       `}</style>
     </section>
