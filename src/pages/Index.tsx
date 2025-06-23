@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ServicesGrid from '@/components/ServicesGrid';
@@ -14,7 +13,6 @@ const Index = () => {
       <main>
         <HeroSection />
         <ServicesGrid />
-        <SlidersSection />
         <TransparencySection />
         <CommunityVoice />
       </main>
