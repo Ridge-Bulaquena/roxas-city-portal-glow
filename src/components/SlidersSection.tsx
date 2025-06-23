@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Slider } from '@/components/ui/slider';
 
@@ -24,10 +23,13 @@ const SlidersSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className={`text-center mb-16 transition-all duration-1000 ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        } group`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             City Performance Metrics
           </h2>
+          <div className="section-underline-wrapper">
+            <div className="section-underline"></div>
+          </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Track our progress in key governance areas and see how we're improving together
           </p>
