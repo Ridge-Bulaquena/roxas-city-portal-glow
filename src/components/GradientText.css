@@ -1,0 +1,38 @@
+.animated-gradient-text {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.25;
+  background-size: 200% 200%;
+  animation: gradient-move var(--gradient-speed, 7s) linear infinite;
+}
+
+.text-content {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(90deg, #3a5ba0, #1a2238, #274472, #406882, #3a5ba0);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-move var(--gradient-speed, 7s) linear infinite;
+  font-weight: inherit;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+} 
