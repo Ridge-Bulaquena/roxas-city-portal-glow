@@ -36,7 +36,7 @@ const slides = [
   },
 ];
 
-const SLIDE_DURATION = 500;
+const SLIDE_DURATION = 3000;
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

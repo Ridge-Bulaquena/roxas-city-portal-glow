@@ -234,19 +234,19 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
   return (
     <>
       {/* Topmost Thin Bar */}
-      <div className="w-full h-6 min-h-[24px] flex items-center justify-between px-4 text-xs font-medium bg-[#0038A8] text-white" style={{height: 24}}>
+      <div className="w-full h-6 min-h-[24px] flex items-center justify-between px-4 text-xs font-medium bg-[#f6f9ff] text-gray-800 sticky top-0 z-50" style={{height: 24}}>
         {/* Left: Quick Links */}
         <div className="flex items-center gap-4">
-          <a href="/" className="hover:text-[#AEDFF7] transition-colors">Home</a>
-          <a href="/contact" className="hover:text-[#AEDFF7] transition-colors">Contact</a>
+          <a href="/" className="hover:text-blue-600 transition-colors">Home</a>
+          <a href="/contact" className="hover:text-blue-600 transition-colors">Contact</a>
         </div>
         {/* Center: Search */}
-        <form className="flex items-center bg-white/10 rounded-full px-2 py-1" style={{minWidth: 180, maxWidth: 260}} onSubmit={e => e.preventDefault()}>
-          <svg className="w-4 h-4 text-[#AEDFF7] mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <form className="flex items-center bg-white/80 rounded-full px-2 py-1 border border-gray-200" style={{minWidth: 180, maxWidth: 260}} onSubmit={e => e.preventDefault()}>
+          <svg className="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input
             type="text"
             placeholder="Search…"
-            className="bg-transparent border-none outline-none text-white placeholder:text-[#AEDFF7] w-full min-w-0"
+            className="bg-transparent border-none outline-none text-gray-800 placeholder:text-gray-500 w-full min-w-0"
             style={{fontSize: 13}}
             aria-label="Search"
           />
@@ -256,7 +256,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           <select
             value={userType}
             onChange={e => setUserType(e.target.value as any)}
-            className="rounded-full px-2 py-1 bg-[#0038A8] border border-[#AEDFF7] text-white focus:border-[#AEDFF7] focus:ring-1 focus:ring-[#AEDFF7] text-xs font-medium appearance-none"
+            className="rounded-full px-2 py-1 bg-white border border-gray-300 text-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs font-medium appearance-none"
             style={{minWidth: 90}}
             aria-label="Select user type"
           >
@@ -264,12 +264,12 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
             <option value="visitor">Visitor</option>
             <option value="official">Official</option>
           </select>
-          <a href="/login" className="ml-2 px-3 py-1 rounded-full bg-[#AEDFF7] text-[#0038A8] font-semibold hover:bg-white transition-colors" style={{fontSize: 13}}>Sign In</a>
-          <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-[#AEDFF7] text-[#AEDFF7] font-semibold hover:bg-[#AEDFF7] hover:text-[#0038A8] transition-colors" style={{fontSize: 13}}>Register</a>
+          <a href="/login" className="ml-2 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors" style={{fontSize: 13}}>Sign In</a>
+          <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-blue-600 text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition-colors" style={{fontSize: 13}}>Register</a>
         </div>
       </div>
       {/* Main Navigation Bar */}
-      <nav className={`fixed top-6 left-0 right-0 z-50 transition-all duration-300 ${
+      <nav className={`fixed top-6 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
           : 'bg-white/90 backdrop-blur-sm'
