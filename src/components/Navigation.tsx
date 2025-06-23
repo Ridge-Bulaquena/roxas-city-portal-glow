@@ -256,19 +256,19 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
   return (
     <>
       {/* Topmost Thin Bar - Always Fixed */}
-      <div className="w-full h-[50px] flex items-center justify-between px-4 text-xs font-medium bg-[#0038A8] text-[#AEDFF7] fixed top-0 left-0 right-0 z-[1000]">
+      <div className="w-full h-[50px] flex items-center justify-between px-4 text-xs font-medium bg-[#f0f3f5] text-[#19191a] fixed top-0 left-0 right-0 z-[1000] border-b border-[#e5e5e5]">
         {/* Left: Quick Links */}
         <div className="flex items-center gap-4">
-          <a href="/" className="hover:text-[#D0EFFF] transition-colors">Home</a>
-          <a href="/contact" className="hover:text-[#D0EFFF] transition-colors">Contact</a>
+          <a href="/" className="hover:text-[#2b5ecf] transition-colors font-medium">Home</a>
+          <a href="/contact" className="hover:text-[#2b5ecf] transition-colors font-medium">Contact</a>
         </div>
         {/* Center: Search */}
-        <form className="flex items-center bg-white/10 rounded-full px-2 py-1" style={{minWidth: 180, maxWidth: 260}} onSubmit={e => e.preventDefault()}>
-          <svg className="w-4 h-4 text-[#AEDFF7] mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <form className="flex items-center bg-white rounded-full px-3 py-1 border border-[#e2e5e9] shadow-sm" style={{minWidth: 180, maxWidth: 260}} onSubmit={e => e.preventDefault()}>
+          <svg className="w-4 h-4 text-[#6c737a] mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input
             type="text"
             placeholder="Search…"
-            className="bg-transparent border-none outline-none text-[#AEDFF7] placeholder:text-[#AEDFF7] w-full min-w-0"
+            className="bg-transparent border-none outline-none text-[#2a2b37] placeholder:text-[#6c737a] w-full min-w-0"
             style={{fontSize: 13}}
             aria-label="Search"
           />
@@ -278,7 +278,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           <select
             value={userType}
             onChange={e => setUserType(e.target.value as any)}
-            className="rounded-full px-2 py-1 bg-[#0038A8] border border-[#AEDFF7] text-[#AEDFF7] focus:border-[#D0EFFF] focus:ring-1 focus:ring-[#D0EFFF] text-xs font-medium appearance-none"
+            className="rounded-full px-3 py-1 bg-white border border-[#e2e5e9] text-[#2a2b37] focus:border-[#b6c6e7] focus:ring-1 focus:ring-[#b6c6e7] text-xs font-medium appearance-none shadow-sm"
             style={{minWidth: 90}}
             aria-label="Select user type"
           >
@@ -286,14 +286,14 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
             <option value="visitor">Visitor</option>
             <option value="official">Official</option>
           </select>
-          <a href="/login" className="ml-2 px-3 py-1 rounded-full bg-[#AEDFF7] text-[#0038A8] font-semibold hover:bg-[#D0EFFF] transition-colors" style={{fontSize: 13}}>Sign In</a>
-          <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-[#AEDFF7] text-[#AEDFF7] font-semibold hover:bg-[#AEDFF7] hover:text-[#0038A8] transition-colors" style={{fontSize: 13}}>Register</a>
+          <a href="/login" className="ml-2 px-3 py-1 rounded-full bg-[#2b5ecf] text-white font-semibold hover:bg-[#2f62c5] transition-colors shadow-sm" style={{fontSize: 13}}>Sign In</a>
+          <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-[#2b5ecf] text-[#2b5ecf] font-semibold hover:bg-[#2b5ecf] hover:text-white transition-colors shadow-sm" style={{fontSize: 13}}>Register</a>
         </div>
       </div>
       
       {/* Main Navigation Bar - Slides up/down based on scroll */}
       <motion.nav 
-        className="fixed top-[50px] left-0 right-0 z-40 bg-[#14274E] h-[60px] flex items-center"
+        className="fixed top-[50px] left-0 right-0 z-40 bg-white h-[60px] flex items-center border-b border-[#e2e5e9] shadow-sm"
         initial={{ y: 0 }}
         animate={{ y: isNavVisible ? 0 : -60 }}
         transition={{ 
@@ -309,12 +309,12 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
               className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => navigate('/')}
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#2b5ecf] to-[#2f62c5] rounded-lg flex items-center justify-center">
                 <Home className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="font-bold text-xl text-white font-inter">Roxas City</h1>
-                <p className="text-xs text-[#AEDFF7] font-figtree">Citizen Platform</p>
+                <h1 className="font-bold text-xl text-[#2a2b37] font-inter">Roxas City</h1>
+                <p className="text-xs text-[#6c737a] font-figtree">Citizen Platform</p>
               </div>
             </div>
 
@@ -327,7 +327,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                   onMouseEnter={() => handleMouseEnter(item.id)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <button className="flex items-center space-x-1 px-4 py-2 text-[#AEDFF7] hover:text-white transition-colors group font-inter font-medium nav-item">
+                  <button className="flex items-center space-x-1 px-4 py-2 text-[#565961] hover:text-[#2b5ecf] transition-colors group font-inter font-medium nav-item">
                     <span>{item.title}</span>
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                   </button>
@@ -335,19 +335,19 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                   {/* Mega Menu Dropdown */}
                   {activeDropdown === item.id && (
                     <div 
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden animate-fade-in z-50"
+                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-white rounded-xl shadow-lg border border-[#e2e5e9] overflow-hidden animate-fade-in z-50"
                       onMouseEnter={() => handleMouseEnter(item.id)}
                       onMouseLeave={handleMouseLeave}
                     >
                       <div className="p-6">
-                        <div className="text-sm text-blue-600 mb-4 font-inter font-medium">{item.tooltip}</div>
+                        <div className="text-sm text-[#2b5ecf] mb-4 font-inter font-medium">{item.tooltip}</div>
                         <div className="grid grid-cols-2 gap-4">
                           {item.items.map((subItem, index) => {
                             const IconComponent = subItem.icon;
                             return (
                               <motion.div
                                 key={index}
-                                className="group flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 cursor-pointer transition-all duration-200 border border-transparent hover:border-blue-100"
+                                className="group flex items-start space-x-3 p-3 rounded-lg hover:bg-[#f0fdff] cursor-pointer transition-all duration-200 border border-transparent hover:border-[#b6c6e7]"
                                 whileHover={{ scale: 1.02, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
                                 initial={{ opacity: 0, y: 20 }}
@@ -360,7 +360,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                               >
                                 <div className="flex-shrink-0">
                                   <motion.div 
-                                    className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center"
+                                    className="w-12 h-12 bg-gradient-to-br from-[#2b5ecf] to-[#2f62c5] rounded-lg flex items-center justify-center"
                                     whileHover={{ scale: 1.1, rotate: 5 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                   >
@@ -368,10 +368,10 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                                   </motion.div>
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <div className="font-inter font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                  <div className="font-inter font-semibold text-[#2a2b37] group-hover:text-[#2b5ecf] transition-colors">
                                     {subItem.title}
                                   </div>
-                                  <div className="text-sm text-gray-600 mt-1 font-figtree leading-relaxed">
+                                  <div className="text-sm text-[#6c737a] mt-1 font-figtree leading-relaxed">
                                     {subItem.desc}
                                   </div>
                                 </div>
@@ -391,7 +391,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
               <Button
                 variant="outline"
                 size="sm"
-                className="md:hidden border-[#AEDFF7] text-[#AEDFF7] hover:bg-[#AEDFF7] hover:text-[#14274E]"
+                className="md:hidden border-[#e2e5e9] text-[#565961] hover:bg-[#f0fdff] hover:text-[#2b5ecf] hover:border-[#b6c6e7]"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -401,16 +401,16 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden border-t border-[#AEDFF7]/20 bg-[#14274E] absolute top-full left-0 right-0">
+            <div className="md:hidden border-t border-[#e2e5e9] bg-white absolute top-full left-0 right-0 shadow-lg">
               <div className="px-4 py-4 space-y-3">
                 {navItems.map((item) => (
-                  <div key={item.id} className="border-b border-[#AEDFF7]/20 pb-3">
-                    <div className="font-medium text-[#AEDFF7] mb-2 font-inter">{item.title}</div>
+                  <div key={item.id} className="border-b border-[#e2e5e9] pb-3">
+                    <div className="font-medium text-[#2a2b37] mb-2 font-inter">{item.title}</div>
                     <div className="space-y-1 ml-4">
                       {item.items.map((subItem, index) => (
                         <div
                           key={index}
-                          className="text-sm text-[#AEDFF7]/80 py-1 font-figtree cursor-pointer hover:text-white"
+                          className="text-sm text-[#6c737a] py-1 font-figtree cursor-pointer hover:text-[#2b5ecf]"
                           onClick={() => subItem.route && navigate(subItem.route)}
                           role="button"
                           tabIndex={0}

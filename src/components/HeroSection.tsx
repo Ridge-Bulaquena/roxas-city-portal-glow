@@ -85,8 +85,7 @@ const HeroSection = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ 
                 duration: 0.5, 
-                ease: [0.4, 0.0, 0.2, 1],
-                willChange: 'opacity, transform'
+                ease: [0.4, 0.0, 0.2, 1]
               }}
               className="space-y-8"
             >
@@ -97,8 +96,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 transition={{ 
                   duration: 0.4, 
-                  delay: 0,
-                  willChange: 'opacity'
+                  delay: 0
                 }}
                 style={{
                   whiteSpace: 'normal',
@@ -120,14 +118,13 @@ const HeroSection = () => {
               <AnimatePresence>
                 {showSubtitle && (
                   <motion.p
-                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-gray-700"
+                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-gray-700 font-figtree font-light tracking-wide leading-relaxed"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ 
                       duration: 0.3, 
-                      delay: 0,
-                      willChange: 'opacity, transform'
+                      delay: 0
                     }}
                   >
                     {slide.subtext}
@@ -145,8 +142,7 @@ const HeroSection = () => {
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ 
                       duration: 0.3, 
-                      delay: 0,
-                      willChange: 'opacity, transform'
+                      delay: 0
                     }}
                   >
                     {slide.description}
@@ -165,8 +161,7 @@ const HeroSection = () => {
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ 
                         duration: 0.3, 
-                        delay: 0,
-                        willChange: 'opacity, transform'
+                        delay: 0
                       }}
                       style={{ display: 'inline-block' }}
                     >
@@ -193,8 +188,7 @@ const HeroSection = () => {
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ 
                         duration: 0.3, 
-                        delay: 0.1,
-                        willChange: 'opacity, transform'
+                        delay: 0.1
                       }}
                       style={{ display: 'inline-block' }}
                     >
