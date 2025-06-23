@@ -93,7 +93,7 @@ const HeroSection = () => {
             key={word + i}
             initial={{ opacity: 0, y: 10 }}
             animate={visible ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 + i * 0.5, type: 'spring', stiffness: 300, damping: 20 }}
+            transition={{ delay: 0.1 + i * 0.12, type: 'spring', stiffness: 300, damping: 20 }}
             style={{ display: 'inline-block', marginRight: '0.4em' }}
           >
             {word}
@@ -112,7 +112,7 @@ const HeroSection = () => {
               <CarouselItem key={slide.headline}>
                 <div className="flex flex-col items-center justify-center min-h-[40vh]">
                   <h1
-                    className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center whitespace-nowrap md:whitespace-nowrap overflow-hidden text-3xl md:text-6xl lg:text-7xl"
+                    className="mb-12 hero-timesnow text-[#1a2238] font-bold w-full text-center whitespace-nowrap md:whitespace-nowrap overflow-hidden text-3xl md:text-6xl lg:text-7xl"
                     style={{
                       textOverflow: 'ellipsis',
                       overflowWrap: 'break-word',
