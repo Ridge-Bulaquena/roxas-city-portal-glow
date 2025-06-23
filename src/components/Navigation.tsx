@@ -234,19 +234,19 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
   return (
     <>
       {/* Topmost Thin Bar */}
-      <div className="w-full h-6 min-h-[24px] flex items-center justify-between px-4 text-xs font-medium bg-[#f6f9ff] text-gray-800 sticky top-0 z-50" style={{height: 24}}>
+      <div className="w-full h-[50px] flex items-center justify-between px-4 text-xs font-medium bg-[#0038A8] text-[#AEDFF7] sticky top-0 z-50">
         {/* Left: Quick Links */}
         <div className="flex items-center gap-4">
-          <a href="/" className="hover:text-blue-600 transition-colors">Home</a>
-          <a href="/contact" className="hover:text-blue-600 transition-colors">Contact</a>
+          <a href="/" className="hover:text-[#D0EFFF] transition-colors">Home</a>
+          <a href="/contact" className="hover:text-[#D0EFFF] transition-colors">Contact</a>
         </div>
         {/* Center: Search */}
-        <form className="flex items-center bg-white/80 rounded-full px-2 py-1 border border-gray-200" style={{minWidth: 180, maxWidth: 260}} onSubmit={e => e.preventDefault()}>
-          <svg className="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <form className="flex items-center bg-white/10 rounded-full px-2 py-1" style={{minWidth: 180, maxWidth: 260}} onSubmit={e => e.preventDefault()}>
+          <svg className="w-4 h-4 text-[#AEDFF7] mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input
             type="text"
             placeholder="Search…"
-            className="bg-transparent border-none outline-none text-gray-800 placeholder:text-gray-500 w-full min-w-0"
+            className="bg-transparent border-none outline-none text-[#AEDFF7] placeholder:text-[#AEDFF7] w-full min-w-0"
             style={{fontSize: 13}}
             aria-label="Search"
           />
@@ -256,7 +256,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           <select
             value={userType}
             onChange={e => setUserType(e.target.value as any)}
-            className="rounded-full px-2 py-1 bg-white border border-gray-300 text-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs font-medium appearance-none"
+            className="rounded-full px-2 py-1 bg-[#0038A8] border border-[#AEDFF7] text-[#AEDFF7] focus:border-[#D0EFFF] focus:ring-1 focus:ring-[#D0EFFF] text-xs font-medium appearance-none"
             style={{minWidth: 90}}
             aria-label="Select user type"
           >
@@ -264,18 +264,14 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
             <option value="visitor">Visitor</option>
             <option value="official">Official</option>
           </select>
-          <a href="/login" className="ml-2 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors" style={{fontSize: 13}}>Sign In</a>
-          <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-blue-600 text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition-colors" style={{fontSize: 13}}>Register</a>
+          <a href="/login" className="ml-2 px-3 py-1 rounded-full bg-[#AEDFF7] text-[#0038A8] font-semibold hover:bg-[#D0EFFF] transition-colors" style={{fontSize: 13}}>Sign In</a>
+          <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-[#AEDFF7] text-[#AEDFF7] font-semibold hover:bg-[#AEDFF7] hover:text-[#0038A8] transition-colors" style={{fontSize: 13}}>Register</a>
         </div>
       </div>
       {/* Main Navigation Bar */}
-      <nav className={`fixed top-6 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
-          : 'bg-white/90 backdrop-blur-sm'
-      }`}>
-        <div className="max-w-7xl mx-auto px-6 md:px-4">
-          <div className="flex items-center justify-between h-16">
+      <nav className={`fixed top-[50px] left-0 right-0 z-40 transition-all duration-300 bg-[#14274E] h-[60px] flex items-center`}>
+        <div className="max-w-7xl mx-auto px-6 md:px-4 w-full">
+          <div className="flex items-center justify-between h-full">
             {/* Logo */}
             <div 
               className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity"
@@ -285,8 +281,8 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 <Home className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="font-bold text-xl text-gray-900 font-inter">Roxas City</h1>
-                <p className="text-xs text-gray-600 font-figtree">Citizen Platform</p>
+                <h1 className="font-bold text-xl text-white font-inter">Roxas City</h1>
+                <p className="text-xs text-[#AEDFF7] font-figtree">Citizen Platform</p>
               </div>
             </div>
 
@@ -299,7 +295,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                   onMouseEnter={() => handleMouseEnter(item.id)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <button className="flex items-center space-x-1 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors group font-inter font-medium nav-item">
+                  <button className="flex items-center space-x-1 px-4 py-2 text-[#AEDFF7] hover:text-white transition-colors group font-inter font-medium nav-item">
                     <span>{item.title}</span>
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                   </button>
@@ -358,32 +354,12 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
               ))}
             </div>
 
-            {/* User Type Selector & Mobile Menu */}
+            {/* Mobile Menu Button */}
             <div className="flex items-center space-x-3">
-              <div className="hidden sm:flex items-center space-x-2">
-                <span className="text-sm text-gray-600 font-figtree">I am a:</span>
-                <select
-                  value={userType}
-                  onChange={(e) => setUserType(e.target.value as any)}
-                  className="text-sm border border-gray-300 rounded-full px-4 py-2 pr-8 bg-gradient-to-b from-amber-200 to-yellow-50 font-figtree shadow-sm hover:shadow-md transition-all duration-200 appearance-none relative"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: 'right 0.5rem center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: '1.5em 1.5em',
-                    paddingRight: '2rem'
-                  }}
-                >
-                  <option value="resident">Resident</option>
-                  <option value="visitor">Visitor</option>
-                  <option value="official">Official</option>
-                </select>
-              </div>
-
               <Button
                 variant="outline"
                 size="sm"
-                className="md:hidden"
+                className="md:hidden border-[#AEDFF7] text-[#AEDFF7] hover:bg-[#AEDFF7] hover:text-[#14274E]"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -393,35 +369,16 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden border-t border-gray-200 bg-white">
+            <div className="md:hidden border-t border-[#AEDFF7]/20 bg-[#14274E] absolute top-full left-0 right-0">
               <div className="px-4 py-4 space-y-3">
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-sm text-gray-600 font-figtree">I am a:</span>
-                  <select
-                    value={userType}
-                    onChange={(e) => setUserType(e.target.value as any)}
-                    className="text-sm border border-gray-300 rounded-full px-4 py-2 pr-8 bg-gradient-to-b from-amber-200 to-yellow-50 font-figtree shadow-sm appearance-none relative"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
-                      backgroundPosition: 'right 0.5rem center',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: '1.5em 1.5em',
-                      paddingRight: '2rem'
-                    }}
-                  >
-                    <option value="resident">Resident</option>
-                    <option value="visitor">Visitor</option>
-                    <option value="official">Official</option>
-                  </select>
-                </div>
                 {navItems.map((item) => (
-                  <div key={item.id} className="border-b border-gray-100 pb-3">
-                    <div className="font-medium text-gray-900 mb-2 font-inter">{item.title}</div>
+                  <div key={item.id} className="border-b border-[#AEDFF7]/20 pb-3">
+                    <div className="font-medium text-[#AEDFF7] mb-2 font-inter">{item.title}</div>
                     <div className="space-y-1 ml-4">
                       {item.items.map((subItem, index) => (
                         <div
                           key={index}
-                          className="text-sm text-gray-600 py-1 font-figtree cursor-pointer hover:text-blue-600"
+                          className="text-sm text-[#AEDFF7]/80 py-1 font-figtree cursor-pointer hover:text-white"
                           onClick={() => subItem.route && navigate(subItem.route)}
                           role="button"
                           tabIndex={0}

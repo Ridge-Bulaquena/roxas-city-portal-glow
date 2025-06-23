@@ -36,7 +36,7 @@ const slides = [
   },
 ];
 
-const SLIDE_DURATION = 3000;
+const SLIDE_DURATION = 6000;
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -57,10 +57,12 @@ const HeroSection = () => {
     setShowDesc(false);
     setShowBtn1(false);
     setShowBtn2(false);
-    const subtitleTimer = setTimeout(() => setShowSubtitle(true), 150);
-    const descTimer = setTimeout(() => setShowDesc(true), 300);
-    const btn1Timer = setTimeout(() => setShowBtn1(true), 450);
-    const btn2Timer = setTimeout(() => setShowBtn2(true), 600);
+    
+    const subtitleTimer = setTimeout(() => setShowSubtitle(true), 200);
+    const descTimer = setTimeout(() => setShowDesc(true), 400);
+    const btn1Timer = setTimeout(() => setShowBtn1(true), 600);
+    const btn2Timer = setTimeout(() => setShowBtn2(true), 700);
+    
     return () => {
       clearTimeout(subtitleTimer);
       clearTimeout(descTimer);
@@ -78,96 +80,131 @@ const HeroSection = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={slide.headline}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ 
+                duration: 0.5, 
+                ease: [0.4, 0.0, 0.2, 1],
+                willChange: 'opacity, transform'
+              }}
               className="space-y-8"
             >
-              {/* Title with typewriter steps and shimmer */}
+              {/* Title with flexible sizing and gradient shimmer */}
               <motion.h1
-                className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-3xl md:text-6xl lg:text-7xl uppercase shimmer-gradient"
+                className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase shimmer-gradient leading-tight"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0 }}
+                transition={{ 
+                  duration: 0.4, 
+                  delay: 0,
+                  willChange: 'opacity'
+                }}
                 style={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  borderRight: '2px solid #aee7ff',
-                  animation: `typing 0.5s steps(20, end) 1 both, shimmer 1.5s linear infinite`,
-                  background: 'linear-gradient(90deg, slategray, #aee7ff, #1a2238)',
+                  whiteSpace: 'normal',
+                  wordWrap: 'break-word',
+                  maxWidth: '100%',
+                  background: 'linear-gradient(90deg, #64748b, #aee7ff, #1a2238)',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
                   WebkitTextFillColor: 'transparent',
+                  backgroundSize: '200% 100%',
+                  animation: 'shimmer 2s linear infinite',
                 }}
               >
                 {slide.headline}
               </motion.h1>
+              
               {/* Subtitle */}
               <AnimatePresence>
                 {showSubtitle && (
                   <motion.p
-                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2, delay: 0 }}
+                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-gray-700"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ 
+                      duration: 0.3, 
+                      delay: 0,
+                      willChange: 'opacity, transform'
+                    }}
                   >
                     {slide.subtext}
                   </motion.p>
                 )}
               </AnimatePresence>
+              
               {/* Description */}
               <AnimatePresence>
                 {showDesc && slide.description && (
                   <motion.p
-                    className="mb-6 max-w-2xl mx-auto text-center text-lg text-muted-foreground"
+                    className="mb-6 max-w-2xl mx-auto text-center text-base sm:text-lg text-gray-600 leading-relaxed"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2, delay: 0 }}
+                    transition={{ 
+                      duration: 0.3, 
+                      delay: 0,
+                      willChange: 'opacity, transform'
+                    }}
                   >
                     {slide.description}
                   </motion.p>
                 )}
               </AnimatePresence>
+              
               {/* CTAs */}
-              <div className="w-full flex flex-wrap justify-center gap-4 mt-2">
+              <div className="w-full flex flex-wrap justify-center gap-3 sm:gap-4 mt-4">
                 <AnimatePresence>
                   {showBtn1 && slide.ctas[0] && (
                     <motion.div
-                      key={slide.ctas[0]}
+                      key={`btn1-${slide.ctas[0]}`}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.2, delay: 0 }}
+                      transition={{ 
+                        duration: 0.3, 
+                        delay: 0,
+                        willChange: 'opacity, transform'
+                      }}
                       style={{ display: 'inline-block' }}
                     >
                       <Button
                         size="lg"
-                        className="service-btn-glass px-7 py-3 text-base font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full min-w-[120px] max-w-[220px]"
-                        style={{ whiteSpace: 'nowrap' }}
+                        className="service-btn-glass px-6 sm:px-7 py-3 text-sm sm:text-base font-semibold transition-all duration-200 hover:scale-105 focus:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/60 rounded-full min-w-[120px] max-w-[200px] sm:max-w-[220px]"
+                        style={{ 
+                          whiteSpace: 'nowrap',
+                          willChange: 'transform'
+                        }}
                       >
                         {slide.ctas[0]}
                       </Button>
                     </motion.div>
                   )}
                 </AnimatePresence>
+                
                 <AnimatePresence>
                   {showBtn2 && slide.ctas[1] && (
                     <motion.div
-                      key={slide.ctas[1]}
+                      key={`btn2-${slide.ctas[1]}`}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.2, delay: 0 }}
+                      transition={{ 
+                        duration: 0.3, 
+                        delay: 0.1,
+                        willChange: 'opacity, transform'
+                      }}
                       style={{ display: 'inline-block' }}
                     >
                       <Button
                         size="lg"
-                        className="service-btn-glass px-7 py-3 text-base font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full min-w-[120px] max-w-[220px]"
-                        style={{ whiteSpace: 'nowrap' }}
+                        className="service-btn-glass px-6 sm:px-7 py-3 text-sm sm:text-base font-semibold transition-all duration-200 hover:scale-105 focus:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/60 rounded-full min-w-[120px] max-w-[200px] sm:max-w-[220px]"
+                        style={{ 
+                          whiteSpace: 'nowrap',
+                          willChange: 'transform'
+                        }}
                       >
                         {slide.ctas[1]}
                       </Button>
@@ -179,17 +216,37 @@ const HeroSection = () => {
           </AnimatePresence>
         </div>
       </div>
+      
       <style>{`
-        @keyframes typing {
-          from { width: 0 }
-          to { width: 100% }
-        }
         @keyframes shimmer {
           0% { background-position: 0% 50%; }
           100% { background-position: 100% 50%; }
         }
-        .shimmer-gradient {
-          background-size: 200% 100%;
+        
+        @media (prefers-reduced-motion: reduce) {
+          .shimmer-gradient {
+            animation: none !important;
+          }
+          
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+        
+        .service-btn-glass {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: #1a2238;
+          font-weight: 600;
+        }
+        
+        .service-btn-glass:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.3);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
       `}</style>
     </section>
