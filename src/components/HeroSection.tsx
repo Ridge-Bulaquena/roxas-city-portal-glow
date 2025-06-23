@@ -61,7 +61,7 @@ const HeroSection = () => {
                 <div className="flex flex-col items-center justify-center min-h-[40vh]">
                   <h1 className="mb-6 hero-timesnow">
                     <GradientText
-                      colors={["#3a5ba0", "#1a2238", "#274472", "#406882", "#3a5ba0"]}
+                      colors={["#00c6fb", "#005bea", "#1a2238", "#274472", "#00c6fb"]}
                       animationSpeed={7}
                       className="inline-block"
                     >
