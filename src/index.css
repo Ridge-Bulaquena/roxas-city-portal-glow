@@ -234,10 +234,17 @@
     color: #fff !important;
   }
 
+  .section-underline-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto 2.5rem auto; /* 2.5rem = 40px for extra space below */
+  }
+
   .section-underline {
     height: 1px;
     background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--chart-1)));
-    margin: 0 auto;
     transition: width 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
     width: 96px;
     max-width: 100%;
@@ -245,6 +252,32 @@
 
   .group:hover .section-underline {
     width: 100%;
+  }
+
+  .service-btn-glass {
+    @apply transition-all duration-300 font-semibold rounded-lg relative overflow-hidden bg-slate-800 text-slate-100 border-none shadow-none;
+  }
+  .service-btn-glass:hover, .service-btn-glass:focus {
+    background: rgba(30, 41, 59, 0.85); /* slate-800 with opacity */
+    color: #e0e7ef; /* light blue-grey */
+    box-shadow: 0 2px 16px 0 rgba(30, 41, 59, 0.10);
+  }
+  .service-btn-glass::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0.01) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: inherit;
+    z-index: 1;
+  }
+  .service-btn-glass:hover::after, .service-btn-glass:focus::after {
+    opacity: 1;
   }
 }
 

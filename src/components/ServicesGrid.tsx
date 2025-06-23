@@ -117,7 +117,9 @@ const ServicesGrid = () => {
           }`}>
             City Services at Your Fingertips
           </h2>
-          <div className="section-underline mb-6"></div>
+          <div className="section-underline-wrapper">
+            <div className="section-underline"></div>
+          </div>
           <p className={`text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
@@ -149,7 +151,11 @@ const ServicesGrid = () => {
                   <CardDescription className="text-sm">
                     {service.description}
                   </CardDescription>
-                  <Button variant="outline" size="sm" className="w-full hover-glow">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full service-btn-glass"
+                  >
                     {service.buttonText}
                   </Button>
                 </CardContent>
