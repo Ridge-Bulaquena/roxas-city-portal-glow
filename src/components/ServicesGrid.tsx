@@ -132,29 +132,28 @@ const ServicesGrid = () => {
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <Card 
+              <Card
                 key={service.title}
-                className={`cursor-pointer transition-all duration-600 ${
-                  sectionVisible ? 'opacity-100 translate-y-0 rotate-0' : 'opacity-0 translate-y-10 rotate-2'
-                } hover:shadow-2xl hover:scale-105`}
-                style={{ 
-                  transitionDelay: sectionVisible ? `${1000 + service.delay}ms` : '0ms'
+                className={`service-card${sectionVisible ? ' entry-animate' : ''}`}
+                style={{
+                  animationDelay: sectionVisible ? `${0.15 * index + 0.5}s` : '0s',
                 }}
+                tabIndex={0}
               >
                 <CardHeader className="text-center pb-4">
-                  <div className="flex justify-center mb-4">
-                    <IconComponent className="w-12 h-12 text-primary transform transition-transform duration-300 group-hover:scale-110" />
+                  <div className="flex justify-center mb-4 service-icon">
+                    <IconComponent className="w-12 h-12 text-primary" />
                   </div>
-                  <CardTitle className="text-lg font-semibold">{service.title}</CardTitle>
+                  <CardTitle className="text-lg font-semibold service-title">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center space-y-4">
-                  <CardDescription className="text-sm">
+                  <CardDescription className="text-sm service-desc">
                     {service.description}
                   </CardDescription>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="w-full service-btn-glass"
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full service-btn-glass service-btn"
                   >
                     {service.buttonText}
                   </Button>

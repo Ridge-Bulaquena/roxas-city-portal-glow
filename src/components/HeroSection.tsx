@@ -1,72 +1,74 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselApi } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselApi } from '@/components/ui/carousel';
 import { motion, AnimatePresence } from 'framer-motion';
+import GradientText from './GradientText';
 
-// TypewriterCascade: animates each letter with typewriter, scale, hover, and exit
-const TypewriterCascade = ({ text, delay = 0, restartKey = 0 }) => {
+// Typewriter with gradient shimmer overlay
+const TypewriterGradient = ({ text, speed = 40, className = '' }) => {
+  const [displayed, setDisplayed] = useState('');
+  useEffect(() => {
+    setDisplayed('');
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, speed]);
   return (
-    <span style={{ display: 'inline-block' }} key={restartKey}>
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i + char}
-          initial={{ opacity: 0, scale: 0.8, y: 10 }}
-          animate={{ opacity: 1, scale: 1.15, y: 0 }}
-          whileHover={{ scale: 1.3 }}
-          exit={{ opacity: 0, scale: 0.7, y: 20, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
-          transition={{
-            delay: delay + i * 0.045,
-            type: 'spring',
-            stiffness: 400,
-            damping: 18,
-          }}
-          style={{ display: 'inline-block', marginRight: char === ' ' ? '0.25em' : 0 }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
+    <GradientText
+      className={`inline-block ${className}`}
+      colors={["#aee7ff", "#00c6fb", "#005bea", "#1a2238", "#aee7ff"]}
+      animationSpeed={6}
+    >
+      {displayed}
+    </GradientText>
   );
 };
 
 const slides = [
   {
-    headline: 'Welcome Resident',
+    headline: 'WELCOME RESIDENT',
     subtext: 'Your City, Your Voice, Your Future',
     description: 'Roxas City Connect empowers every citizen to participate in building our community. Access city services, share your ideas, and stay connected with your local government.',
-    ctas: ['Get Started', 'City Services', 'Share Feedback'],
+    ctas: ['Get Started', 'City Services'],
   },
   {
-    headline: 'Your City, Your Voice.',
+    headline: 'YOUR CITY, YOUR VOICE.',
     subtext: 'Real-time platforms for public participation in governance.',
     ctas: ['Get Started', 'Learn More'],
   },
   {
-    headline: 'Transparency That Inspires Trust.',
+    headline: 'TRANSPARENCY THAT INSPIRES TRUST.',
     subtext: 'Budgets, projects, and decisions — visible and accountable.',
     ctas: ['View Budget', 'Open Data'],
   },
   {
-    headline: 'Smart Services for Every Citizen.',
+    headline: 'SMART SERVICES FOR EVERY CITIZEN.',
     subtext: 'Access health, education, permits, and more — faster, simpler.',
     ctas: ['Explore Services', 'Get Started'],
   },
   {
-    headline: 'A Government That Listens.',
+    headline: 'A GOVERNMENT THAT LISTENS.',
     subtext: 'Submit feedback, report issues, and shape policies online.',
     ctas: ['Share Feedback', 'Report Issue'],
   },
   {
-    headline: 'Innovation Rooted in Community.',
+    headline: 'INNOVATION ROOTED IN COMMUNITY.',
     subtext: 'Built by and for the people of Roxas, with civic technology.',
     ctas: ['Learn More', 'Join Community'],
   },
 ];
 
+const SLIDE_DURATION = 2000;
+
 const HeroSection = () => {
   const [active, setActive] = useState(0);
-  const [restartKey, setRestartKey] = useState(0);
+  const [typewriterDone, setTypewriterDone] = useState(false);
   const [subtitleVisible, setSubtitleVisible] = useState(false);
+  const [descVisible, setDescVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(false);
   const emblaApi = useRef<CarouselApi | null>(null);
   const autoAdvanceRef = useRef<NodeJS.Timeout | null>(null);
@@ -74,30 +76,40 @@ const HeroSection = () => {
   // Auto-advance logic
   useEffect(() => {
     if (!emblaApi.current) return;
-    if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
-    autoAdvanceRef.current = setInterval(() => {
+    if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
+    autoAdvanceRef.current = setTimeout(() => {
       if (emblaApi.current) {
         const next = (active + 1) % slides.length;
         emblaApi.current.scrollTo(next);
       }
-    }, 7000);
+    }, SLIDE_DURATION);
     return () => {
-      if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
+      if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
     };
   }, [active]);
 
-  // Animation restart on slide change
+  // Animation sequence
   useEffect(() => {
-    setRestartKey(prev => prev + 1);
+    setTypewriterDone(false);
     setSubtitleVisible(false);
+    setDescVisible(false);
     setButtonVisible(false);
-    const subtitleTimer = setTimeout(() => setSubtitleVisible(true), 200);
-    const buttonTimer = setTimeout(() => setButtonVisible(true), 400);
+    // Typewriter duration: 40ms per char
+    const typeTime = slides[active].headline.length * 40 + 200;
+    const subtitleTimer = setTimeout(() => setSubtitleVisible(true), typeTime);
+    const descTimer = setTimeout(() => setDescVisible(true), typeTime + 200);
+    const btnTimer = setTimeout(() => setButtonVisible(true), typeTime + 400);
+    const doneTimer = setTimeout(() => setTypewriterDone(true), typeTime);
     return () => {
       clearTimeout(subtitleTimer);
-      clearTimeout(buttonTimer);
+      clearTimeout(descTimer);
+      clearTimeout(btnTimer);
+      clearTimeout(doneTimer);
     };
   }, [active]);
+
+  const slide = slides[active];
+  const ctas = (slide.ctas || []).slice(0, 2);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
@@ -109,8 +121,8 @@ const HeroSection = () => {
                 <div className="flex flex-col items-center justify-center min-h-[40vh]">
                   <AnimatePresence mode="wait">
                     <motion.h1
-                      key={restartKey + '-headline'}
-                      className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-3xl md:text-6xl lg:text-7xl"
+                      key={slide.headline + '-headline'}
+                      className="mb-6 hero-timesnow text-[#1a2238] font-bold w-full text-center overflow-hidden text-3xl md:text-6xl lg:text-7xl uppercase"
                       style={{
                         textOverflow: 'ellipsis',
                         overflowWrap: 'break-word',
@@ -122,32 +134,32 @@ const HeroSection = () => {
                       exit={{ opacity: 0, y: -30 }}
                       transition={{ duration: 0.7, ease: 'easeInOut' }}
                     >
-                      {slide.headline}
+                      <TypewriterGradient text={slide.headline} speed={40} />
                     </motion.h1>
                   </AnimatePresence>
                   <AnimatePresence>
                     {subtitleVisible && (
                       <motion.p
-                        key={restartKey + '-subtitle'}
+                        key={slide.headline + '-subtitle'}
                         className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.4, delay: 0.2 }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
                       >
                         {slide.subtext}
                       </motion.p>
                     )}
                   </AnimatePresence>
                   <AnimatePresence>
-                    {slide.description && subtitleVisible && (
+                    {descVisible && slide.description && (
                       <motion.p
-                        key={restartKey + '-desc'}
+                        key={slide.headline + '-desc'}
                         className="mb-6 max-w-2xl mx-auto text-center text-lg text-muted-foreground"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.4, delay: 0.35 }}
+                        transition={{ duration: 0.4, delay: 0.2 }}
                       >
                         {slide.description}
                       </motion.p>
@@ -156,18 +168,19 @@ const HeroSection = () => {
                   <AnimatePresence>
                     {buttonVisible && (
                       <motion.div
-                        key={restartKey + '-button'}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
-                        className="w-full flex flex-wrap justify-center gap-4"
+                        key={slide.headline + '-button'}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.4, delay: 0.3 }}
+                        className="w-full flex justify-center gap-6 mt-2"
                       >
-                        {slide.ctas && slide.ctas.map((cta, i) => (
+                        {ctas.map((cta, i) => (
                           <Button
                             key={cta}
                             size="lg"
-                            className="service-btn-glass px-8 py-4 text-lg font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full"
+                            className="service-btn-glass px-8 py-4 text-lg font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60 rounded-full min-w-[140px] max-w-[220px]"
+                            style={{ whiteSpace: 'nowrap' }}
                           >
                             {cta}
                           </Button>

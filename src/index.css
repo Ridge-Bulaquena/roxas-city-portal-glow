@@ -357,3 +357,103 @@
     font-size: 2rem;
   }
 }
+
+.service-card {
+  position: relative;
+  background: white;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, box-shadow;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(0,198,251,0.10) 0%, rgba(26,34,56,0.10) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+  z-index: 2;
+}
+.service-card:hover,
+.service-card:focus-within {
+  transform: scale(1.03);
+  box-shadow: 0 12px 36px 0 rgba(80, 120, 200, 0.18), 0 2px 8px 0 rgba(80, 120, 200, 0.12);
+}
+.service-card:hover::before,
+.service-card:focus-within::before {
+  opacity: 1;
+}
+
+/* Layered element animation on hover */
+.service-card .service-icon,
+.service-card .service-title,
+.service-card .service-desc,
+.service-card .service-btn {
+  transition-property: opacity, transform, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  will-change: opacity, transform;
+}
+.service-card .service-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+.service-card:hover .service-icon {
+  opacity: 1;
+  transform: translateY(-6px);
+  transition-delay: 0.05s;
+}
+.service-card .service-title {
+  opacity: 1;
+  transform: scale(1);
+}
+.service-card:hover .service-title {
+  opacity: 1;
+  transform: scale(1.04);
+  transition-delay: 0.12s;
+}
+.service-card .service-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+.service-card:hover .service-desc {
+  opacity: 1;
+  transform: translateY(-4px);
+  transition-delay: 0.18s;
+}
+.service-card .service-btn {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: none;
+}
+.service-card:hover .service-btn {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px #aee7ff44;
+  transition-delay: 0.25s;
+}
+
+/* Entry animation for cards */
+@media (prefers-reduced-motion: no-preference) {
+  .service-card.entry-animate {
+    opacity: 0;
+    transform: translateY(32px) scale(0.98);
+    animation: serviceCardEntry 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+}
+@keyframes serviceCardEntry {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
