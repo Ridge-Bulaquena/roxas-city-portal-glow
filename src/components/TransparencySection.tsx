@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -35,15 +34,15 @@ const TransparencySection = () => {
     <section className="py-20 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 group">
           <h2 className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-1000 ${
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
             Transparency Dashboard
           </h2>
-          <div className={`w-24 h-1 bg-primary mx-auto mb-6 transition-all duration-800 delay-300 ${
-            sectionVisible ? 'scale-x-100' : 'scale-x-0'
-          }`}></div>
+          <div className="section-underline-wrapper">
+            <div className="section-underline"></div>
+          </div>
           <p className={`text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>

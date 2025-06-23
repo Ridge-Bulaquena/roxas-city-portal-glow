@@ -242,16 +242,16 @@
   }
 
   .section-underline {
-    height: 4px;
+    height: 1px;
     width: 64px;
     background: #1a2238;
     border-radius: 2px;
-    margin: 0 auto;
-    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+    margin: 0 auto 2rem auto;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
   }
 
   .group:hover .section-underline {
-    width: 400px;
+    width: 600px;
   }
 
   .service-btn-glass {
