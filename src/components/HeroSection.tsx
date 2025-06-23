@@ -64,7 +64,7 @@ const HeroSection = () => {
         const next = (active + 1) % slides.length;
         emblaApi.current.scrollTo(next);
       }
-    }, 6000);
+    }, 2000);
     return () => {
       if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
     };
@@ -75,33 +75,13 @@ const HeroSection = () => {
     setRestartKey(prev => prev + 1);
     setSubtitleVisible(false);
     setButtonVisible(false);
-    const subtitleTimer = setTimeout(() => setSubtitleVisible(true), 700);
-    const buttonTimer = setTimeout(() => setButtonVisible(true), 700 + 500 * (slides[active].subtext.split(' ').length / 3));
+    const subtitleTimer = setTimeout(() => setSubtitleVisible(true), 200);
+    const buttonTimer = setTimeout(() => setButtonVisible(true), 400);
     return () => {
       clearTimeout(subtitleTimer);
       clearTimeout(buttonTimer);
     };
   }, [active]);
-
-  // Subtitle word-by-word animation
-  const SubtitleCascade = ({ text, visible, restartKey }) => {
-    const words = text.split(' ');
-    return (
-      <span className="inline-block" key={restartKey}>
-        {words.map((word, i) => (
-          <motion.span
-            key={word + i}
-            initial={{ opacity: 0, y: 10 }}
-            animate={visible ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 + i * 0.12, type: 'spring', stiffness: 300, damping: 20 }}
-            style={{ display: 'inline-block', marginRight: '0.4em' }}
-          >
-            {word}
-          </motion.span>
-        ))}
-      </span>
-    );
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
@@ -130,9 +110,9 @@ const HeroSection = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <SubtitleCascade text={slide.subtext} visible={subtitleVisible} restartKey={restartKey + idx * 100} />
+                        {slide.subtext}
                       </motion.p>
                     )}
                   </AnimatePresence>
