@@ -20,8 +20,19 @@ const SlidersSection = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-6">
+    <section 
+      className="py-20 relative overflow-hidden"
+      style={{
+        backgroundImage: `url('/lovable-uploads/bda9d2eb-56a2-40ed-bcbc-0f2ef26f430f.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* White gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white/80"></div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className={`text-center mb-16 transition-all duration-1000 ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
@@ -37,7 +48,7 @@ const SlidersSection = () => {
           {sliders.map((slider, index) => (
             <div
               key={slider.label}
-              className={`bg-card p-6 rounded-2xl border border-border hover:shadow-lg transition-all duration-500 ${
+              className={`bg-card/90 backdrop-blur-sm p-6 rounded-2xl border border-border hover:shadow-lg transition-all duration-500 ${
                 visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
