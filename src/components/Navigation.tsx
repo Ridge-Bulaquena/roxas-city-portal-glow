@@ -232,138 +232,140 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
-        : 'bg-white/90 backdrop-blur-sm'
-    }`}>
-      <div className="max-w-7xl mx-auto px-6 md:px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div 
-            className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity"
-            onClick={() => navigate('/')}
+    <>
+      {/* Topmost Thin Bar */}
+      <div className="w-full h-6 min-h-[24px] flex items-center justify-between px-4 text-xs font-medium bg-[#0038A8] text-white" style={{height: 24}}>
+        {/* Left: Quick Links */}
+        <div className="flex items-center gap-4">
+          <a href="/" className="hover:text-[#AEDFF7] transition-colors">Home</a>
+          <a href="/contact" className="hover:text-[#AEDFF7] transition-colors">Contact</a>
+        </div>
+        {/* Center: Search */}
+        <form className="flex items-center bg-white/10 rounded-full px-2 py-1" style={{minWidth: 180, maxWidth: 260}} onSubmit={e => e.preventDefault()}>
+          <svg className="w-4 h-4 text-[#AEDFF7] mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="text"
+            placeholder="Search…"
+            className="bg-transparent border-none outline-none text-white placeholder:text-[#AEDFF7] w-full min-w-0"
+            style={{fontSize: 13}}
+            aria-label="Search"
+          />
+        </form>
+        {/* Right: User Type Dropdown & Auth */}
+        <div className="flex items-center gap-2">
+          <select
+            value={userType}
+            onChange={e => setUserType(e.target.value as any)}
+            className="rounded-full px-2 py-1 bg-[#0038A8] border border-[#AEDFF7] text-white focus:border-[#AEDFF7] focus:ring-1 focus:ring-[#AEDFF7] text-xs font-medium appearance-none"
+            style={{minWidth: 90}}
+            aria-label="Select user type"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-              <Home className="w-6 h-6 text-white" />
+            <option value="resident">Resident</option>
+            <option value="visitor">Visitor</option>
+            <option value="official">Official</option>
+          </select>
+          <a href="/login" className="ml-2 px-3 py-1 rounded-full bg-[#AEDFF7] text-[#0038A8] font-semibold hover:bg-white transition-colors" style={{fontSize: 13}}>Sign In</a>
+          <a href="/register" className="ml-1 px-3 py-1 rounded-full border border-[#AEDFF7] text-[#AEDFF7] font-semibold hover:bg-[#AEDFF7] hover:text-[#0038A8] transition-colors" style={{fontSize: 13}}>Register</a>
+        </div>
+      </div>
+      {/* Main Navigation Bar */}
+      <nav className={`fixed top-6 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
+          : 'bg-white/90 backdrop-blur-sm'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 md:px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div 
+              className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => navigate('/')}
+            >
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                <Home className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="font-bold text-xl text-gray-900 font-inter">Roxas City</h1>
+                <p className="text-xs text-gray-600 font-figtree">Citizen Platform</p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-bold text-xl text-gray-900 font-inter">Roxas City</h1>
-              <p className="text-xs text-gray-600 font-figtree">Citizen Platform</p>
-            </div>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <div
-                key={item.id}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(item.id)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button className="flex items-center space-x-1 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors group font-inter font-medium nav-item">
-                  <span>{item.title}</span>
-                  <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-                </button>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-1">
+              {navItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter(item.id)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <button className="flex items-center space-x-1 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors group font-inter font-medium nav-item">
+                    <span>{item.title}</span>
+                    <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+                  </button>
 
-                {/* Mega Menu Dropdown */}
-                {activeDropdown === item.id && (
-                  <div 
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden animate-fade-in z-50"
-                    onMouseEnter={() => handleMouseEnter(item.id)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <div className="p-6">
-                      <div className="text-sm text-blue-600 mb-4 font-inter font-medium">{item.tooltip}</div>
-                      <div className="grid grid-cols-2 gap-4">
-                        {item.items.map((subItem, index) => {
-                          const IconComponent = subItem.icon;
-                          return (
-                            <motion.div
-                              key={index}
-                              className="group flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 cursor-pointer transition-all duration-200 border border-transparent hover:border-blue-100"
-                              whileHover={{ scale: 1.02, x: 5 }}
-                              whileTap={{ scale: 0.98 }}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: index * 0.1 }}
-                              onClick={() => subItem.route && navigate(subItem.route)}
-                              role="button"
-                              tabIndex={0}
-                              onKeyPress={e => { if (e.key === 'Enter' && subItem.route) navigate(subItem.route); }}
-                            >
-                              <div className="flex-shrink-0">
-                                <motion.div 
-                                  className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center"
-                                  whileHover={{ scale: 1.1, rotate: 5 }}
-                                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                                >
-                                  <IconComponent className="w-6 h-6 text-white" />
-                                </motion.div>
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="font-inter font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                                  {subItem.title}
+                  {/* Mega Menu Dropdown */}
+                  {activeDropdown === item.id && (
+                    <div 
+                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden animate-fade-in z-50"
+                      onMouseEnter={() => handleMouseEnter(item.id)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <div className="p-6">
+                        <div className="text-sm text-blue-600 mb-4 font-inter font-medium">{item.tooltip}</div>
+                        <div className="grid grid-cols-2 gap-4">
+                          {item.items.map((subItem, index) => {
+                            const IconComponent = subItem.icon;
+                            return (
+                              <motion.div
+                                key={index}
+                                className="group flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 cursor-pointer transition-all duration-200 border border-transparent hover:border-blue-100"
+                                whileHover={{ scale: 1.02, x: 5 }}
+                                whileTap={{ scale: 0.98 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                onClick={() => subItem.route && navigate(subItem.route)}
+                                role="button"
+                                tabIndex={0}
+                                onKeyPress={e => { if (e.key === 'Enter' && subItem.route) navigate(subItem.route); }}
+                              >
+                                <div className="flex-shrink-0">
+                                  <motion.div 
+                                    className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center"
+                                    whileHover={{ scale: 1.1, rotate: 5 }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                  >
+                                    <IconComponent className="w-6 h-6 text-white" />
+                                  </motion.div>
                                 </div>
-                                <div className="text-sm text-gray-600 mt-1 font-figtree leading-relaxed">
-                                  {subItem.desc}
+                                <div className="flex-1 min-w-0">
+                                  <div className="font-inter font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                    {subItem.title}
+                                  </div>
+                                  <div className="text-sm text-gray-600 mt-1 font-figtree leading-relaxed">
+                                    {subItem.desc}
+                                  </div>
                                 </div>
-                              </div>
-                            </motion.div>
-                          );
-                        })}
+                              </motion.div>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                  )}
+                </div>
+              ))}
+            </div>
 
-          {/* User Type Selector & Mobile Menu */}
-          <div className="flex items-center space-x-3">
-            <div className="hidden sm:flex items-center space-x-2">
-              <span className="text-sm text-gray-600 font-figtree">I am a:</span>
-              <select
-                value={userType}
-                onChange={(e) => setUserType(e.target.value as any)}
-                className="text-sm border border-gray-300 rounded-full px-4 py-2 pr-8 bg-gradient-to-b from-amber-200 to-yellow-50 font-figtree shadow-sm hover:shadow-md transition-all duration-200 appearance-none relative"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
-                  backgroundPosition: 'right 0.5rem center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: '1.5em 1.5em',
-                  paddingRight: '2rem'
-                }}
-              >
-                <option value="resident">Resident</option>
-                <option value="visitor">Visitor</option>
-                <option value="official">Official</option>
-              </select>
-          </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              className="md:hidden"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white">
-            <div className="px-4 py-4 space-y-3">
-              <div className="flex items-center space-x-2 mb-4">
+            {/* User Type Selector & Mobile Menu */}
+            <div className="flex items-center space-x-3">
+              <div className="hidden sm:flex items-center space-x-2">
                 <span className="text-sm text-gray-600 font-figtree">I am a:</span>
                 <select
                   value={userType}
                   onChange={(e) => setUserType(e.target.value as any)}
-                  className="text-sm border border-gray-300 rounded-full px-4 py-2 pr-8 bg-gradient-to-b from-amber-200 to-yellow-50 font-figtree shadow-sm appearance-none relative"
+                  className="text-sm border border-gray-300 rounded-full px-4 py-2 pr-8 bg-gradient-to-b from-amber-200 to-yellow-50 font-figtree shadow-sm hover:shadow-md transition-all duration-200 appearance-none relative"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
                     backgroundPosition: 'right 0.5rem center',
@@ -377,29 +379,65 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                   <option value="official">Official</option>
                 </select>
               </div>
-              {navItems.map((item) => (
-                <div key={item.id} className="border-b border-gray-100 pb-3">
-                  <div className="font-medium text-gray-900 mb-2 font-inter">{item.title}</div>
-                  <div className="space-y-1 ml-4">
-                    {item.items.map((subItem, index) => (
-                      <div
-                        key={index}
-                        className="text-sm text-gray-600 py-1 font-figtree cursor-pointer hover:text-blue-600"
-                        onClick={() => subItem.route && navigate(subItem.route)}
-                        role="button"
-                        tabIndex={0}
-                        onKeyPress={e => { if (e.key === 'Enter' && subItem.route) navigate(subItem.route); }}
-                      >
-                        {subItem.title}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="md:hidden"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </Button>
             </div>
           </div>
-        )}
-      </div>
-    </nav>
+
+          {/* Mobile Menu */}
+          {isOpen && (
+            <div className="md:hidden border-t border-gray-200 bg-white">
+              <div className="px-4 py-4 space-y-3">
+                <div className="flex items-center space-x-2 mb-4">
+                  <span className="text-sm text-gray-600 font-figtree">I am a:</span>
+                  <select
+                    value={userType}
+                    onChange={(e) => setUserType(e.target.value as any)}
+                    className="text-sm border border-gray-300 rounded-full px-4 py-2 pr-8 bg-gradient-to-b from-amber-200 to-yellow-50 font-figtree shadow-sm appearance-none relative"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: 'right 0.5rem center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '1.5em 1.5em',
+                      paddingRight: '2rem'
+                    }}
+                  >
+                    <option value="resident">Resident</option>
+                    <option value="visitor">Visitor</option>
+                    <option value="official">Official</option>
+                  </select>
+                </div>
+                {navItems.map((item) => (
+                  <div key={item.id} className="border-b border-gray-100 pb-3">
+                    <div className="font-medium text-gray-900 mb-2 font-inter">{item.title}</div>
+                    <div className="space-y-1 ml-4">
+                      {item.items.map((subItem, index) => (
+                        <div
+                          key={index}
+                          className="text-sm text-gray-600 py-1 font-figtree cursor-pointer hover:text-blue-600"
+                          onClick={() => subItem.route && navigate(subItem.route)}
+                          role="button"
+                          tabIndex={0}
+                          onKeyPress={e => { if (e.key === 'Enter' && subItem.route) navigate(subItem.route); }}
+                        >
+                          {subItem.title}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+    </>
   );
 };
