@@ -59,14 +59,8 @@ const HeroSection = () => {
             {slides.map((slide, idx) => (
               <CarouselItem key={slide.headline}>
                 <div className="flex flex-col items-center justify-center min-h-[40vh]">
-                  <h1 className="mb-6 hero-timesnow">
-                    <GradientText
-                      colors={["#1a2238", "#274472", "#274060", "#406882", "#1a2238"]}
-                      animationSpeed={7}
-                      className="inline-block"
-                    >
-                      <TypewriterCascade text={slide.headline} delay={0.2} />
-                    </GradientText>
+                  <h1 className="mb-6 hero-timesnow text-[#1a2238]">
+                    <TypewriterCascade text={slide.headline} delay={0.2} />
                   </h1>
                   <p className="hero-timesnow-sub mb-8 max-w-2xl mx-auto">
                     {slide.subtext}

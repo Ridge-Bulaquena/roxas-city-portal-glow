@@ -134,9 +134,9 @@ const ServicesGrid = () => {
             return (
               <Card 
                 key={service.title}
-                className={`card-hover cursor-pointer transition-all duration-600 ${
+                className={`cursor-pointer transition-all duration-600 ${
                   sectionVisible ? 'opacity-100 translate-y-0 rotate-0' : 'opacity-0 translate-y-10 rotate-2'
-                }`}
+                } hover:shadow-2xl hover:scale-105`}
                 style={{ 
                   transitionDelay: sectionVisible ? `${1000 + service.delay}ms` : '0ms'
                 }}
@@ -151,7 +151,7 @@ const ServicesGrid = () => {
                   <CardDescription className="text-sm">
                     {service.description}
                   </CardDescription>
-                  <Button variant="outline" size="sm" className="w-full shine-button">
+                  <Button variant="outline" size="sm" className="w-full hover-glow">
                     {service.buttonText}
                   </Button>
                 </CardContent>
