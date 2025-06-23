@@ -34,21 +34,6 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/70 to-white/50"></div>
       </div>
 
-      {/* Background cityscape effect */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-muted to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-full">
-          <svg viewBox="0 0 1200 300" className="w-full h-64 text-muted-foreground fill-current">
-            <rect x="0" y="100" width="80" height="200" className="animate-fade-in animation-delay-3300" />
-            <rect x="100" y="80" width="60" height="220" className="animate-fade-in animation-delay-3800" />
-            <rect x="180" y="120" width="70" height="180" className="animate-fade-in animation-delay-3300" />
-            <rect x="270" y="90" width="50" height="210" className="animate-fade-in animation-delay-3800" />
-            <rect x="340" y="110" width="65" height="190" className="animate-fade-in animation-delay-3300" />
-            <rect x="430" y="70" width="75" height="230" className="animate-fade-in animation-delay-3800" />
-          </svg>
-        </div>
-      </div>
-
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
         {/* Hero Headline with letter-by-letter animation */}
         <h1 className={`text-6xl md:text-8xl font-bold mb-6 transition-all duration-1000 ${
