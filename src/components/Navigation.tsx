@@ -450,6 +450,8 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           font-family: 'Figtree', Inter, sans-serif;
           background: none !important;
           border: none !important;
+          font-size: 10px;
+          letter-spacing: 1px;
         }
         .nav-link .nav-underline {
           content: '';
