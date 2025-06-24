@@ -452,6 +452,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           border: none !important;
           font-size: 10px;
           letter-spacing: 1px;
+          line-height: 1.2;
         }
         .nav-link .nav-underline {
           content: '';
