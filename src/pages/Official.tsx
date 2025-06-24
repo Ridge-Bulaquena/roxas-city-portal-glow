@@ -97,7 +97,7 @@ const Official = () => {
             <h2 className="text-3xl font-semibold text-[#2c3e50] text-center">Leadership & Oversight</h2>
             <div className="mt-10 grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-lg font-bold">🧭 Mayor’s Control Panel</h3>
+                <h3 className="text-lg font-bold">🧭 Mayor's Control Panel</h3>
                 <ul className="list-disc pl-6 mt-2 text-gray-600 space-y-2">
                   <li>Municipal Development Tracker (AIP, CDP, GAD)</li>
                   <li>Citizen Service Quality Analytics</li>
