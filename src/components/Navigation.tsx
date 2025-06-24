@@ -294,8 +294,8 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 else if (value === 'visitor') navigate('/visitor');
                 else if (value === 'official') navigate('/official');
               }}
-              className="px-4 py-2 bg-white text-[#14274E] border border-gray-200 rounded-md font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm"
-              style={{minWidth: 120, fontFamily: 'Figtree, Inter, sans-serif'}} 
+              className="px-4 pr-8 py-2 bg-white text-[#14274E] border border-gray-200 rounded-full font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm appearance-none hover:shadow-md hover:border-blue-300 duration-200"
+              style={{minWidth: 140, fontFamily: 'Figtree, Inter, sans-serif', backgroundPosition: 'right 1rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em'}}
               aria-label="Select user type"
             >
               <option value="resident">I am a Resident</option>
@@ -501,6 +501,15 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
         .btn:hover, button:hover, a.button:hover, .btn:focus, button:focus, a.button:focus {
           transform: scale(1.06);
           box-shadow: 0 0 0 2px #fdfdfd, 0 4px 16px #60a5fa26;
+        }
+
+        select[aria-label="Select user type"]::-ms-expand { display: none; }
+        select[aria-label="Select user type"] {
+          transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        select[aria-label="Select user type"]:hover, select[aria-label="Select user type"]:focus {
+          box-shadow: 0 2px 8px #60a5fa22, 0 0 0 2px #eaf3fb;
+          border-color: #60A5FA;
         }
       `}</style>
     </>
