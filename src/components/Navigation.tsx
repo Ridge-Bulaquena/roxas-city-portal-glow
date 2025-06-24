@@ -284,7 +284,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
       
       {/* Main Navigation Bar - Slides up/down based on scroll */}
       <motion.nav 
-        className="fixed top-[50px] left-0 right-0 z-[999] bg-white min-h-[100px] flex items-center border-b border-gray-200 shadow-sm"
+        className="fixed top-[50px] left-0 right-0 z-[999] bg-white min-h-[100px] flex items-center border-b border-gray-200"
         initial={{ y: 0 }}
         animate={{ y: isNavVisible ? 0 : -100 }}
         transition={{ 
@@ -466,6 +466,11 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
         .nav-link:focus-visible .nav-underline {
           width: 60%;
           left: 50%;
+        }
+
+        .btn:hover, button:hover, a.button:hover, .btn:focus, button:focus, a.button:focus {
+          transform: scale(1.06);
+          box-shadow: 0 0 0 2px #fdfdfd, 0 4px 16px #60a5fa26;
         }
       `}</style>
     </>
