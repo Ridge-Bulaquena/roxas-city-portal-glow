@@ -130,13 +130,21 @@ const HeroSection = () => {
               <AnimatePresence>
                 {showSubtitle && (
                   <motion.p
-                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-[#14274E] font-figtree font-light tracking-wide leading-relaxed"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
+                    key={slide.subtext}
+                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-[#14274E] font-figtree font-light tracking-wide leading-relaxed typewriter-effect"
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
+                    exit={{ width: 0 }}
                     transition={{ 
-                      duration: 0.3, 
+                      duration: 1.2, // typewriter speed
+                      ease: 'linear',
                       delay: 0
+                    }}
+                    style={{
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      borderRight: '2px solid #14274E',
+                      fontFamily: 'Figtree, Inter, sans-serif',
                     }}
                   >
                     {slide.subtext}
@@ -254,6 +262,10 @@ const HeroSection = () => {
           border-color: rgba(255, 255, 255, 0.5);
           box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
           color: #0038A8;
+        }
+        
+        .typewriter-effect {
+          animation: none;
         }
       `}</style>
     </section>
