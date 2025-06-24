@@ -91,6 +91,15 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
     setHoverTimeout(timeout);
   };
 
+  // Dropdown handler for top bar
+  const handleUserTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setUserType(value);
+    if (value === 'resident') navigate('/resident');
+    else if (value === 'visitor') navigate('/visitor');
+    else if (value === 'official') navigate('/official');
+  };
+
   const navItems = [
     {
       id: 'services',
@@ -274,8 +283,25 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
               aria-label="Search"
             />
           </form>
-          {/* Right: Auth Buttons */}
+          {/* Right: Dropdown and Auth Buttons */}
           <div className="flex items-center gap-2">
+            <select
+              value={userType}
+              onChange={e => {
+                const value = e.target.value;
+                setUserType(value);
+                if (value === 'resident') navigate('/resident');
+                else if (value === 'visitor') navigate('/visitor');
+                else if (value === 'official') navigate('/official');
+              }}
+              className="px-4 py-2 bg-white text-[#14274E] border border-gray-200 rounded-md font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm"
+              style={{minWidth: 120, fontFamily: 'Figtree, Inter, sans-serif'}} 
+              aria-label="Select user type"
+            >
+              <option value="resident">I am a Resident</option>
+              <option value="visitor">I am a Visitor</option>
+              <option value="official">I am an Official</option>
+            </select>
             <a href="/login" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Sign In</a>
             <a href="/register" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Register</a>
           </div>
