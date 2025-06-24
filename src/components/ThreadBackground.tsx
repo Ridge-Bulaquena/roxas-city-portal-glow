@@ -11,26 +11,40 @@ const ThreadBackground = () => {
 
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
+
     const lines = 60;
-    const spacing = 28;
+    const spacing = 20;
+    const amplitude = 20;
+    const speed = 0.002;
+    const useWhiteBackground = false;
 
     const draw = () => {
-      // Gradient background
-      const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      gradient.addColorStop(0, "#0a0f3d");    // Midnight Blue
-      gradient.addColorStop(0.5, "#1f3b67");  // Slate Blue
-      gradient.addColorStop(1, "#b4d4ee");    // Baby Blue
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
+      // Clear background (white or transparent)
+      ctx.clearRect(0, 0, width, height);
+      if (useWhiteBackground) {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, width, height);
+      }
 
-      // Draw animated thread lines
+      const time = Date.now();
+
+      // Draw horizontal threads
       for (let i = 0; i < lines; i++) {
-        const offset = Math.sin(Date.now() * 0.001 + i) * 20;
+        const y = i * spacing;
         ctx.beginPath();
-        ctx.moveTo(i * spacing, 0);
-        ctx.lineTo(i * spacing + offset, height);
-        ctx.strokeStyle = i % 2 === 0 ? "#00bfff" : "#89c9ff"; // Electric blue & baby blue
-        ctx.lineWidth = 1;
+
+        for (let x = 0; x <= width; x += 10) {
+          const offset = Math.sin(x * 0.01 + time * speed + i) * amplitude;
+          const yOffset = y + offset;
+          if (x === 0) {
+            ctx.moveTo(x, yOffset);
+          } else {
+            ctx.lineTo(x, yOffset);
+          }
+        }
+
+        ctx.strokeStyle = i % 2 === 0 ? "#2f70c9" : "#8eaedc"; // Blue and grey-blue
+        ctx.lineWidth = 1.2;
         ctx.stroke();
       }
 
@@ -45,7 +59,9 @@ const ThreadBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
