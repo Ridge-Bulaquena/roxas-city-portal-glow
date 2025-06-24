@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
+import ThreadBackground from './ThreadBackground';
 
 const slides = [
   {
@@ -89,6 +90,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+      <ThreadBackground />
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6 py-32">
         <div className="relative w-full h-full">
