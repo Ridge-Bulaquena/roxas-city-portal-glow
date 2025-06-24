@@ -1,7 +1,6 @@
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
-import Threads from '@/components/Threads';
 
 const Official = () => {
   const [userType, setUserType] = useState<'resident' | 'official' | 'visitor'>(
