@@ -95,9 +95,13 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
   const handleUserTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as 'resident' | 'official' | 'visitor';
     setUserType(value);
-    if (value === 'resident') navigate('/resident');
-    else if (value === 'visitor') navigate('/visitor');
-    else if (value === 'official') navigate('/official');
+    if (value === 'resident') {
+      if (window.location.pathname !== '/resident') window.location.href = '/resident';
+    } else if (value === 'visitor') {
+      if (window.location.pathname !== '/visitor') window.location.href = '/visitor';
+    } else if (value === 'official') {
+      if (window.location.pathname !== '/official') window.location.href = '/official';
+    }
   };
 
   const navItems = [
