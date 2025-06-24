@@ -169,7 +169,8 @@ const HeroSection = () => {
               <AnimatePresence>
                 {showDesc && slide.description && (
                   <motion.p
-                    className="mb-6 max-w-2xl mx-auto text-center text-base sm:text-lg text-[#AEDFF7]/80 leading-relaxed"
+                    className="mb-6 max-w-2xl mx-auto text-center text-base sm:text-lg font-figtree leading-relaxed"
+                    style={{ color: '#14274E', fontFamily: 'Figtree, Inter, sans-serif' }}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
