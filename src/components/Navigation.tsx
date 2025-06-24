@@ -302,7 +302,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 <option value="official">I am an Official</option>
               </select>
               {/* Custom dropdown arrow for better visibility */}
-              <svg className="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ml-2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ml-2 pr-12" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 8L10 12L14 8" stroke="#bcd7f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
