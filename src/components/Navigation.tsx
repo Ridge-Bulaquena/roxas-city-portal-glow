@@ -96,11 +96,11 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
     const value = e.target.value as 'resident' | 'official' | 'visitor';
     setUserType(value);
     if (value === 'resident') {
-      if (window.location.pathname !== '/resident') window.location.href = '/resident';
+      if (window.location.pathname !== '/resident') navigate('/resident');
     } else if (value === 'visitor') {
-      if (window.location.pathname !== '/visitor') window.location.href = '/visitor';
+      if (window.location.pathname !== '/visitor') navigate('/visitor');
     } else if (value === 'official') {
-      if (window.location.pathname !== '/official') window.location.href = '/official';
+      if (window.location.pathname !== '/official') navigate('/official');
     }
   };
 
@@ -303,7 +303,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
               </select>
               {/* Custom dropdown arrow for better visibility */}
               <svg className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ml-2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 8L10 12L14 8" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 8L10 12L14 8" stroke="#bcd7f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <a href="/login" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Sign In</a>

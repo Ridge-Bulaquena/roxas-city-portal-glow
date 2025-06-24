@@ -87,6 +87,9 @@ const Footer = () => {
               <a href="/visitor" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-200">
                 Visitor Portal
               </a>
+              <a href="/official" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-200">
+                Official Portal
+              </a>
             </div>
           </div>
         </div>
