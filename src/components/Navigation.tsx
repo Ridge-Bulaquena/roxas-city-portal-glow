@@ -317,11 +317,9 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 onMouseEnter={() => handleMouseEnter(item.id)}
                 onMouseLeave={handleMouseLeave}
               >
-                <button className="group relative flex items-center font-inter font-medium text-gray-700 px-2 py-1 focus:outline-none">
-                  <span className="pb-1">
-                    {item.title}
-                  </span>
-                  <span className="absolute left-0 right-0 -bottom-0.5 h-[2.5px] bg-blue-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <button className="nav-link group relative flex items-center font-figtree font-medium text-[#14274E] px-2 py-1 focus:outline-none uppercase tracking-wide text-base" style={{fontFamily: 'Figtree, Inter, sans-serif'}}>
+                  <span className="pb-1">{item.title}</span>
+                  <span className="nav-underline"></span>
                   <ChevronDown className="w-4 h-4 ml-1 transition-transform group-hover:rotate-180 text-gray-400" />
                 </button>
 
@@ -441,6 +439,33 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
           }
+        }
+
+        .nav-link {
+          position: relative;
+          text-decoration: none;
+          color: #14274E;
+          padding: 12px 20px;
+          font-family: 'Figtree', Inter, sans-serif;
+          background: none !important;
+          border: none !important;
+        }
+        .nav-link .nav-underline {
+          content: '';
+          position: absolute;
+          left: 50%;
+          bottom: 4px;
+          width: 0;
+          height: 2px;
+          background: #0038A8;
+          border-radius: 1px;
+          transition: width 0.3s cubic-bezier(.4,1.6,.6,1), left 0.3s cubic-bezier(.4,1.6,.6,1);
+          transform: translateX(-50%);
+        }
+        .nav-link:hover .nav-underline,
+        .nav-link:focus-visible .nav-underline {
+          width: 60%;
+          left: 50%;
         }
       `}</style>
     </>
