@@ -294,7 +294,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 value={userType}
                 onChange={handleUserTypeChange}
                 className="px-4 pr-8 py-2 bg-white text-[#14274E] border border-gray-200 rounded-xl font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm appearance-none hover:shadow-md hover:border-blue-300 duration-200"
-                style={{minWidth: 140, fontFamily: 'Figtree, Inter, sans-serif'}}
+                style={{ minWidth: 140, fontFamily: 'Figtree, Inter, sans-serif' }}
                 aria-label="Select user type"
               >
                 <option value="resident">I am a Resident</option>

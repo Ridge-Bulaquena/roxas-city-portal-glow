@@ -1,6 +1,7 @@
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
+import Threads from '@/components/Threads';
 
 const Official = () => {
   const [userType, setUserType] = useState<'resident' | 'official' | 'visitor'>(
@@ -42,30 +43,36 @@ const Official = () => {
         </section>
 
         {/* Ordinance & Policy Tools */}
-        <section className="py-16 px-6 bg-white">
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl font-semibold text-[#2c3e50]">Smart Legislation Toolkit</h2>
-            <p className="text-gray-600 mt-4">
-              Use data-driven templates and issue trackers to create ordinances aligned with national mandates and local needs.
-            </p>
-          </div>
-          <div className="mt-12 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <div className="bg-gray-100 p-6 rounded-xl shadow">
-              <h3 className="font-bold text-lg mb-2">📘 Template Ordinances</h3>
-              <p className="text-gray-600">Browse model ordinances from DILG and customize for local relevance.</p>
-            </div>
-            <div className="bg-gray-100 p-6 rounded-xl shadow">
-              <h3 className="font-bold text-lg mb-2">🗳️ Citizen Sentiment Reports</h3>
-              <p className="text-gray-600">See what issues are trending among constituents in real-time.</p>
-            </div>
-            <div className="bg-gray-100 p-6 rounded-xl shadow">
-              <h3 className="font-bold text-lg mb-2">📅 Compliance Calendar</h3>
-              <p className="text-gray-600">Stay ahead of DILG deadlines and reporting periods (LGPMS, CDP, etc).</p>
-            </div>
-            <div className="bg-gray-100 p-6 rounded-xl shadow">
-              <h3 className="font-bold text-lg mb-2">💬 Ordinance Collaboration</h3>
-              <p className="text-gray-600">Each Councilor can draft, share, and refine ordinance proposals digitally.</p>
-            </div>
+        <section className="py-20 bg-muted/30 relative overflow-hidden">
+          {/* Thread animation background */}
+          <Threads color={[0.0, 0.48, 0.98]} amplitude={1.3} distance={0.18} />
+          <div className="max-w-3xl mx-auto px-6 relative z-10">
+            <section className="py-16 px-6 bg-white">
+              <div className="text-center max-w-4xl mx-auto">
+                <h2 className="text-3xl font-semibold text-[#2c3e50]">Smart Legislation Toolkit</h2>
+                <p className="text-gray-600 mt-4">
+                  Use data-driven templates and issue trackers to create ordinances aligned with national mandates and local needs.
+                </p>
+              </div>
+              <div className="mt-12 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div className="bg-gray-100 p-6 rounded-xl shadow">
+                  <h3 className="font-bold text-lg mb-2">📘 Template Ordinances</h3>
+                  <p className="text-gray-600">Browse model ordinances from DILG and customize for local relevance.</p>
+                </div>
+                <div className="bg-gray-100 p-6 rounded-xl shadow">
+                  <h3 className="font-bold text-lg mb-2">🗳️ Citizen Sentiment Reports</h3>
+                  <p className="text-gray-600">See what issues are trending among constituents in real-time.</p>
+                </div>
+                <div className="bg-gray-100 p-6 rounded-xl shadow">
+                  <h3 className="font-bold text-lg mb-2">📅 Compliance Calendar</h3>
+                  <p className="text-gray-600">Stay ahead of DILG deadlines and reporting periods (LGPMS, CDP, etc).</p>
+                </div>
+                <div className="bg-gray-100 p-6 rounded-xl shadow">
+                  <h3 className="font-bold text-lg mb-2">💬 Ordinance Collaboration</h3>
+                  <p className="text-gray-600">Each Councilor can draft, share, and refine ordinance proposals digitally.</p>
+                </div>
+              </div>
+            </section>
           </div>
         </section>
 
