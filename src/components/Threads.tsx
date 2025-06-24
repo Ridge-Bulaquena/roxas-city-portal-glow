@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { Renderer, Camera, Transform, Geometry, Program, Mesh } from "ogl";
 
 interface ThreadsProps {
   color?: [number, number, number]; // RGB values between 0-1
@@ -13,69 +14,126 @@ const Threads: React.FC<ThreadsProps> = ({
   distance = 0.5,
   enableMouseInteraction = false
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mountRef = useRef<HTMLDivElement>(null);
+  const rendererRef = useRef<Renderer | null>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    const mount = mountRef.current;
+    if (!mount) return;
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+    // Clean up previous renderer if any
+    if (rendererRef.current) {
+      rendererRef.current.gl.getExtension('WEBGL_lose_context')?.loseContext();
+      rendererRef.current = null;
+      while (mount.firstChild) mount.removeChild(mount.firstChild);
+    }
 
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const renderer = new Renderer({ dpr: 1, width, height, alpha: true });
+    rendererRef.current = renderer;
+    mount.appendChild(renderer.gl.canvas);
+
+    const gl = renderer.gl;
+    gl.clearColor(0, 0, 0, 0);
+
+    const camera = new Camera(width / height);
+    camera.position.z = 5;
+
+    const scene = new Transform();
+
+    // Thread lines setup
     const lines = 60;
-    const spacing = 20;
-    const speed = 0.002;
+    const spacing = distance * 20;
+    const threadMeshes: Mesh[] = [];
+    const threadGeometries: Geometry[] = [];
+    const threadPrograms: Program[] = [];
 
-    const draw = () => {
-      // Clear background
-      ctx.clearRect(0, 0, width, height);
-
-      const time = Date.now();
-
-      // Draw horizontal threads
-      for (let i = 0; i < lines; i++) {
-        const y = i * spacing;
-        ctx.beginPath();
-
-        for (let x = 0; x <= width; x += 10) {
-          const offset = Math.sin(x * 0.01 + time * speed + i) * (amplitude * 20);
-          const yOffset = y + offset;
-          if (x === 0) {
-            ctx.moveTo(x, yOffset);
-          } else {
-            ctx.lineTo(x, yOffset);
-          }
-        }
-
-        // Use the color prop to create alternating shades
-        const [r, g, b] = color;
-        const alpha = i % 2 === 0 ? 0.8 : 0.6;
-        ctx.strokeStyle = `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${alpha})`;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
+    for (let i = 0; i < lines; i++) {
+      // Create a horizontal line geometry
+      const points = [];
+      for (let x = -2; x <= 2; x += 0.04) {
+        points.push(x, 0, 0);
       }
+      const geometry = new Geometry(gl, {
+        position: { size: 3, data: new Float32Array(points) },
+      });
+      const [r, g, b] = color;
+      const threadColor = [r, g, b].map((c, idx) => c * (i % 2 === 0 ? 1 : 0.7));
+      const program = new Program(gl, {
+        vertex: `
+          attribute vec3 position;
+          uniform float uTime;
+          uniform float uY;
+          uniform float uAmplitude;
+          varying float vX;
+          void main() {
+            float offset = sin(position.x * 8.0 + uTime + uY) * uAmplitude;
+            vec3 pos = position;
+            pos.y += offset;
+            pos.y += uY;
+            vX = position.x;
+            gl_Position = vec4(pos, 1.0);
+          }
+        `,
+        fragment: `
+          precision highp float;
+          uniform vec3 uColor;
+          varying float vX;
+          void main() {
+            gl_FragColor = vec4(uColor, 0.8);
+          }
+        `,
+        uniforms: {
+          uTime: { value: 0 },
+          uY: { value: (i - lines / 2) * spacing / 100 },
+          uAmplitude: { value: amplitude * 0.12 },
+          uColor: { value: threadColor },
+        },
+        transparent: true,
+      });
+      const mesh = new Mesh(gl, { geometry, program, mode: gl.LINE_STRIP });
+      mesh.setParent(scene);
+      threadMeshes.push(mesh);
+      threadGeometries.push(geometry);
+      threadPrograms.push(program);
+    }
 
-      requestAnimationFrame(draw);
+    let animationId: number;
+    const animate = () => {
+      const time = performance.now() * 0.002;
+      threadPrograms.forEach((program) => {
+        program.uniforms.uTime.value = time;
+      });
+      renderer.render({ scene, camera });
+      animationId = requestAnimationFrame(animate);
     };
-
-    draw();
+    animate();
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      renderer.setSize(w, h);
+      camera.perspective(w / h);
     };
-
     window.addEventListener("resize", handleResize);
+
     return () => {
+      cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
+      threadMeshes.forEach((mesh) => mesh.setParent(null));
+      // Geometry and Program do not have dispose methods in ogl
+      if (rendererRef.current) {
+        rendererRef.current.gl.getExtension('WEBGL_lose_context')?.loseContext();
+        rendererRef.current = null;
+      }
+      while (mount.firstChild) mount.removeChild(mount.firstChild);
     };
   }, [color, amplitude, distance]);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      ref={mountRef}
       className="absolute inset-0 w-full h-full"
       style={{ pointerEvents: enableMouseInteraction ? "auto" : "none" }}
     />
