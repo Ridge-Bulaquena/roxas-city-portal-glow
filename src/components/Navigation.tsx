@@ -285,17 +285,23 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           </form>
           {/* Right: Dropdown and Auth Buttons */}
           <div className="flex items-center gap-2">
-            <select
-              value={userType}
-              onChange={handleUserTypeChange}
-              className="px-4 pr-6 py-2 bg-white text-[#14274E] border border-gray-200 rounded-xl font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm appearance-none hover:shadow-md hover:border-blue-300 duration-200"
-              style={{minWidth: 140, fontFamily: 'Figtree, Inter, sans-serif', backgroundPosition: 'right 1rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em'}}
-              aria-label="Select user type"
-            >
-              <option value="resident">I am a Resident</option>
-              <option value="visitor">I am a Visitor</option>
-              <option value="official">I am an Official</option>
-            </select>
+            <div className="relative w-[140px]">
+              <select
+                value={userType}
+                onChange={handleUserTypeChange}
+                className="px-4 pr-8 py-2 bg-white text-[#14274E] border border-gray-200 rounded-xl font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm appearance-none hover:shadow-md hover:border-blue-300 duration-200"
+                style={{minWidth: 140, fontFamily: 'Figtree, Inter, sans-serif'}}
+                aria-label="Select user type"
+              >
+                <option value="resident">I am a Resident</option>
+                <option value="visitor">I am a Visitor</option>
+                <option value="official">I am an Official</option>
+              </select>
+              {/* Custom dropdown arrow for better visibility */}
+              <svg className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 8L10 12L14 8" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
             <a href="/login" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Sign In</a>
             <a href="/register" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Register</a>
           </div>
