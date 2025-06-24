@@ -93,7 +93,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
 
   // Dropdown handler for top bar
   const handleUserTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
+    const value = e.target.value as 'resident' | 'official' | 'visitor';
     setUserType(value);
     if (value === 'resident') navigate('/resident');
     else if (value === 'visitor') navigate('/visitor');
@@ -287,14 +287,8 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           <div className="flex items-center gap-2">
             <select
               value={userType}
-              onChange={e => {
-                const value = e.target.value;
-                setUserType(value);
-                if (value === 'resident') navigate('/resident');
-                else if (value === 'visitor') navigate('/visitor');
-                else if (value === 'official') navigate('/official');
-              }}
-              className="px-4 pr-8 py-2 bg-white text-[#14274E] border border-gray-200 rounded-full font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm appearance-none hover:shadow-md hover:border-blue-300 duration-200"
+              onChange={handleUserTypeChange}
+              className="px-4 pr-6 py-2 bg-white text-[#14274E] border border-gray-200 rounded-xl font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm appearance-none hover:shadow-md hover:border-blue-300 duration-200"
               style={{minWidth: 140, fontFamily: 'Figtree, Inter, sans-serif', backgroundPosition: 'right 1rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em'}}
               aria-label="Select user type"
             >
@@ -347,7 +341,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 <button className="nav-link group relative flex items-center font-figtree font-medium text-[#14274E] px-2 py-1 focus:outline-none uppercase tracking-wide text-base" style={{fontFamily: 'Figtree, Inter, sans-serif'}}>
                   <span className="pb-1">{item.title}</span>
                   <span className="nav-underline"></span>
-                  <ChevronDown className="w-4 h-4 ml-1 transition-transform group-hover:rotate-180 text-gray-400" />
+                  <ChevronDown className="w-4 h-4 ml-1 pr-2 transition-transform group-hover:rotate-180 text-gray-400" />
                 </button>
 
                 {/* Mega Menu Dropdown */}
