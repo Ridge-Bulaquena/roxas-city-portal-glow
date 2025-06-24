@@ -92,18 +92,29 @@ const HeroSection = () => {
             >
               {/* Title with flexible sizing and gradient shimmer */}
               <motion.h1
-                className="mb-6 hero-timesnow text-white font-bold w-full text-center overflow-hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase shimmer-gradient leading-tight"
+                className={`mb-6 hero-timesnow font-bold w-full text-center overflow-hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase shimmer-gradient leading-tight ${slide.headline === 'SMART SERVICES FOR EVERY CITIZEN.' ? 'gradient-smart-services' : ''}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ 
                   duration: 0.4, 
                   delay: 0
                 }}
-                style={{
+                style={slide.headline === 'SMART SERVICES FOR EVERY CITIZEN.' ? {
                   whiteSpace: 'normal',
                   wordWrap: 'break-word',
                   maxWidth: '100%',
-                  background: 'linear-gradient(90deg, #ffffff, #aee7ff, #ffffff)',
+                  background: 'linear-gradient(90deg, #14274E, #60A5FA)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundSize: '200% 100%',
+                  animation: 'shimmer 2s linear infinite',
+                } : {
+                  whiteSpace: 'normal',
+                  wordWrap: 'break-word',
+                  maxWidth: '100%',
+                  background: 'linear-gradient(90deg, #14274E, #AEDFF7)',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
@@ -119,7 +130,7 @@ const HeroSection = () => {
               <AnimatePresence>
                 {showSubtitle && (
                   <motion.p
-                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-[#AEDFF7] font-figtree font-light tracking-wide leading-relaxed"
+                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-[#14274E] font-figtree font-light tracking-wide leading-relaxed"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
