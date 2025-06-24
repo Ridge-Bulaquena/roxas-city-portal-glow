@@ -1,6 +1,7 @@
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
+import ThreadBackground from "@/components/ThreadBackground";
 
 const Official = () => {
   const [userType, setUserType] = useState<'resident' | 'official' | 'visitor'>(
@@ -44,7 +45,7 @@ const Official = () => {
         {/* Ordinance & Policy Tools */}
         <section className="py-20 bg-muted/30 relative overflow-hidden">
           {/* Thread animation background */}
-          <Threads color={[0.0, 0.48, 0.98]} amplitude={1.3} distance={0.18} />
+          <ThreadBackground />
           <div className="max-w-3xl mx-auto px-6 relative z-10">
             <section className="py-16 px-6 bg-white">
               <div className="text-center max-w-4xl mx-auto">
