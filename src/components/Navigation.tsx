@@ -256,12 +256,12 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
   return (
     <>
       {/* Topmost Thin Bar - Always Fixed */}
-      <div className="w-full min-h-[50px] flex items-center justify-center px-4 text-xs font-medium bg-[#0038A8] text-white fixed top-0 left-0 right-0 z-[1000]">
+      <div className="w-full min-h-[50px] flex items-center justify-center px-4 text-xs font-medium bg-[#f6f9ff] text-[#14274E] fixed top-0 left-0 right-0 z-[1000]">
         <div className="flex w-full max-w-5xl items-center justify-between">
           {/* Left: Quick Links */}
           <div className="flex items-center gap-2">
-            <a href="/" className="px-4 py-2 bg-transparent text-white hover:bg-white/10 transition-colors rounded-md">Home</a>
-            <a href="/contact" className="px-4 py-2 bg-transparent text-white hover:bg-white/10 transition-colors rounded-md">Contact</a>
+            <a href="/" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md">Home</a>
+            <a href="/contact" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md">Contact</a>
           </div>
           {/* Center: Search */}
           <form className="flex items-center bg-white rounded-md px-3 py-2" style={{width: 240}} onSubmit={e => e.preventDefault()}>
@@ -276,8 +276,8 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           </form>
           {/* Right: Auth Buttons */}
           <div className="flex items-center gap-2">
-            <a href="/login" className="px-4 py-2 bg-transparent text-white hover:bg-white/10 transition-colors rounded-md font-medium">Sign In</a>
-            <a href="/register" className="px-4 py-2 bg-transparent text-white hover:bg-white/10 transition-colors rounded-md font-medium">Register</a>
+            <a href="/login" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Sign In</a>
+            <a href="/register" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Register</a>
           </div>
         </div>
       </div>

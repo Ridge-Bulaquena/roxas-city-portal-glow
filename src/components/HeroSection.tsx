@@ -74,7 +74,7 @@ const HeroSection = () => {
   const slide = slides[currentSlide];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0038A8]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6 py-32">
         <div className="relative w-full h-full">
