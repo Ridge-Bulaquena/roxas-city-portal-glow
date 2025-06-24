@@ -1,142 +1,238 @@
-import React, { useRef, useEffect } from "react";
-import { Renderer, Camera, Transform, Geometry, Program, Mesh } from "ogl";
+import React, { useEffect, useRef } from "react";
+import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 
 interface ThreadsProps {
-  color?: [number, number, number]; // RGB values between 0-1
+  color?: [number, number, number];
   amplitude?: number;
   distance?: number;
   enableMouseInteraction?: boolean;
 }
 
+const vertexShader = `
+attribute vec2 position;
+attribute vec2 uv;
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position, 0.0, 1.0);
+}
+`;
+
+const fragmentShader = `
+precision highp float;
+
+uniform float iTime;
+uniform vec3 iResolution;
+uniform vec3 uColor;
+uniform float uAmplitude;
+uniform float uDistance;
+uniform vec2 uMouse;
+
+#define PI 3.1415926538
+
+const int u_line_count = 40;
+const float u_line_width = 7.0;
+const float u_line_blur = 10.0;
+
+float Perlin2D(vec2 P) {
+    vec2 Pi = floor(P);
+    vec4 Pf_Pfmin1 = P.xyxy - vec4(Pi, Pi + 1.0);
+    vec4 Pt = vec4(Pi.xy, Pi.xy + 1.0);
+    Pt = Pt - floor(Pt * (1.0 / 71.0)) * 71.0;
+    Pt += vec2(26.0, 161.0).xyxy;
+    Pt *= Pt;
+    Pt = Pt.xzxz * Pt.yyww;
+    vec4 hash_x = fract(Pt * (1.0 / 951.135664));
+    vec4 hash_y = fract(Pt * (1.0 / 642.949883));
+    vec4 grad_x = hash_x - 0.49999;
+    vec4 grad_y = hash_y - 0.49999;
+    vec4 grad_results = inversesqrt(grad_x * grad_x + grad_y * grad_y)
+        * (grad_x * Pf_Pfmin1.xzxz + grad_y * Pf_Pfmin1.yyww);
+    grad_results *= 1.4142135623730950;
+    vec2 blend = Pf_Pfmin1.xy * Pf_Pfmin1.xy * Pf_Pfmin1.xy
+               * (Pf_Pfmin1.xy * (Pf_Pfmin1.xy * 6.0 - 15.0) + 10.0);
+    vec4 blend2 = vec4(blend, vec2(1.0 - blend));
+    return dot(grad_results, blend2.zxzx * blend2.wwyy);
+}
+
+float pixel(float count, vec2 resolution) {
+    return (1.0 / max(resolution.x, resolution.y)) * count;
+}
+
+float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float time, float amplitude, float distance) {
+    float split_offset = (perc * 0.4);
+    float split_point = 0.1 + split_offset;
+
+    float amplitude_normal = smoothstep(split_point, 0.7, st.x);
+    float amplitude_strength = 0.5;
+    float finalAmplitude = amplitude_normal * amplitude_strength
+                           * amplitude * (1.0 + (mouse.y - 0.5) * 0.2);
+
+    float time_scaled = time / 10.0 + (mouse.x - 0.5) * 1.0;
+    float blur = smoothstep(split_point, split_point + 0.05, st.x) * perc;
+
+    float xnoise = mix(
+        Perlin2D(vec2(time_scaled, st.x + perc) * 2.5),
+        Perlin2D(vec2(time_scaled, st.x + time_scaled) * 3.5) / 1.5,
+        st.x * 0.3
+    );
+
+    float y = 0.5 + (perc - 0.5) * distance + xnoise / 2.0 * finalAmplitude;
+
+    float line_start = smoothstep(
+        y + (width / 2.0) + (u_line_blur * pixel(1.0, iResolution.xy) * blur),
+        y,
+        st.y
+    );
+
+    float line_end = smoothstep(
+        y,
+        y - (width / 2.0) - (u_line_blur * pixel(1.0, iResolution.xy) * blur),
+        st.y
+    );
+
+    return clamp(
+        (line_start - line_end) * (1.0 - smoothstep(0.0, 1.0, pow(perc, 0.3))),
+        0.0,
+        1.0
+    );
+}
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+    vec2 uv = fragCoord / iResolution.xy;
+
+    float line_strength = 1.0;
+    for (int i = 0; i < u_line_count; i++) {
+        float p = float(i) / float(u_line_count);
+        line_strength *= (1.0 - lineFn(
+            uv,
+            u_line_width * pixel(1.0, iResolution.xy) * (1.0 - p),
+            p,
+            (PI * 1.0) * p,
+            uMouse,
+            iTime,
+            uAmplitude,
+            uDistance
+        ));
+    }
+
+    float colorVal = 1.0 - line_strength;
+    // White background, blue threads
+    vec3 bg = vec3(1.0, 1.0, 1.0);
+    vec3 thread = uColor;
+    vec3 color = mix(bg, thread, colorVal);
+    fragColor = vec4(color, colorVal);
+}
+
+void main() {
+    mainImage(gl_FragColor, gl_FragCoord.xy);
+}
+`;
+
 const Threads: React.FC<ThreadsProps> = ({
-  color = [0.4, 0.6, 1],
+  color = [0.19, 0.44, 0.79], // #2f70c9 blue
   amplitude = 1,
-  distance = 0.5,
-  enableMouseInteraction = false
+  distance = 0,
+  enableMouseInteraction = false,
+  ...rest
 }) => {
-  const mountRef = useRef<HTMLDivElement>(null);
-  const rendererRef = useRef<Renderer | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animationFrameId = useRef<number>();
 
   useEffect(() => {
-    const mount = mountRef.current;
-    if (!mount) return;
+    if (!containerRef.current) return;
+    const container = containerRef.current;
 
-    // Clean up previous renderer if any
-    if (rendererRef.current) {
-      rendererRef.current.gl.getExtension('WEBGL_lose_context')?.loseContext();
-      rendererRef.current = null;
-      while (mount.firstChild) mount.removeChild(mount.firstChild);
-    }
-
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const renderer = new Renderer({ dpr: 1, width, height, alpha: true });
-    rendererRef.current = renderer;
-    mount.appendChild(renderer.gl.canvas);
-
+    const renderer = new Renderer({ alpha: true });
     const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
+    gl.clearColor(1, 1, 1, 1); // White background
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    container.appendChild(gl.canvas);
 
-    const camera = new Camera(width / height);
-    camera.position.z = 5;
-
-    const scene = new Transform();
-
-    // Thread lines setup
-    const lines = 60;
-    const spacing = distance * 20;
-    const threadMeshes: Mesh[] = [];
-    const threadGeometries: Geometry[] = [];
-    const threadPrograms: Program[] = [];
-
-    for (let i = 0; i < lines; i++) {
-      // Create a horizontal line geometry
-      const points = [];
-      for (let x = -2; x <= 2; x += 0.04) {
-        points.push(x, 0, 0);
-      }
-      const geometry = new Geometry(gl, {
-        position: { size: 3, data: new Float32Array(points) },
-      });
-      const [r, g, b] = color;
-      const threadColor = [r, g, b].map((c, idx) => c * (i % 2 === 0 ? 1 : 0.7));
-      const program = new Program(gl, {
-        vertex: `
-          attribute vec3 position;
-          uniform float uTime;
-          uniform float uY;
-          uniform float uAmplitude;
-          varying float vX;
-          void main() {
-            float offset = sin(position.x * 8.0 + uTime + uY) * uAmplitude;
-            vec3 pos = position;
-            pos.y += offset;
-            pos.y += uY;
-            vX = position.x;
-            gl_Position = vec4(pos, 1.0);
-          }
-        `,
-        fragment: `
-          precision highp float;
-          uniform vec3 uColor;
-          varying float vX;
-          void main() {
-            gl_FragColor = vec4(uColor, 0.8);
-          }
-        `,
-        uniforms: {
-          uTime: { value: 0 },
-          uY: { value: (i - lines / 2) * spacing / 100 },
-          uAmplitude: { value: amplitude * 0.12 },
-          uColor: { value: threadColor },
+    const geometry = new Triangle(gl);
+    const program = new Program(gl, {
+      vertex: vertexShader,
+      fragment: fragmentShader,
+      uniforms: {
+        iTime: { value: 0 },
+        iResolution: {
+          value: new Color(
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height
+          ),
         },
-        transparent: true,
-      });
-      const mesh = new Mesh(gl, { geometry, program, mode: gl.LINE_STRIP });
-      mesh.setParent(scene);
-      threadMeshes.push(mesh);
-      threadGeometries.push(geometry);
-      threadPrograms.push(program);
+        uColor: { value: new Color(...color) },
+        uAmplitude: { value: amplitude },
+        uDistance: { value: distance },
+        uMouse: { value: new Float32Array([0.5, 0.5]) },
+      },
+    });
+
+    const mesh = new Mesh(gl, { geometry, program });
+
+    function resize() {
+      const { clientWidth, clientHeight } = container;
+      renderer.setSize(clientWidth, clientHeight);
+      program.uniforms.iResolution.value.r = clientWidth;
+      program.uniforms.iResolution.value.g = clientHeight;
+      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    let currentMouse = [0.5, 0.5];
+    let targetMouse = [0.5, 0.5];
+
+    function handleMouseMove(e: MouseEvent) {
+      const rect = container.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = 1.0 - (e.clientY - rect.top) / rect.height;
+      targetMouse = [x, y];
+    }
+    function handleMouseLeave() {
+      targetMouse = [0.5, 0.5];
+    }
+    if (enableMouseInteraction) {
+      container.addEventListener("mousemove", handleMouseMove);
+      container.addEventListener("mouseleave", handleMouseLeave);
     }
 
-    let animationId: number;
-    const animate = () => {
-      const time = performance.now() * 0.002;
-      threadPrograms.forEach((program) => {
-        program.uniforms.uTime.value = time;
-      });
-      renderer.render({ scene, camera });
-      animationId = requestAnimationFrame(animate);
-    };
-    animate();
+    function update(t: number) {
+      if (enableMouseInteraction) {
+        const smoothing = 0.05;
+        currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0]);
+        currentMouse[1] += smoothing * (targetMouse[1] - currentMouse[1]);
+        program.uniforms.uMouse.value[0] = currentMouse[0];
+        program.uniforms.uMouse.value[1] = currentMouse[1];
+      } else {
+        program.uniforms.uMouse.value[0] = 0.5;
+        program.uniforms.uMouse.value[1] = 0.5;
+      }
+      program.uniforms.iTime.value = t * 0.001;
 
-    const handleResize = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      renderer.setSize(w, h);
-      camera.perspective(w / h);
-    };
-    window.addEventListener("resize", handleResize);
+      renderer.render({ scene: mesh });
+      animationFrameId.current = requestAnimationFrame(update);
+    }
+    animationFrameId.current = requestAnimationFrame(update);
 
     return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", handleResize);
-      threadMeshes.forEach((mesh) => mesh.setParent(null));
-      // Geometry and Program do not have dispose methods in ogl
-      if (rendererRef.current) {
-        rendererRef.current.gl.getExtension('WEBGL_lose_context')?.loseContext();
-        rendererRef.current = null;
+      if (animationFrameId.current)
+        cancelAnimationFrame(animationFrameId.current);
+      window.removeEventListener("resize", resize);
+
+      if (enableMouseInteraction) {
+        container.removeEventListener("mousemove", handleMouseMove);
+        container.removeEventListener("mouseleave", handleMouseLeave);
       }
-      while (mount.firstChild) mount.removeChild(mount.firstChild);
+      if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [color, amplitude, distance]);
+  }, [color, amplitude, distance, enableMouseInteraction]);
 
   return (
-    <div
-      ref={mountRef}
-      className="absolute inset-0 w-full h-full"
-      style={{ pointerEvents: enableMouseInteraction ? "auto" : "none" }}
-    />
+    <div ref={containerRef} className="w-full h-full relative" {...rest} />
   );
 };
 
