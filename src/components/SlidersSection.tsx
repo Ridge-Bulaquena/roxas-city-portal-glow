@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import GradientText from './GradientText';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
+import Threads from './Threads';
 
 const slides = [
   {
@@ -56,8 +57,10 @@ const SlidersSection = () => {
   const slide = slides[active];
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="max-w-3xl mx-auto px-6">
+    <section className="py-20 bg-muted/30 relative overflow-hidden">
+      {/* Thread animation background */}
+      <Threads color={[0.16, 0.23, 0.36]} amplitude={1.1} distance={0.18} />
+      <div className="max-w-3xl mx-auto px-6 relative z-10">
         <div className="relative h-[340px] md:h-[320px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
