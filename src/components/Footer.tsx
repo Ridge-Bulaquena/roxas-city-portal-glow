@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 
 const Footer = () => {
@@ -84,6 +83,9 @@ const Footer = () => {
               </a>
               <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-200">
                 Contact
+              </a>
+              <a href="/visitor" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-200">
+                Visitor Portal
               </a>
             </div>
           </div>
