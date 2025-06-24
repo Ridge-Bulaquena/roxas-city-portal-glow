@@ -293,9 +293,9 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
       
       {/* Main Navigation Bar - Slides up/down based on scroll */}
       <motion.nav 
-        className="fixed top-[50px] left-0 right-0 z-[999] bg-[#14274E] h-[60px] flex items-center"
+        className="fixed top-[50px] left-0 right-0 z-[999] bg-white h-[90px] flex items-center border-b border-gray-200 shadow-sm"
         initial={{ y: 0 }}
-        animate={{ y: isNavVisible ? 0 : -60 }}
+        animate={{ y: isNavVisible ? 0 : -90 }}
         transition={{ 
           duration: 0.35, 
           ease: "easeOut"
@@ -309,17 +309,17 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
               className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => navigate('/')}
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                <Home className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                <Home className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="font-bold text-xl text-white font-inter">Roxas City</h1>
-                <p className="text-xs text-[#AEDFF7] font-figtree">Citizen Platform</p>
+                <h1 className="font-bold text-2xl text-gray-900 font-inter">Roxas City</h1>
+                <p className="text-sm text-gray-600 font-figtree">Citizen Platform</p>
               </div>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-1">
+            <div className="hidden md:flex items-center space-x-2">
               {navItems.map((item) => (
                 <div
                   key={item.id}
@@ -327,7 +327,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                   onMouseEnter={() => handleMouseEnter(item.id)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <button className="flex items-center space-x-1 px-5 py-3 text-[#AEDFF7] hover:text-white transition-colors group font-inter font-medium nav-item rounded-md hover:bg-white/10">
+                  <button className="flex items-center space-x-1 px-6 py-4 text-gray-700 hover:text-blue-600 transition-colors group font-inter font-medium nav-item rounded-md hover:bg-blue-50">
                     <span>{item.title}</span>
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                   </button>
@@ -391,7 +391,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
               <Button
                 variant="outline"
                 size="sm"
-                className="md:hidden border-[#AEDFF7] text-[#AEDFF7] hover:bg-[#AEDFF7] hover:text-[#14274E]"
+                className="md:hidden border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-blue-600 hover:border-blue-300"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -401,16 +401,16 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden border-t border-[#AEDFF7]/20 bg-[#14274E] absolute top-full left-0 right-0 shadow-lg">
+            <div className="md:hidden border-t border-gray-200 bg-white absolute top-full left-0 right-0 shadow-lg">
               <div className="px-4 py-4 space-y-3">
                 {navItems.map((item) => (
-                  <div key={item.id} className="border-b border-[#AEDFF7]/20 pb-3">
-                    <div className="font-medium text-[#AEDFF7] mb-2 font-inter">{item.title}</div>
+                  <div key={item.id} className="border-b border-gray-100 pb-3">
+                    <div className="font-medium text-gray-900 mb-2 font-inter">{item.title}</div>
                     <div className="space-y-1 ml-4">
                       {item.items.map((subItem, index) => (
                         <div
                           key={index}
-                          className="text-sm text-[#AEDFF7]/80 py-1 font-figtree cursor-pointer hover:text-white"
+                          className="text-sm text-gray-600 py-1 font-figtree cursor-pointer hover:text-blue-600"
                           onClick={() => subItem.route && navigate(subItem.route)}
                           role="button"
                           tabIndex={0}
@@ -429,9 +429,16 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
       </motion.nav>
       
       {/* Spacer to prevent content from hiding behind fixed nav */}
-      <div className="h-[110px]"></div>
+      <div className="h-[140px]"></div>
       
       <style>{`
+        @media (min-width: 768px) {
+          .md\\:px-4 {
+            padding-left: 3rem;
+            padding-right: 3rem;
+          }
+        }
+        
         @media (prefers-reduced-motion: reduce) {
           .nav-slide {
             transition: none !important;
