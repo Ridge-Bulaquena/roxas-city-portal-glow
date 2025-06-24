@@ -38,6 +38,20 @@ const slides = [
 
 const SLIDE_DURATION = 6000;
 
+const typewriterContainer = {
+  hidden: {},
+  visible: (i = 1) => ({
+    transition: { 
+      staggerChildren: 0.025, // speed per character
+      delayChildren: 0,
+    }
+  })
+};
+const typewriterChar = {
+  hidden: { opacity: 0, y: 2 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.18 } }
+};
+
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showSubtitle, setShowSubtitle] = useState(false);
@@ -129,26 +143,25 @@ const HeroSection = () => {
               {/* Subtitle */}
               <AnimatePresence>
                 {showSubtitle && (
-                  <motion.p
+                  <motion.span
                     key={slide.subtext}
-                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-[#14274E] font-figtree font-light tracking-wide leading-relaxed typewriter-effect"
-                    initial={{ width: 0 }}
-                    animate={{ width: '100%' }}
-                    exit={{ width: 0 }}
-                    transition={{ 
-                      duration: 1.2, // typewriter speed
-                      ease: 'linear',
-                      delay: 0
-                    }}
-                    style={{
-                      overflow: 'hidden',
-                      whiteSpace: 'nowrap',
-                      borderRight: '2px solid #14274E',
-                      fontFamily: 'Figtree, Inter, sans-serif',
-                    }}
+                    className="hero-timesnow-sub mb-4 max-w-2xl mx-auto text-center text-lg sm:text-xl text-[#14274E] font-figtree font-light tracking-wide leading-relaxed block"
+                    style={{ fontFamily: 'Figtree, Inter, sans-serif' }}
+                    variants={typewriterContainer}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
                   >
-                    {slide.subtext}
-                  </motion.p>
+                    {slide.subtext.split('').map((char, idx) => (
+                      <motion.span
+                        key={idx}
+                        variants={typewriterChar}
+                        style={{ display: 'inline-block' }}
+                      >
+                        {char === ' ' ? '\u00A0' : char}
+                      </motion.span>
+                    ))}
+                  </motion.span>
                 )}
               </AnimatePresence>
               

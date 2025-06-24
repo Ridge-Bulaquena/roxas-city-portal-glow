@@ -296,17 +296,17 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
         <div className="max-w-7xl mx-auto px-6 md:px-4 w-full flex items-center justify-center">
           {/* Logo */}
           <div 
-            className="flex flex-col justify-center items-start cursor-pointer hover:opacity-80 transition-opacity mr-12 min-w-[180px] py-2"
+            className="flex items-center cursor-pointer hover:opacity-80 transition-opacity mr-12 min-w-[220px] gap-3"
             onClick={() => navigate('/')}
             style={{lineHeight: 1.1}}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mb-1">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
               <Home className="w-6 h-6 text-white" />
             </div>
-            <div>
-              <h1 className="font-bold text-lg text-gray-900 font-inter tracking-tight">Roxas City</h1>
-              <p className="text-xs text-gray-600 font-figtree tracking-wide">Citizen Platform</p>
-            </div>
+            <span className="flex flex-col justify-center">
+              <span className="font-bold text-base text-gray-900 font-inter tracking-tight leading-tight">Roxas City</span>
+              <span className="text-xs text-gray-600 font-figtree tracking-wide leading-tight">Citizen Platform</span>
+            </span>
           </div>
 
           {/* Desktop Navigation - Centered */}
