@@ -6,7 +6,7 @@ import { AnimateOnView } from '@/components/AnimateOnView';
 import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const miniApps = [
-  { icon: <Compass className="w-8 h-8 text-[var(--chart-3)] icon" />, title: '360° Virtual Plaza Tour', desc: 'Walk through Roxas City's plazas and landmarks in immersive 3D.' },
+  { icon: <Compass className="w-8 h-8 text-[var(--chart-3)] icon" />, title: '360° Virtual Plaza Tour', desc: "Walk through Roxas City's plazas and landmarks in immersive 3D." },
   { icon: <Play className="w-8 h-8 text-[var(--chart-3)] icon" />, title: 'Festival Replay Theater', desc: 'Watch past parades and festivals on demand.' },
   { icon: <BookOpen className="w-8 h-8 text-[var(--chart-3)] icon" />, title: 'Cultural Trivia Game', desc: 'Test your knowledge of Roxas heritage and win badges.' },
   { icon: <Star className="w-8 h-8 text-[var(--chart-3)] icon" />, title: 'Cuisine Explorer', desc: 'Discover local dishes, recipes, and food tours.' },
