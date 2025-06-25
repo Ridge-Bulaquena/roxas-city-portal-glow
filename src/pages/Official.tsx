@@ -129,6 +129,9 @@ const Official = () => {
           <a href="/uploads/dilg-checklist.pdf" className="hover:text-[#1472f4]">DILG Compliance Guide</a>
           <a href="/official/report" className="hover:text-[#1472f4]">Submit Monthly Report</a>
           <a href="/official/training" className="hover:text-[#1472f4]">Training Schedule</a>
+          <a href="/visitor" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-200">
+            Visitor Portal
+          </a>
         </div>
       </main>
       <Footer />
