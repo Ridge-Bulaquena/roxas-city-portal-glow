@@ -90,7 +90,7 @@ const EducationSupport = () => {
                   <GraduationCap className="w-10 h-10 mb-2 text-primary" />
                   <h3 className="font-semibold text-lg mt-2 text-[var(--foreground)]">{s.name}</h3>
                   <span className={`mt-2 px-4 py-1 rounded-full text-xs font-bold ${s.status === 'Open' ? 'bg-green-100 text-green-700' : s.status === 'Closed' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}`}>{s.status}</span>
-                  <a href={s.link} className="mt-4 bg-primary text-white rounded-full px-6 py-2 font-semibold shadow hover:scale-105 focus:ring-2 focus:ring-[var(--ring)] transition-all duration-150">Apply</a>
+                  <a href={s.link} className="mt-4 bg-white text-[#1e293b] rounded-full px-6 py-2 font-semibold shadow hover:scale-105 focus:ring-2 focus:ring-[var(--ring)] transition-all duration-150">Apply</a>
                 </div>
               ))}
             </div>
@@ -143,7 +143,7 @@ const EducationSupport = () => {
                 <a 
                   key={i} 
                   href={l.link} 
-                  className={`bg-white rounded-xl shadow-sm p-6 flex flex-col items-center border border-[var(--border)] hover:scale-105 transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
+                  className={`bg-white text-[#1e293b] rounded-xl shadow-sm p-6 flex flex-col items-center border border-[var(--border)] hover:scale-105 transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
                   style={{
                     animationDelay: sectionVisible ? `${0.15 * i + 0.5}s` : '0s',
                   }}
