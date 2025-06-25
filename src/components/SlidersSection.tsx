@@ -118,6 +118,13 @@ const SlidersSection = () => {
                       key={cta}
                       className="service-btn-glass px-7 py-3 text-base font-semibold transition-transform duration-200 hover:scale-105 focus:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-primary/60"
                       style={{ minWidth: 140 }}
+                      onClick={() => {
+                        if (cta.toLowerCase().includes('health')) {
+                          window.location.href = '/health-services';
+                        } else if (cta.toLowerCase().includes('support learners')) {
+                          window.location.href = '/education-support';
+                        }
+                      }}
                     >
                       {cta}
                     </Button>

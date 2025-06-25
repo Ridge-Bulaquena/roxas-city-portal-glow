@@ -115,14 +115,14 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           desc: 'Clinics, emergency care, health programs',
           icon: Heart,
           image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
-          route: '/apps/health',
+          route: '/health-services',
         },
         {
           title: 'Education Support',
           desc: 'Schools, scholarships, student assistance',
           icon: GraduationCap,
           image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
-          route: '/apps/education',
+          route: '/education-support',
         },
         {
           title: 'Social Welfare',
