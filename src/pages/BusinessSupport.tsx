@@ -12,6 +12,8 @@ import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
+import { Navigation } from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 const mentors = [
   { name: 'Ana Cruz', field: 'Retail', rating: 4.8, testimonials: 12 },
@@ -32,6 +34,7 @@ const BusinessSupport = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-green-50 to-white">
+      <Navigation userType="resident" setUserType={() => {}} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-cyan-600 via-green-500 to-teal-400 text-white">
         <SeaweedThreadBackground />
@@ -223,6 +226,7 @@ const BusinessSupport = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
