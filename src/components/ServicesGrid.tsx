@@ -53,7 +53,7 @@ const ServicesGrid = () => {
       buttonText: "Track Governance",
       icon: BarChart3,
       delay: 600,
-      route: "/transparency"
+      route: "/governance-transparency"
     },
     {
       title: "Public Works & Infrastructure",

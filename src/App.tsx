@@ -10,6 +10,7 @@ import Visitor from "./pages/Visitor";
 import SocialWelfare from "./pages/SocialWelfare";
 import HealthServices from "./pages/HealthServices";
 import EducationSupport from "./pages/EducationSupport";
+import GovernanceTransparency from "./pages/GovernanceTransparency";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/social-welfare" element={<SocialWelfare />} />
           <Route path="/health-services" element={<HealthServices />} />
           <Route path="/education-support" element={<EducationSupport />} />
+          <Route path="/governance-transparency" element={<GovernanceTransparency />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

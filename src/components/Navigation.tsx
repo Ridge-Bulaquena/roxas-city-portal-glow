@@ -146,6 +146,13 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
       tooltip: 'See how government works.',
       items: [
         {
+          title: 'Governance & Transparency',
+          desc: 'Access budgets, procurement, and performance data',
+          icon: BarChart3,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/governance-transparency',
+        },
+        {
           title: 'Budget Dashboard',
           desc: 'Track spending and allocations',
           icon: TrendingUp,
