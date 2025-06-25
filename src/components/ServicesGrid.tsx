@@ -78,7 +78,7 @@ const ServicesGrid = () => {
       buttonText: "Support Local Producers",
       icon: Wheat,
       delay: 1200,
-      route: "/agriculture"
+      route: "/agriculture-fishery"
     },
     {
       title: "Peace & Order",
