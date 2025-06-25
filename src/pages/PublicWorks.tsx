@@ -3,7 +3,6 @@ import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Wrench, MapPin, Calendar, Building2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
-import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const projectTypes = ['Road', 'Housing', 'Facility'];
 const projectStatuses = ['Ongoing', 'Completed'];
@@ -47,7 +46,6 @@ const PublicWorks = () => {
       <main className="pt-8 pb-16">
         {/* Hero Section */}
         <section className="relative text-center py-16 px-6 bg-gradient-to-br from-primary to-[#3b76d9] text-white">
-          <SeaweedThreadBackground />
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Public Works & Infrastructure
           </h1>

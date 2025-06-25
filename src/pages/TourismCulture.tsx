@@ -3,7 +3,6 @@ import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { MapPin, Play, BookOpen, Users, Calendar, Star, MessageSquare, GalleryHorizontal, Ticket, Bot, Compass, Globe, CheckCircle2 } from 'lucide-react';
 import { AnimateOnView } from '@/components/AnimateOnView';
-import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const miniApps = [
   { icon: <Compass className="w-8 h-8 text-[var(--chart-3)] icon" />, title: '360° Virtual Plaza Tour', desc: 'Walk through Roxas City\'s plazas and landmarks in immersive 3D.' },
@@ -33,7 +32,6 @@ const TourismCulture = () => {
         {/* Hero Section */}
         <AnimateOnView type="card" delay={0}>
           <section className="relative text-center py-16 px-6">
-            <SeaweedThreadBackground />
             <AnimateOnView type="icon" delay={0.1}>
               <MapPin className="w-12 h-12 mx-auto mb-4 text-[var(--chart-3)] icon" />
             </AnimateOnView>
