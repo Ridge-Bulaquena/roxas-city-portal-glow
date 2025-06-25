@@ -1,4 +1,5 @@
 import { Navigation } from '@/components/Navigation';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 import HeroSection from '@/components/HeroSection';
 import ServicesGrid from '@/components/ServicesGrid';
 import SlidersSection from '@/components/SlidersSection';
@@ -14,7 +15,8 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden">
+    <div className="relative min-h-screen w-full overflow-x-hidden">
+      <SeaweedThreadBackground />
       <Navigation userType={userType} setUserType={setUserType} />
       <main>
         <HeroSection />

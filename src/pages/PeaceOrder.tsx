@@ -25,6 +25,7 @@ import {
   Bell
 } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const barangays = [
   'Barangay 1', 'Barangay 2', 'Barangay 3', 'Barangay 4', 'Barangay 5', 'Barangay 6', 'Barangay 7', 'Barangay 8',
@@ -129,7 +130,8 @@ const PeaceOrder = () => {
       <Navigation userType="resident" setUserType={() => {}} />
       <main className="pt-8 pb-16">
         {/* Hero Section */}
-        <section className="text-center py-16 px-6 bg-gradient-to-br from-[#1e3a8a] to-[#475569] text-white">
+        <section className="relative text-center py-16 px-6 bg-gradient-to-br from-[#1e3a8a] to-[#475569] text-white">
+          <SeaweedThreadBackground />
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Peace & Order
           </h1>

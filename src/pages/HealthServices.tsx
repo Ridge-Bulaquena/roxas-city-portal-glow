@@ -3,6 +3,7 @@ import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { MapPin, AlertCircle, Phone, Hospital, CheckCircle2, Heart, Users, Calendar, Star } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const barangays = [
   'Adlawan', 'Bago', 'Bago Salvacion', 'Banica', 'Barra', 'Baybay', 'Bayuyan', 'Bolo', 'Cabugao', 'Cagay',
@@ -100,7 +101,8 @@ const HealthServices = () => {
       <Navigation userType="resident" setUserType={() => {}} />
       <main className="pt-8 pb-16">
         {/* Hero Section */}
-        <section className="text-center py-16 px-6 bg-gradient-to-br from-primary to-[#3b76d9] text-white">
+        <section className="relative text-center py-16 px-6 bg-gradient-to-br from-primary to-[#3b76d9] text-white">
+          <SeaweedThreadBackground />
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Health Services
           </h1>

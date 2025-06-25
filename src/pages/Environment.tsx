@@ -3,6 +3,7 @@ import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Leaf, TreePine, Droplets, AlertCircle, CheckCircle2, BookOpen } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const ecoInitiatives = [
   { title: 'Clean-up Drive', desc: 'Join our next coastal clean-up in Baybay.', icon: <Droplets className="w-8 h-8 text-primary" /> },
@@ -49,7 +50,8 @@ const Environment = () => {
       <Navigation userType="resident" setUserType={() => {}} />
       <main className="pt-8 pb-16">
         {/* Hero Section */}
-        <section className="text-center py-16 px-6 bg-gradient-to-br from-primary to-[#4f90e1] text-white">
+        <section className="relative text-center py-16 px-6 bg-gradient-to-br from-primary to-[#4f90e1] text-white">
+          <SeaweedThreadBackground />
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Environmental Management
           </h1>

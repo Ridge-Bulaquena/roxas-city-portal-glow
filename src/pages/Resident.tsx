@@ -1,6 +1,7 @@
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const Resident = () => {
   const [userType, setUserType] = useState<'resident' | 'official' | 'visitor'>(
@@ -8,7 +9,8 @@ const Resident = () => {
   );
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden">
+    <div className="relative min-h-screen w-full overflow-x-hidden">
+      <SeaweedThreadBackground />
       <Navigation userType={userType} setUserType={setUserType} />
       <main className="pt-8 pb-16">
         <div className="max-w-3xl mx-auto mt-24 text-center">

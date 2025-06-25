@@ -39,6 +39,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const DigitalParticipation = () => {
   const [activeTab, setActiveTab] = useState('ideas');
@@ -165,6 +166,7 @@ const DigitalParticipation = () => {
       <Navigation userType="resident" setUserType={() => {}} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-800 text-white">
+        <SeaweedThreadBackground />
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">

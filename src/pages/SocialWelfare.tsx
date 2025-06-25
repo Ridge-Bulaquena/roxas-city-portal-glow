@@ -19,6 +19,7 @@ import {
   MessageSquare,
   ArrowRight
 } from 'lucide-react';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const recipientGroups = ['All Groups', 'PWD', 'Solo Parent', 'Senior', 'Indigent'];
 const supportPrograms = [
@@ -138,7 +139,8 @@ const SocialWelfare = () => {
       <Navigation userType="resident" setUserType={() => {}} />
       <main className="pt-8 pb-16">
         {/* Hero Section */}
-        <section className="text-center py-16 px-6" style={{ fontFamily: 'Geist, sans-serif' }}>
+        <section className="relative text-center py-16 px-6" style={{ fontFamily: 'Geist, sans-serif' }}>
+          <SeaweedThreadBackground />
           <h1 className="text-5xl font-bold text-white mb-4">Social Welfare</h1>
           <p className="text-lg text-white/90 max-w-2xl mx-auto font-figtree">
             Programs for PWDs, solo parents, seniors, and marginalized families.

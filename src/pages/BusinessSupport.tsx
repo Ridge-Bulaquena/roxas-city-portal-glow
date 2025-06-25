@@ -11,6 +11,7 @@ import { Avatar } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const mentors = [
   { name: 'Ana Cruz', field: 'Retail', rating: 4.8, testimonials: 12 },
@@ -33,6 +34,7 @@ const BusinessSupport = () => {
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-green-50 to-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-cyan-600 via-green-500 to-teal-400 text-white">
+        <SeaweedThreadBackground />
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">

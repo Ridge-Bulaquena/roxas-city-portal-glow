@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { MapPin, Landmark, Users, Calendar, Star } from 'lucide-react';
+import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const Visitor = () => {
   return (
@@ -9,7 +10,8 @@ const Visitor = () => {
       <Navigation userType="visitor" setUserType={() => {}} />
       <main>
         {/* Hero Section */}
-        <section className="text-center bg-[#f9fafa] py-16 px-6">
+        <section className="relative text-center bg-[#f9fafa] py-16 px-6">
+          <SeaweedThreadBackground />
           <div className="flex justify-center mb-6">
             <div className="bg-[#a0d0f3] rounded-full p-4 inline-flex items-center justify-center">
               <MapPin className="w-10 h-10 text-[#2a2b37]" />
