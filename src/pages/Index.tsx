@@ -16,7 +16,6 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden">
-      <ThreadBackground />
       <Navigation userType={userType} setUserType={setUserType} />
       <main>
         <HeroSection />
