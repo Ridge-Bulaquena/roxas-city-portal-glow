@@ -53,7 +53,7 @@ const BusinessSupport = () => {
             <p className="text-lg mb-10 text-green-200 max-w-3xl mx-auto leading-relaxed">
               From sari-sari stores to tech startups, Roxas City fuels local businesses with digital tools, financial programs, and a vibrant mentorship network.
             </p>
-            <Button size="lg" className="bg-white text-cyan-700 hover:bg-green-50 px-8 py-4 text-lg font-semibold">
+            <Button size="lg" className="bg-white text-[#1e293b] hover:bg-green-50 px-8 py-4 text-lg font-semibold">
               Start or Grow Your Business
             </Button>
           </div>

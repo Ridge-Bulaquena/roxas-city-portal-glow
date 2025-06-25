@@ -50,7 +50,7 @@ const PublicWorks = () => {
             Public Works & Infrastructure
           </h1>
           <p className="text-lg text-white/90 max-w-2xl mx-auto font-figtree">Monitor ongoing roadworks, housing projects, and facility upgrades.</p>
-          <button className="mt-8 bg-white text-[var(--chart-3)] rounded-full px-8 py-3 font-semibold shadow-md hover:scale-105 hover:brightness-110 focus:ring-2 focus:ring-white/50 transition-all duration-150">
+          <button className="mt-8 bg-white text-[#1e293b] rounded-full px-8 py-3 font-semibold shadow-md hover:scale-105 hover:brightness-110 focus:ring-2 focus:ring-white/50 transition-all duration-150">
             View City Projects
           </button>
         </section>

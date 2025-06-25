@@ -182,7 +182,7 @@ const DigitalParticipation = () => {
             <p className="text-lg mb-12 text-blue-200 max-w-4xl mx-auto leading-relaxed">
               True governance starts with your voice. Roxas City invites every citizen to propose, vote, and shape civic policies from anywhere — all through secure digital tools.
             </p>
-            <Button size="lg" className="bg-white text-[var(--chart-3)] hover:bg-blue-50 px-8 py-4 text-lg font-semibold">
+            <Button size="lg" className="bg-white text-[#1e293b] hover:bg-blue-50 px-8 py-4 text-lg font-semibold">
               Engage Digitally
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
