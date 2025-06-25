@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ThreadBackground from "@/components/ThreadBackground";
 import { BarChart3, MessageSquare, FileText, Calendar, Users, BookOpen, ClipboardList, Gavel, UserCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Environment from "./pages/Environment";
 
 const Official = () => {
   const [userType, setUserType] = useState<'resident' | 'official' | 'visitor'>(
