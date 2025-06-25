@@ -129,6 +129,8 @@ const SlidersSection = () => {
                           navigate('/public-works');
                         } else if (cta.toLowerCase().includes('protect our environment')) {
                           navigate('/environment');
+                        } else if (cta.toLowerCase().includes('support local producers')) {
+                          navigate('/agriculture-fishery');
                         }
                       }}
                     >

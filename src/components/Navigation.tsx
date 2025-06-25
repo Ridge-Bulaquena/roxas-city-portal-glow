@@ -27,7 +27,11 @@ import {
   MapPin,
   Phone,
   Clock,
-  Leaf
+  Leaf,
+  Tractor,
+  Fish,
+  Shield,
+  Car
 } from "lucide-react";
 
 interface NavigationProps {
@@ -152,6 +156,39 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           icon: Wrench,
           image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
           route: '/apps/public-works',
+        },
+        {
+          title: 'Agriculture & Fishery Support',
+          desc: 'Programs for farmers and fishers',
+          icon: Tractor,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/agriculture-fishery',
+        },
+      ]
+    },
+    {
+      id: 'safety',
+      title: 'Safety & Security',
+      tooltip: 'Community safety and law enforcement.',
+      items: [
+        {
+          title: 'Peace & Order',
+          desc: 'Patrol schedules, incident reports, ordinances',
+          icon: Shield,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/peace-order',
+        },
+        {
+          title: 'Emergency Response',
+          desc: 'Fire, medical, and disaster response',
+          icon: Phone,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png'
+        },
+        {
+          title: 'Traffic Management',
+          desc: 'Road safety and traffic regulations',
+          icon: Car,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png'
         }
       ]
     },
