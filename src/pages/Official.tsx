@@ -3,11 +3,13 @@ import Footer from '@/components/Footer';
 import { useState } from 'react';
 import ThreadBackground from "@/components/ThreadBackground";
 import { BarChart3, MessageSquare, FileText, Calendar, Users, BookOpen, ClipboardList, Gavel, UserCheck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Official = () => {
   const [userType, setUserType] = useState<'resident' | 'official' | 'visitor'>(
     () => (localStorage.getItem('userType') as 'resident' | 'official' | 'visitor') || 'official'
   );
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-[#f6f9ff]">

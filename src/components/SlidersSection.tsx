@@ -3,6 +3,7 @@ import GradientText from './GradientText';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThreadBackground from './ThreadBackground';
+import { useNavigate } from 'react-router-dom';
 
 const slides = [
   {
@@ -43,6 +44,7 @@ const SLIDE_DURATION = 7000;
 const SlidersSection = () => {
   const [active, setActive] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -120,9 +122,9 @@ const SlidersSection = () => {
                       style={{ minWidth: 140 }}
                       onClick={() => {
                         if (cta.toLowerCase().includes('health')) {
-                          window.location.href = '/health-services';
+                          navigate('/health-services');
                         } else if (cta.toLowerCase().includes('support learners')) {
-                          window.location.href = '/education-support';
+                          navigate('/education-support');
                         }
                       }}
                     >

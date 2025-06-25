@@ -129,7 +129,7 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           desc: 'PWD support, senior care, livelihood programs',
           icon: Users,
           image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
-          route: '/apps/social-welfare',
+          route: '/social-welfare',
         },
         {
           title: 'Public Works',

@@ -16,9 +16,11 @@ import {
   Camera 
 } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
+import { useNavigate } from 'react-router-dom';
 
 const ServicesGrid = () => {
   const [sectionRef, sectionVisible] = useInView({ threshold: 0.2 });
+  const navigate = useNavigate();
 
   const services = [
     {
@@ -26,86 +28,102 @@ const ServicesGrid = () => {
       description: "Find nearby health stations, track medicine supply, and report health concerns.",
       buttonText: "Access Health Support",
       icon: Heart,
-      delay: 0
+      delay: 0,
+      route: "/health-services"
     },
     {
       title: "Education Support",
       description: "Scholarships, feeding programs, and lifelong learning resources for all citizens.",
       buttonText: "Support Learners",
       icon: GraduationCap,
-      delay: 200
+      delay: 200,
+      route: "/education-support"
     },
     {
       title: "Social Welfare",
       description: "Programs for PWDs, solo parents, seniors, and marginalized families.",
       buttonText: "Uplift Communities",
       icon: Users,
-      delay: 400
+      delay: 400,
+      route: "/social-welfare"
     },
     {
       title: "Governance & Transparency",
       description: "Access city budgets, procurement records, and performance data in real time.",
       buttonText: "Track Governance",
       icon: BarChart3,
-      delay: 600
+      delay: 600,
+      route: "/transparency"
     },
     {
       title: "Public Works & Infrastructure",
       description: "Monitor ongoing roadworks, housing projects, and facility upgrades.",
       buttonText: "View City Projects",
       icon: Building,
-      delay: 800
+      delay: 800,
+      route: "/public-works"
     },
     {
       title: "Environmental Management",
       description: "Preserve clean air, water, and sustainable land use in Roxas.",
       buttonText: "Protect Our Environment",
       icon: Leaf,
-      delay: 1000
+      delay: 1000,
+      route: "/environment"
     },
     {
       title: "Agriculture & Fishery Support",
       description: "Empowering local producers with training, access, and innovation.",
       buttonText: "Support Local Producers",
       icon: Wheat,
-      delay: 1200
+      delay: 1200,
+      route: "/agriculture"
     },
     {
       title: "Peace & Order",
       description: "Community-focused safety with fair enforcement and local patrol programs.",
       buttonText: "Promote Safety",
       icon: Shield,
-      delay: 1400
+      delay: 1400,
+      route: "/peace-order"
     },
     {
       title: "Open Data Portal",
       description: "Explore raw civic data, budget flows, and project timelines.",
       buttonText: "Explore Open Data",
       icon: Database,
-      delay: 1600
+      delay: 1600,
+      route: "/open-data"
     },
     {
       title: "Digital Participation",
       description: "Submit ideas, vote, and join town halls from your device.",
       buttonText: "Engage Digitally",
       icon: MessageSquare,
-      delay: 1800
+      delay: 1800,
+      route: "/participation"
     },
     {
       title: "Business Support",
       description: "Permits, incentives, and mentorship to help entrepreneurs thrive.",
       buttonText: "Start or Grow Your Business",
       icon: Briefcase,
-      delay: 2000
+      delay: 2000,
+      route: "/business"
     },
     {
       title: "Tourism & Culture",
       description: "Discover festivals, food, heritage, and sights of Roxas.",
       buttonText: "Explore Roxas Culture",
       icon: Camera,
-      delay: 2200
+      delay: 2200,
+      route: "/tourism"
     }
   ];
+
+  const handleServiceClick = (route: string) => {
+    navigate(route);
+  };
 
   return (
     <section ref={sectionRef} className="py-20 px-6 bg-muted/30">
@@ -154,6 +172,7 @@ const ServicesGrid = () => {
                     variant="outline"
                     size="sm"
                     className="w-full service-btn-glass service-btn"
+                    onClick={() => handleServiceClick(service.route)}
                   >
                     {service.buttonText}
                   </Button>
