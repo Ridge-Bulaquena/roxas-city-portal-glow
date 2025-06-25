@@ -76,7 +76,7 @@ const Environment = () => {
               {ecoInitiatives.map((e, i) => (
                 <div 
                   key={i} 
-                  className={`bg-white rounded-xl shadow-sm p-6 flex flex-col items-center border border-[var(--border)] service-card${sectionVisible ? ' entry-animate' : ''}`}
+                  className={`bg-[var(--card)] rounded-[var(--radius)] p-4 md:p-6 border border-transparent shadow-[0_4px_12px_rgba(0,0,0,0.04)] card transition-all duration-300 group`}
                   style={{
                     animationDelay: sectionVisible ? `${0.15 * i + 0.5}s` : '0s',
                   }}
@@ -138,7 +138,7 @@ const Environment = () => {
                 <a 
                   key={i} 
                   href={r.link} 
-                  className={`bg-white rounded-xl shadow-sm p-6 flex flex-col items-center border border-[var(--border)] hover:scale-105 transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
+                  className={`bg-[var(--card)] rounded-[var(--radius)] p-4 md:p-6 border border-transparent shadow-[0_4px_12px_rgba(0,0,0,0.04)] card transition-all duration-300 group`}
                   style={{
                     animationDelay: sectionVisible ? `${0.15 * i + 0.5}s` : '0s',
                   }}
@@ -154,6 +154,64 @@ const Environment = () => {
         </section>
       </main>
       <Footer />
+      <style>{`
+.card {
+  position: relative;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius, 1rem);
+  background: var(--card);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.2s cubic-bezier(.4,2,.3,1);
+}
+.card:hover {
+  border-color: rgba(173,201,226,0.8);
+  box-shadow: 0 6px 16px rgba(173,201,226,0.15);
+  transform: scale(1.03) translateY(-4px);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1.5px solid rgba(173,201,226,0.0);
+  pointer-events: none;
+  transition: border-color 0.4s cubic-bezier(.4,2,.3,1);
+}
+.card:hover::before {
+  border-color: rgba(173,201,226,0.8);
+}
+.card .icon, .card .section-title {
+  transition: transform 0.2s cubic-bezier(.4,2,.3,1), filter 0.2s cubic-bezier(.4,2,.3,1);
+}
+.card:hover .icon {
+  filter: drop-shadow(0 2px 8px var(--ring));
+  transform: scale(1.08) rotate(2deg);
+}
+.card:hover .section-title {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--chart-1);
+}
+.underline-animate {
+  display: inline-block;
+  position: relative;
+}
+.underline-animate::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--chart-1), var(--ring));
+  transition: width 0.3s cubic-bezier(.4,2,.3,1), left 0.3s cubic-bezier(.4,2,.3,1);
+}
+.card:hover .underline-animate::after {
+  width: 100%;
+  left: 0;
+}
+`}</style>
     </div>
   );
 };

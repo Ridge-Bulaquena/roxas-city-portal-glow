@@ -37,6 +37,8 @@ import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Navigation } from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 const DigitalParticipation = () => {
   const [activeTab, setActiveTab] = useState('ideas');
@@ -160,6 +162,7 @@ const DigitalParticipation = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      <Navigation userType="resident" setUserType={() => {}} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -819,6 +822,7 @@ const DigitalParticipation = () => {
           </TabsContent>
         </Tabs>
       </div>
+      <Footer />
     </div>
   );
 };
