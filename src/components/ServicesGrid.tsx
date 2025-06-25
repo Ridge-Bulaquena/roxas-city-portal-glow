@@ -93,7 +93,7 @@ const ServicesGrid = () => {
       buttonText: "Explore Open Data",
       icon: Database,
       delay: 1600,
-      route: "/open-data"
+      route: "/open-data-portal"
     },
     {
       title: "Digital Participation",

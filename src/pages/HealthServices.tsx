@@ -5,12 +5,11 @@ import { MapPin, AlertCircle, Phone, Hospital, CheckCircle2, Heart, Users, Calen
 import { useInView } from '@/hooks/use-in-view';
 
 const barangays = [
-  'Barangay 1', 'Barangay 2', 'Barangay 3', 'Barangay 4', 'Barangay 5', 'Barangay 6', 'Barangay 7', 'Barangay 8',
-  'Barangay 9', 'Barangay 10', 'Barangay 11', 'Barangay 12', 'Barangay 13', 'Barangay 14', 'Barangay 15', 'Barangay 16',
-  'Barangay 17', 'Barangay 18', 'Barangay 19', 'Barangay 20', 'Barangay 21', 'Barangay 22', 'Barangay 23', 'Barangay 24',
-  'Barangay 25', 'Barangay 26', 'Barangay 27', 'Barangay 28', 'Barangay 29', 'Barangay 30', 'Barangay 31', 'Barangay 32',
-  'Barangay 33', 'Barangay 34', 'Barangay 35', 'Barangay 36', 'Barangay 37', 'Barangay 38', 'Barangay 39', 'Barangay 40',
-  'Barangay 41', 'Barangay 42', 'Barangay 43', 'Barangay 44', 'Barangay 45', 'Barangay 46', 'Barangay 47'
+  'Adlawan', 'Bago', 'Bago Salvacion', 'Banica', 'Barra', 'Baybay', 'Bayuyan', 'Bolo', 'Cabugao', 'Cagay',
+  'Culasi', 'Dulangan', 'Inzo Arnaldo Village', 'Jardin', 'Jolo', 'Jumbo', 'Lanot', 'Lawaan', 'Libas', 'Loctugan',
+  'Lonoy', 'Lota', 'Malag-it', 'Mambusao', 'Mongpong', 'Olotayan', 'Punta Cogon', 'Quinabcaban', 'San Jose',
+  'San Roque', 'Sibaguan', 'Tanza', 'Tanza Norte', 'Tanza Sur', 'Tanque', 'Tawog', 'Tiza', 'Uyong', 'VIlla Arevalo',
+  'VIlla Consuelo', 'VIlla San Antonio', 'VIlla Soledad', 'VIlla Teresa', 'VIlla Victoria', 'VIlla Visaya', 'VIlla Zarraga'
 ];
 
 const concernTypes = [
@@ -145,7 +144,7 @@ const HealthServices = () => {
               {filteredStations.map((station, index) => (
                 <div 
                   key={index} 
-                  className={`bg-white rounded-xl shadow-sm p-6 border border-[var(--border)] hover:shadow-md transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
+                  className={`bg-white rounded-xl shadow-sm p-6 border border-[#dbeafe] hover:shadow-md transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
                   style={{
                     animationDelay: sectionVisible ? `${0.15 * index + 0.5}s` : '0s',
                   }}
@@ -170,7 +169,7 @@ const HealthServices = () => {
             </div>
             
             {/* Map Placeholder */}
-            <div className="rounded-2xl border border-[var(--border)] bg-white shadow-md h-72 flex items-center justify-center text-[var(--card-foreground)] font-figtree">
+            <div className="rounded-2xl border border-[#dbeafe] bg-white shadow-md h-72 flex items-center justify-center text-[var(--card-foreground)] font-figtree">
               <div className="text-center">
                 <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
                 <span className="text-lg">Interactive Map with Health Station Locations</span>
@@ -191,21 +190,21 @@ const HealthServices = () => {
                 <div className="section-underline"></div>
               </div>
             </div>
-            <form onSubmit={handleSubmit} className="bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-md p-8 flex flex-col gap-6 animate-fade-in">
+            <form onSubmit={handleSubmit} className="bg-[var(--card)] border border-[#dbeafe] rounded-2xl shadow-md p-8 flex flex-col gap-6 animate-fade-in">
               <input 
                 name="name" 
                 value={form.name} 
                 onChange={handleFormChange} 
                 required 
                 placeholder="Full Name" 
-                className="bg-[var(--input)] border border-[var(--border)] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none" 
+                className="bg-[var(--input)] border border-[#dbeafe] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none" 
               />
               <select 
                 name="barangay" 
                 value={form.barangay} 
                 onChange={handleFormChange} 
                 required 
-                className="bg-[var(--input)] border border-[var(--border)] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
+                className="bg-[var(--input)] border border-[#dbeafe] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
               >
                 <option value="">Select Barangay (47 total)</option>
                 {barangays.map(b => <option key={b}>{b}</option>)}
@@ -215,7 +214,7 @@ const HealthServices = () => {
                 value={form.concern} 
                 onChange={handleFormChange} 
                 required 
-                className="bg-[var(--input)] border border-[var(--border)] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
+                className="bg-[var(--input)] border border-[#dbeafe] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
               >
                 <option value="">Type of Concern</option>
                 {concernTypes.map(c => <option key={c}>{c}</option>)}
@@ -226,7 +225,7 @@ const HealthServices = () => {
                 onChange={handleFormChange} 
                 required 
                 placeholder="Description" 
-                className="bg-[var(--input)] border border-[var(--border)] rounded-2xl px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none min-h-[80px]" 
+                className="bg-[var(--input)] border border-[#dbeafe] rounded-2xl px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none min-h-[80px]" 
               />
               <input 
                 type="file" 
@@ -277,7 +276,7 @@ const HealthServices = () => {
               {healthAlerts.map((alert, i) => (
                 <div 
                   key={i} 
-                  className={`bg-white rounded-xl shadow-sm p-6 border border-[var(--border)] hover:shadow-md transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
+                  className={`bg-white rounded-xl shadow-sm p-6 border border-[#dbeafe] hover:shadow-md transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
                   style={{
                     animationDelay: sectionVisible ? `${0.15 * i + 0.5}s` : '0s',
                   }}
@@ -311,7 +310,7 @@ const HealthServices = () => {
                 <a 
                   key={i} 
                   href={`tel:${h.number}`} 
-                  className={`bg-[var(--card)] border border-[var(--border)] rounded-xl shadow-md p-6 flex flex-col items-center hover:scale-105 transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
+                  className={`bg-[var(--card)] border border-[#dbeafe] rounded-xl shadow-md p-6 flex flex-col items-center hover:scale-105 transition-all duration-300 service-card${sectionVisible ? ' entry-animate' : ''}`}
                   style={{
                     animationDelay: sectionVisible ? `${0.15 * i + 0.5}s` : '0s',
                   }}
