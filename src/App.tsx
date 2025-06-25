@@ -13,6 +13,7 @@ import EducationSupport from "./pages/EducationSupport";
 import GovernanceTransparency from "./pages/GovernanceTransparency";
 import Environment from "./pages/Environment";
 import PublicWorks from "./pages/PublicWorks";
+import PeaceOrder from "./pages/PeaceOrder";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/governance-transparency" element={<GovernanceTransparency />} />
           <Route path="/environment" element={<Environment />} />
           <Route path="/public-works" element={<PublicWorks />} />
+          <Route path="/peace-order" element={<PeaceOrder />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
