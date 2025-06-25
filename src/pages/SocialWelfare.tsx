@@ -156,7 +156,7 @@ const SocialWelfare = () => {
             </h2>
             <div className="flex gap-4 mb-8 flex-wrap">
               <select 
-                className="bg-[var(--card)] border border-[var(--border)] text-[var(--card-foreground)] rounded-full px-6 py-3 font-figtree shadow"
+                className="bg-[var(--card)] border border-[var(--border)] text-[var(--card-foreground)] rounded-full px-6 py-3 pr-10 font-figtree shadow"
                 value={groupFilter} 
                 onChange={e => setGroupFilter(e.target.value)}
               >
@@ -230,7 +230,7 @@ const SocialWelfare = () => {
                   value={form.idType} 
                   onChange={handleFormChange} 
                   required 
-                  className="bg-[var(--input)] border border-[var(--border)] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
+                  className="bg-[var(--input)] border border-[var(--border)] rounded-full px-6 py-3 pr-10 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
                 >
                   <option value="">ID Type</option>
                   <option value="PWD ID">PWD ID</option>
@@ -244,7 +244,7 @@ const SocialWelfare = () => {
                   value={form.needType} 
                   onChange={handleFormChange} 
                   required 
-                  className="bg-[var(--input)] border border-[var(--border)] rounded-full px-6 py-3 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
+                  className="bg-[var(--input)] border border-[var(--border)] rounded-full px-6 py-3 pr-10 font-figtree text-[var(--foreground)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
                 >
                   <option value="">Type of Need</option>
                   <option value="Financial Assistance">Financial Assistance</option>
