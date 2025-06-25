@@ -42,7 +42,7 @@ const Footer = () => {
             </p>
             <Button 
               variant="outline" 
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="border-primary-foreground text-[#2f4f9d] font-bold hover:bg-primary-foreground hover:text-primary"
             >
               Get Updates
             </Button>
