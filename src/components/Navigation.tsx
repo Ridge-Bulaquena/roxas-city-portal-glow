@@ -151,13 +151,6 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           route: '/social-welfare',
         },
         {
-          title: 'Public Works',
-          desc: 'Infrastructure, road repairs, utilities',
-          icon: Wrench,
-          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
-          route: '/apps/public-works',
-        },
-        {
           title: 'Agriculture & Fishery Support',
           desc: 'Programs for farmers and fishers',
           icon: Tractor,
