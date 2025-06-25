@@ -21,7 +21,6 @@ import {
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
-import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const budgetData = [
   { department: 'Health Services', allocated: 45000000, spent: 42000000, year: 2024 },
@@ -200,7 +199,6 @@ const GovernanceTransparency = () => {
       <main className="pt-8 pb-16">
         {/* Hero Section */}
         <section className="relative text-center py-16 px-6 bg-gradient-to-br from-[var(--chart-1)] to-[var(--card)]">
-          <SeaweedThreadBackground />
           <h1 className="text-5xl font-bold text-[var(--foreground)] mb-4" style={{ fontFamily: 'Geist, sans-serif' }}>
             Governance & Transparency
           </h1>

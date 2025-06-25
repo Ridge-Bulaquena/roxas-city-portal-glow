@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { BarChart3, FileText, Download, Search, PieChart, TrendingUp, Users, CheckCircle2, Bot } from 'lucide-react';
-import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const OpenDataPortal = () => {
   const [aiQuestion, setAiQuestion] = useState('');
@@ -22,7 +21,6 @@ const OpenDataPortal = () => {
       <main className="pt-8 pb-16">
         {/* Hero Section */}
         <section className="relative text-center py-16 px-6">
-          <SeaweedThreadBackground />
           <h1 className="text-5xl font-bold mb-4 typewriter text-white" style={{ fontFamily: 'Geist, sans-serif' }}>
             Open Data Portal
           </h1>

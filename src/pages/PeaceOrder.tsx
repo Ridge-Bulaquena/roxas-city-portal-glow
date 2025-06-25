@@ -25,6 +25,81 @@ import {
   Bell
 } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
+
+const barangays = [
+  'Barangay 1', 'Barangay 2', 'Barangay 3', 'Barangay 4', 'Barangay 5', 'Barangay 6', 'Barangay 7', 'Barangay 8',
+  'Barangay 9', 'Barangay 10', 'Barangay 11', 'Barangay 12', 'Barangay 13', 'Barangay 14', 'Barangay 15', 'Barangay 16',
+  'Barangay 17', 'Barangay 18', 'Barangay 19', 'Barangay 20', 'Barangay 21', 'Barangay 22', 'Barangay 23', 'Barangay 24',
+  'Barangay 25', 'Barangay 26', 'Barangay 27', 'Barangay 28', 'Barangay 29', 'Barangay 30', 'Barangay 31', 'Barangay 32',
+  'Barangay 33', 'Barangay 34', 'Barangay 35', 'Barangay 36', 'Barangay 37', 'Barangay 38', 'Barangay 39', 'Barangay 40',
+  'Barangay 41', 'Barangay 42', 'Barangay 43', 'Barangay 44', 'Barangay 45', 'Barangay 46', 'Barangay 47'
+];
+
+const incidentTypes = ['Theft', 'Dispute', 'Domestic Violence', 'Vandalism', 'Noise Complaint', 'Traffic Violation', 'Other'];
+
+const patrolSchedules = [
+  { barangay: 'Barangay 1', time: '6AM-2PM', officer: 'PO Santos', status: 'Active' },
+  { barangay: 'Barangay 2', time: '2PM-10PM', officer: 'PO Dela Cruz', status: 'Active' },
+  { barangay: 'Barangay 3', time: '10PM-6AM', officer: 'PO Rodriguez', status: 'Active' },
+  { barangay: 'Barangay 4', time: '6AM-2PM', officer: 'PO Garcia', status: 'Active' },
+  { barangay: 'Barangay 5', time: '2PM-10PM', officer: 'PO Martinez', status: 'Active' },
+];
+
+const policeOutposts = [
+  { name: 'City Police Station', location: 'Downtown', status: '24/7', contact: '123-4567' },
+  { name: 'Barangay 1 Outpost', location: 'Barangay 1', status: '8AM-8PM', contact: '123-4568' },
+  { name: 'Barangay 5 Checkpoint', location: 'Barangay 5', status: '24/7', contact: '123-4569' },
+  { name: 'Baybay Police Post', location: 'Baybay', status: '6AM-10PM', contact: '123-4570' },
+];
+
+const ordinances = [
+  { 
+    title: 'Anti-Noise Ordinance', 
+    code: '2024-001', 
+    desc: 'Regulates noise levels in residential areas during specific hours.',
+    category: 'Public Order',
+    date: 'January 2024'
+  },
+  { 
+    title: 'Curfew for Minors', 
+    code: '2024-002', 
+    desc: 'Establishes curfew hours for minors under 18 years old.',
+    category: 'Youth Protection',
+    date: 'February 2024'
+  },
+  { 
+    title: 'Traffic Management', 
+    code: '2024-003', 
+    desc: 'Comprehensive traffic rules and parking regulations.',
+    category: 'Traffic',
+    date: 'March 2024'
+import React, { useState } from 'react';
+import { Navigation } from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { 
+  Shield, 
+  MapPin, 
+  Clock, 
+  Users, 
+  FileText, 
+  Search, 
+  Download, 
+  Eye, 
+  AlertTriangle, 
+  CheckCircle2,
+  Phone,
+  Mail,
+  Calendar,
+  Filter,
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
+  Car,
+  Building,
+  UserCheck,
+  Bell
+} from 'lucide-react';
+import { useInView } from '@/hooks/use-in-view';
 import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 
 const barangays = [

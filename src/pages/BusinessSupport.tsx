@@ -11,7 +11,6 @@ import { Avatar } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import SeaweedThreadBackground from '@/components/SeaweedThreadBackground';
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
@@ -37,7 +36,6 @@ const BusinessSupport = () => {
       <Navigation userType="resident" setUserType={() => {}} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-cyan-600 via-green-500 to-teal-400 text-white">
-        <SeaweedThreadBackground />
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
