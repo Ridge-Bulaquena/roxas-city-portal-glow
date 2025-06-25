@@ -125,6 +125,10 @@ const SlidersSection = () => {
                           navigate('/health-services');
                         } else if (cta.toLowerCase().includes('support learners')) {
                           navigate('/education-support');
+                        } else if (cta.toLowerCase().includes('view city projects')) {
+                          navigate('/public-works');
+                        } else if (cta.toLowerCase().includes('protect our environment')) {
+                          navigate('/environment');
                         }
                       }}
                     >

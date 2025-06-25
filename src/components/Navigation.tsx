@@ -26,7 +26,8 @@ import {
   Store,
   MapPin,
   Phone,
-  Clock
+  Clock,
+  Leaf
 } from "lucide-react";
 
 interface NavigationProps {
@@ -123,6 +124,20 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           icon: GraduationCap,
           image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
           route: '/education-support',
+        },
+        {
+          title: 'Public Works & Infrastructure',
+          desc: 'Roads, housing, city facilities',
+          icon: Wrench,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/public-works',
+        },
+        {
+          title: 'Environmental Management',
+          desc: 'Clean air, water, and land',
+          icon: Leaf,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/environment',
         },
         {
           title: 'Social Welfare',
