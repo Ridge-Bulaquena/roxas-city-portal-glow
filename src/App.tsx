@@ -11,6 +11,8 @@ import SocialWelfare from "./pages/SocialWelfare";
 import HealthServices from "./pages/HealthServices";
 import EducationSupport from "./pages/EducationSupport";
 import GovernanceTransparency from "./pages/GovernanceTransparency";
+import Environment from "./pages/Environment";
+import PublicWorks from "./pages/PublicWorks";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
           <Route path="/health-services" element={<HealthServices />} />
           <Route path="/education-support" element={<EducationSupport />} />
           <Route path="/governance-transparency" element={<GovernanceTransparency />} />
+          <Route path="/environment" element={<Environment />} />
+          <Route path="/public-works" element={<PublicWorks />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
