@@ -31,7 +31,8 @@ import {
   Tractor,
   Fish,
   Shield,
-  Car
+  Car,
+  Megaphone
 } from "lucide-react";
 
 interface NavigationProps {
@@ -228,6 +229,13 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
       title: 'Participation',
       tooltip: 'Engage in real governance.',
       items: [
+        {
+          title: 'Digital Participation',
+          desc: 'Submit ideas, vote, and join town halls digitally',
+          icon: Megaphone,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/digital-participation',
+        },
         {
           title: 'Complaint System',
           desc: 'File and track complaints',

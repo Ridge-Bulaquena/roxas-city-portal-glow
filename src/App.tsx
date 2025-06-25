@@ -16,6 +16,7 @@ import PublicWorks from "./pages/PublicWorks";
 import PeaceOrder from "./pages/PeaceOrder";
 import AgricultureFishery from "./pages/AgricultureFishery";
 import OpenDataPortal from "./pages/OpenDataPortal";
+import DigitalParticipation from "./pages/DigitalParticipation";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/peace-order" element={<PeaceOrder />} />
           <Route path="/agriculture-fishery" element={<AgricultureFishery />} />
           <Route path="/open-data-portal" element={<OpenDataPortal />} />
+          <Route path="/digital-participation" element={<DigitalParticipation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

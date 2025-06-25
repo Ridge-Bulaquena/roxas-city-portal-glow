@@ -13,7 +13,8 @@ import {
   Database, 
   MessageSquare, 
   Briefcase, 
-  Camera 
+  Camera,
+  Megaphone
 } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
 import { useNavigate } from 'react-router-dom';
@@ -99,9 +100,9 @@ const ServicesGrid = () => {
       title: "Digital Participation",
       description: "Submit ideas, vote, and join town halls from your device.",
       buttonText: "Engage Digitally",
-      icon: MessageSquare,
+      icon: Megaphone,
       delay: 1800,
-      route: "/participation"
+      route: "/digital-participation"
     },
     {
       title: "Business Support",
