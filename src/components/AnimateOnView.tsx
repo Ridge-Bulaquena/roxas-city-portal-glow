@@ -1,101 +1,80 @@
 import React, { useRef } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 interface AnimateOnViewProps {
-  children: React.ReactNode;
+  as?: keyof JSX.IntrinsicElements;
   delay?: number;
-  custom?: number;
-  type?: 'icon' | 'title' | 'subtitle' | 'button' | 'card' | 'form' | 'section' | 'paragraph' | 'input' | 'tab';
-  once?: boolean;
+  children: React.ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  type?: 'icon' | 'title' | 'subtitle' | 'button' | 'card' | 'form' | 'default';
+  once?: boolean;
 }
 
-const variants = {
-  icon: (i = 0) => ({
-    initial: { opacity: 0, scale: 0.9, y: 20 },
-    animate: { opacity: 1, scale: 1, y: 0, transition: { delay: i * 0.2, duration: 0.4, ease: 'easeOut' } },
-    exit: { opacity: 0, scale: 0.9, y: 10, transition: { duration: 0.3 } },
-  }),
-  title: (i = 0) => ({
-    initial: { opacity: 0, x: 30 },
-    animate: { opacity: 1, x: 0, transition: { delay: i * 0.2, duration: 0.5, ease: 'easeOut' } },
-    exit: { opacity: 0, x: 10, transition: { duration: 0.3 } },
-  }),
-  subtitle: (i = 0) => ({
+const variantsByType = {
+  icon: {
+    initial: { opacity: 0, y: 20, scale: 0.9 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: 10, scale: 0.9 },
+  },
+  title: {
+    initial: { opacity: 0, x: 40 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 20 },
+  },
+  subtitle: {
     initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { delay: i * 0.2 + 0.1, duration: 0.4, ease: 'easeOut' } },
-    exit: { opacity: 0, y: 10, transition: { duration: 0.3 } },
-  }),
-  button: (i = 0) => ({
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 10 },
+  },
+  button: {
     initial: { opacity: 0, scale: 0.95 },
-    animate: { opacity: 1, scale: 1, transition: { delay: i * 0.2 + 0.2, duration: 0.3, ease: 'easeOut' } },
-    exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } },
-  }),
-  card: (i = 0) => ({
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0, transition: { delay: i * 0.2 + 0.1, duration: 0.4, ease: 'easeOut' } },
-    exit: { opacity: 0, y: 30, scale: 0.98, transition: { duration: 0.3 } },
-  }),
-  form: (i = 0) => ({
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.95 },
+  },
+  card: {
     initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { delay: i * 0.2 + 0.1, duration: 0.5, ease: 'easeOut' } },
-    exit: { opacity: 0, y: 30, transition: { duration: 0.3 } },
-  }),
-  section: (i = 0) => ({
-    initial: { opacity: 0, y: 30 },
-    animate: { opacity: 1, y: 0, transition: { delay: i * 0.2, duration: 0.5, ease: 'easeOut' } },
-    exit: { opacity: 0, y: 30, transition: { duration: 0.3 } },
-  }),
-  paragraph: (i = 0) => ({
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0, transition: { delay: i * 0.2 + 0.1, duration: 0.4, ease: 'easeOut' } },
-    exit: { opacity: 0, y: 10, transition: { duration: 0.2 } },
-  }),
-  input: (i = 0) => ({
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0, transition: { delay: i * 0.2 + 0.1, duration: 0.3, ease: 'easeOut' } },
-    exit: { opacity: 0, y: 10, transition: { duration: 0.2 } },
-  }),
-  tab: (i = 0) => ({
-    initial: { opacity: 0, scale: 0.95 },
-    animate: { opacity: 1, scale: 1, transition: { delay: i * 0.2, duration: 0.3, ease: 'easeOut' } },
-    exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } },
-  })
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 10 },
+  },
+  form: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 10 },
+  },
+  default: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 10 },
+  },
 };
 
 export const AnimateOnView: React.FC<AnimateOnViewProps> = ({
-  children,
+  as = 'div',
   delay = 0,
-  custom = 0,
-  type = 'section',
-  once = true,
+  children,
   className = '',
-  style = {},
+  type = 'default',
+  once = true,
 }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once, margin: '-80px' });
-  const controls = useAnimation();
-
-  React.useEffect(() => {
-    if (inView) {
-      controls.start('animate');
-    }
-  }, [inView, controls]);
-
-  const variant = variants[type] ? variants[type](custom) : variants.section(custom);
+  const Tag = as as any;
+  const variants = variantsByType[type] || variantsByType.default;
 
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={style}
-      initial="initial"
-      animate={controls}
-      exit="exit"
-      variants={variant}
-    >
-      {children}
-    </motion.div>
+    <AnimatePresence>
+      <motion.div
+        ref={ref}
+        initial="initial"
+        animate={inView ? 'animate' : 'initial'}
+        exit="exit"
+        variants={variants}
+        transition={{ duration: 0.4, delay, ease: 'easeOut' }}
+        className={className}
+        style={{ willChange: 'opacity, transform' }}
+      >
+        <Tag>{children}</Tag>
+      </motion.div>
+    </AnimatePresence>
   );
 }; 
