@@ -32,7 +32,9 @@ import {
   Fish,
   Shield,
   Car,
-  Megaphone
+  Megaphone,
+  Briefcase,
+  Camera
 } from "lucide-react";
 
 interface NavigationProps {
@@ -268,6 +270,13 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
       tooltip: 'Opportunities await.',
       items: [
         {
+          title: 'Business Support',
+          desc: 'Permits, incentives, and mentorship',
+          icon: Briefcase,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/business-support',
+        },
+        {
           title: 'MSME Hub',
           desc: 'Small business support and resources',
           icon: Store,
@@ -290,7 +299,14 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           desc: 'Festivals, markets, community events',
           icon: Calendar,
           image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png'
-        }
+        },
+        {
+          title: 'Tourism & Culture',
+          desc: 'Festivals, food, heritage, and sights',
+          icon: Camera,
+          image: '/lovable-uploads/e8142eed-99fa-4dc3-acd3-0d372b04ae75.png',
+          route: '/tourism-culture',
+        },
       ]
     },
     {

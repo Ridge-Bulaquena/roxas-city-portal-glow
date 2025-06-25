@@ -54,7 +54,7 @@ const EducationSupport = () => {
             Education Support
           </h1>
           <p className="text-lg text-white/90 max-w-2xl mx-auto font-figtree">Scholarships, feeding programs, and lifelong learning resources for all citizens.</p>
-          <button className="mt-8 bg-white text-primary rounded-full px-8 py-3 font-semibold shadow-md hover:scale-105 hover:brightness-110 focus:ring-2 focus:ring-white/50 transition-all duration-150">
+          <button className="mt-8 bg-white text-[var(--chart-3)] rounded-full px-8 py-3 font-semibold shadow-md hover:scale-105 hover:brightness-110 focus:ring-2 focus:ring-white/50 transition-all duration-150">
             Support Learners
           </button>
         </section>

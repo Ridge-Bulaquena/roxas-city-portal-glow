@@ -1,132 +1,226 @@
 import React, { useState } from 'react';
-import { Navigation } from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import { Briefcase, Store, Lightbulb, CheckSquare, FileText, Users, Download, Bot, ShoppingBag } from 'lucide-react';
+import { Briefcase, Store, Lightbulb, FileText, CheckCircle, Users, Upload, MessageSquare, Calendar, Star, Search, Building2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
+import { Avatar } from '@/components/ui/avatar';
+import { Separator } from '@/components/ui/separator';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const mentors = [
-  { name: 'Maria Santos', field: 'Retail', rating: 4.8, testimonials: 12 },
-  { name: 'Juan Dela Cruz', field: 'Tech', rating: 4.9, testimonials: 8 },
-  { name: 'Josefa Reyes', field: 'F&B', rating: 4.7, testimonials: 15 },
+  { name: 'Ana Cruz', field: 'Retail', rating: 4.8, testimonials: 12 },
+  { name: 'Mark Tan', field: 'Tech', rating: 4.9, testimonials: 8 },
+  { name: 'Liza Gomez', field: 'F&B', rating: 4.7, testimonials: 15 },
+];
+
+const products = [
+  { name: 'Bangus Tinapa', seller: 'Barangay 1', price: '₱120', delivery: true },
+  { name: 'Rice Cakes', seller: 'Barangay 3', price: '₱60', delivery: false },
+  { name: 'Organic Veggies', seller: 'Barangay 5', price: '₱80', delivery: true },
 ];
 
 const BusinessSupport = () => {
-  const [gptQuestion, setGptQuestion] = useState('');
-  const [gptResponse, setGptResponse] = useState('');
-  const [showGPTSuccess, setShowGPTSuccess] = useState(false);
-
-  const handleGPTAsk = (e: React.FormEvent) => {
-    e.preventDefault();
-    setGptResponse('To get BIR clearance, visit the BIR office with your business permit, fill out Form 1901, and submit required documents. See full checklist below.');
-    setShowGPTSuccess(true);
-  };
+  const [activeTab, setActiveTab] = useState('permit');
+  const [selectedField, setSelectedField] = useState('all');
+  const [selectedBarangay, setSelectedBarangay] = useState('all');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[var(--chart-1)] to-[var(--chart-3)]">
-      <Navigation userType="resident" setUserType={() => {}} />
-      <main className="pt-8 pb-16">
-        {/* Hero Section */}
-        <section className="text-center py-16 px-6">
-          <h1 className="text-5xl font-bold mb-4 text-[var(--chart-3)]" style={{ fontFamily: 'Geist, sans-serif' }}>
-            Business Support
-          </h1>
-          <p className="text-lg text-[var(--chart-1)] max-w-2xl mx-auto font-inter mb-8">
-            From sari-sari stores to tech startups, Roxas City fuels local businesses with digital tools, financial programs, and a vibrant mentorship network.
-          </p>
-          <button className="bg-[var(--chart-1)] text-white rounded-full px-8 py-3 font-semibold shadow-md hover:scale-105 hover:brightness-110 focus:ring-2 focus:ring-[var(--ring)] transition-all duration-150" style={{ fontFamily: 'Inter, sans-serif' }}>
-            Start or Grow Your Business
-          </button>
-        </section>
-
-        {/* Mini-Apps & AI Features */}
-        <section className="py-12 px-6">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
-            {/* Left Column */}
-            <div className="space-y-8">
-              {/* Smart Permit System */}
-              <div className="bg-white/80 rounded-2xl shadow-lg p-6 flex flex-col gap-4 border border-[#b6f0e6]">
-                <div className="flex items-center gap-3 mb-2">
-                  <FileText className="w-8 h-8 text-[var(--chart-1)]" />
-                  <h2 className="text-xl font-bold text-[var(--chart-3)]">Smart Permit System</h2>
-                </div>
-                <p className="text-[var(--chart-3)]">Apply, upload docs, and track your business permit. Smart form auto-fills using uploaded PDFs.</p>
-                <button className="bg-[var(--chart-1)] text-white rounded-full px-6 py-2 font-semibold shadow hover:scale-105 focus:ring-2 focus:ring-[var(--ring)] transition-all">Apply for Permit</button>
-              </div>
-
-              {/* Incentive Eligibility Checker */}
-              <div className="bg-white/80 rounded-2xl shadow-lg p-6 flex flex-col gap-4 border border-[#b6f0e6]">
-                <div className="flex items-center gap-3 mb-2">
-                  <CheckSquare className="w-8 h-8 text-[var(--chart-1)]" />
-                  <h2 className="text-xl font-bold text-[var(--chart-3)]">Incentive Eligibility Checker</h2>
-                </div>
-                <p className="text-[var(--chart-3)]">GPT form analyzes your business profile and matches you to tax breaks, grants, and exemptions.</p>
-                <button className="bg-[var(--chart-1)] text-white rounded-full px-6 py-2 font-semibold shadow hover:scale-105 focus:ring-2 focus:ring-[var(--ring)] transition-all">Check Eligibility</button>
-              </div>
-
-              {/* Business GPT Coach */}
-              <div className="bg-white/80 rounded-2xl shadow-lg p-6 flex flex-col gap-4 border border-[#b6f0e6]">
-                <div className="flex items-center gap-3 mb-2">
-                  <Bot className="w-8 h-8 text-[var(--chart-1)]" />
-                  <h2 className="text-xl font-bold text-[var(--chart-3)]">Business GPT Coach</h2>
-                </div>
-                <form onSubmit={handleGPTAsk} className="w-full flex flex-col gap-2">
-                  <input
-                    type="text"
-                    value={gptQuestion}
-                    onChange={e => setGptQuestion(e.target.value)}
-                    placeholder='Ask: "How do I get BIR clearance?"'
-                    className="w-full px-4 py-2 rounded-full border border-[#b6f0e6] bg-white/60 text-[var(--chart-3)] focus:ring-2 focus:ring-[var(--ring)] outline-none"
-                  />
-                  <button type="submit" className="bg-[var(--chart-1)] text-white rounded-full px-6 py-2 font-semibold shadow hover:scale-105 focus:ring-2 focus:ring-[var(--ring)] transition-all">Ask</button>
-                </form>
-                {showGPTSuccess && (
-                  <div className="mt-4 bg-white/90 rounded-xl p-4 text-left w-full animate-fade-in">
-                    <div className="flex items-center gap-2 mb-2 text-green-700 font-bold"><CheckSquare className="w-5 h-5" />GPT Response</div>
-                    <div className="text-[var(--chart-3)] mb-2">{gptResponse}</div>
-                    <button className="flex items-center gap-2 bg-[var(--chart-1)] text-white rounded-full px-4 py-2 text-sm font-semibold hover:scale-105 transition-all">
-                      <Download className="w-4 h-4" />
-                      Download Checklist
-                    </button>
-                  </div>
-                )}
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-green-50 to-white">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-cyan-600 via-green-500 to-teal-400 text-white">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <div className="flex justify-center mb-6">
+              <div className="p-3 bg-white/10 backdrop-blur-sm rounded-full">
+                <Briefcase className="w-8 h-8 text-white" />
               </div>
             </div>
-
-            {/* Right Column */}
-            <div className="space-y-8">
-              {/* Mentorship Matchmaker */}
-              <div className="bg-white/80 rounded-2xl shadow-lg p-6 flex flex-col gap-4 border border-[#b6f0e6]">
-                <div className="flex items-center gap-3 mb-2">
-                  <Users className="w-8 h-8 text-[var(--chart-1)]" />
-                  <h2 className="text-xl font-bold text-[var(--chart-3)]">Mentorship Matchmaker</h2>
-                </div>
-                <ul className="mb-2">
-                  {mentors.map((m, i) => (
-                    <li key={i} className="flex items-center gap-3 mb-1">
-                      <Briefcase className="w-5 h-5 text-[var(--chart-3)]" />
-                      <span className="font-semibold text-[var(--chart-3)]">{m.name}</span>
-                      <span className="text-xs text-[var(--chart-1)]">{m.field}</span>
-                      <span className="text-xs text-yellow-500">★ {m.rating}</span>
-                      <span className="text-xs text-[var(--muted-foreground)]">({m.testimonials} reviews)</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className="bg-[var(--chart-1)] text-white rounded-full px-6 py-2 font-semibold shadow hover:scale-105 focus:ring-2 focus:ring-[var(--ring)] transition-all">Schedule Consult</button>
-              </div>
-
-              {/* eKadiwa Marketplace Preview */}
-              <div className="bg-white/80 rounded-2xl shadow-lg p-6 flex flex-col gap-4 border border-[#b6f0e6]">
-                <div className="flex items-center gap-3 mb-2">
-                  <Store className="w-8 h-8 text-[var(--chart-1)]" />
-                  <h2 className="text-xl font-bold text-[var(--chart-3)]">eKadiwa Marketplace Preview</h2>
-                </div>
-                <p className="text-[var(--chart-3)]">Sell your products directly to locals. Filter by barangay, pickup/delivery.</p>
-                <button className="bg-[var(--chart-1)] text-white rounded-full px-6 py-2 font-semibold shadow hover:scale-105 focus:ring-2 focus:ring-[var(--ring)] transition-all">Preview Marketplace</button>
-              </div>
-            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent">
+              Business Support
+            </h1>
+            <p className="text-xl md:text-2xl mb-6 text-green-100 max-w-2xl mx-auto">
+              Permits, incentives, and mentorship to help entrepreneurs thrive.
+            </p>
+            <p className="text-lg mb-10 text-green-200 max-w-3xl mx-auto leading-relaxed">
+              From sari-sari stores to tech startups, Roxas City fuels local businesses with digital tools, financial programs, and a vibrant mentorship network.
+            </p>
+            <Button size="lg" className="bg-white text-cyan-700 hover:bg-green-50 px-8 py-4 text-lg font-semibold">
+              Start or Grow Your Business
+            </Button>
           </div>
-        </section>
-      </main>
-      <Footer />
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Left Column: Mini-Apps */}
+          <div className="space-y-8">
+            {/* Smart Permit System */}
+            <Card className="bg-white/90 border-cyan-100">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-cyan-600" />
+                  Smart Permit System
+                </CardTitle>
+                <CardDescription>Apply, upload docs, and track your business permit progress. Auto-fill forms using uploaded PDFs.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Input type="text" placeholder="Business Name" />
+                <div className="flex gap-2">
+                  <Input type="file" />
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Upload className="w-4 h-4" />
+                    Upload Docs
+                  </Button>
+                </div>
+                <Progress value={40} className="h-2" />
+                <p className="text-xs text-gray-500">Status: Application in review</p>
+                <Button className="w-full bg-gradient-to-r from-cyan-600 to-green-500">
+                  Track Progress
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Incentive Eligibility Checker */}
+            <Card className="bg-white/90 border-green-100">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  Incentive Eligibility Checker
+                </CardTitle>
+                <CardDescription>Find out which tax breaks, grants, or exemptions your business qualifies for. Powered by GPT.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Input placeholder="Describe your business (e.g. sari-sari store, tech startup)" />
+                <Button className="w-full bg-gradient-to-r from-green-500 to-cyan-500">
+                  Check Eligibility
+                </Button>
+                <Alert>
+                  <Lightbulb className="h-4 w-4 text-cyan-500" />
+                  <AlertDescription>
+                    Our AI will analyze your profile and match you to the best incentives.
+                  </AlertDescription>
+                </Alert>
+              </CardContent>
+            </Card>
+
+            {/* Business GPT Coach */}
+            <Card className="bg-white/90 border-cyan-100">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="w-5 h-5 text-cyan-600" />
+                  Business GPT Coach
+                </CardTitle>
+                <CardDescription>Ask business/legal questions and get instant answers, tips, and agency links.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Textarea placeholder="Ask a question (e.g. How do I get BIR clearance?)" />
+                <Button className="w-full bg-gradient-to-r from-cyan-600 to-green-500">
+                  Ask Coach
+                </Button>
+                <div className="mt-2 text-xs text-gray-500">Sample: "Can I open a business as a student?"</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Right Column: Mentorship & Marketplace */}
+          <div className="space-y-8">
+            {/* Mentorship Matchmaker */}
+            <Card className="bg-white/90 border-green-100">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="w-5 h-5 text-green-600" />
+                  Mentorship Matchmaker
+                </CardTitle>
+                <CardDescription>Find a local mentor by field and schedule a virtual consult. See ratings and testimonials.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Select value={selectedField} onValueChange={setSelectedField}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="All Fields" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Fields</SelectItem>
+                    <SelectItem value="Retail">Retail</SelectItem>
+                    <SelectItem value="F&B">F&B</SelectItem>
+                    <SelectItem value="Tech">Tech</SelectItem>
+                  </SelectContent>
+                </Select>
+                <div className="space-y-2">
+                  {mentors.filter(m => selectedField === 'all' || m.field === selectedField).map((mentor, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <Avatar className="w-8 h-8 bg-cyan-100 text-cyan-700 font-bold">{mentor.name[0]}</Avatar>
+                        <div>
+                          <div className="font-medium">{mentor.name}</div>
+                          <div className="text-xs text-gray-500">{mentor.field} Mentor</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4 text-yellow-400" />
+                        <span className="text-sm font-semibold">{mentor.rating}</span>
+                        <span className="text-xs text-gray-400">({mentor.testimonials})</span>
+                        <Button size="sm" variant="outline" className="ml-2">Schedule</Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* eKadiwa Marketplace Preview */}
+            <Card className="bg-white/90 border-cyan-100">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Store className="w-5 h-5 text-cyan-600" />
+                  eKadiwa Marketplace Preview
+                </CardTitle>
+                <CardDescription>Sell your products directly to locals. Filter by barangay, pickup/delivery.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex gap-2">
+                  <Select value={selectedBarangay} onValueChange={setSelectedBarangay}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="All Barangays" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Barangays</SelectItem>
+                      <SelectItem value="Barangay 1">Barangay 1</SelectItem>
+                      <SelectItem value="Barangay 3">Barangay 3</SelectItem>
+                      <SelectItem value="Barangay 5">Barangay 5</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button variant="outline" size="sm">
+                    <Search className="w-4 h-4 mr-2" />
+                    Filter
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {products.filter(p => selectedBarangay === 'all' || p.seller === selectedBarangay).map((product, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-3 bg-cyan-50 rounded-lg">
+                      <div>
+                        <div className="font-medium">{product.name}</div>
+                        <div className="text-xs text-gray-500">by {product.seller}</div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-cyan-700">{product.price}</span>
+                        <Badge variant={product.delivery ? 'default' : 'secondary'}>{product.delivery ? 'Delivery' : 'Pickup'}</Badge>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

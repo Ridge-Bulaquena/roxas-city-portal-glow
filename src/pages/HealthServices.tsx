@@ -107,7 +107,7 @@ const HealthServices = () => {
           <p className="text-lg text-white/90 max-w-2xl mx-auto font-figtree">
             Find nearby health stations, track urgent health concerns, and get connected to support across all 47 barangays of Roxas City.
           </p>
-          <button className="mt-8 bg-white text-primary rounded-full px-8 py-3 font-semibold shadow-md hover:scale-105 hover:brightness-110 focus:ring-2 focus:ring-white/50 transition-all duration-150">
+          <button className="mt-8 bg-white text-[var(--chart-3)] rounded-full px-8 py-3 font-semibold shadow-md hover:scale-105 hover:brightness-110 focus:ring-2 focus:ring-white/50 transition-all duration-150">
             Access Health Support
           </button>
         </section>

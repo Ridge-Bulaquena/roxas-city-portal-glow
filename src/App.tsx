@@ -17,6 +17,8 @@ import PeaceOrder from "./pages/PeaceOrder";
 import AgricultureFishery from "./pages/AgricultureFishery";
 import OpenDataPortal from "./pages/OpenDataPortal";
 import DigitalParticipation from "./pages/DigitalParticipation";
+import BusinessSupport from "./pages/BusinessSupport";
+import TourismCulture from "./pages/TourismCulture";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +43,8 @@ const App = () => (
           <Route path="/agriculture-fishery" element={<AgricultureFishery />} />
           <Route path="/open-data-portal" element={<OpenDataPortal />} />
           <Route path="/digital-participation" element={<DigitalParticipation />} />
+          <Route path="/business-support" element={<BusinessSupport />} />
+          <Route path="/tourism-culture" element={<TourismCulture />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

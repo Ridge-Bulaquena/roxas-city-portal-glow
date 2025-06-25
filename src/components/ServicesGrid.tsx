@@ -110,7 +110,7 @@ const ServicesGrid = () => {
       buttonText: "Start or Grow Your Business",
       icon: Briefcase,
       delay: 2000,
-      route: "/business"
+      route: "/business-support"
     },
     {
       title: "Tourism & Culture",
@@ -118,7 +118,7 @@ const ServicesGrid = () => {
       buttonText: "Explore Roxas Culture",
       icon: Camera,
       delay: 2200,
-      route: "/tourism"
+      route: "/tourism-culture"
     }
   ];
 
