@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { Tractor, Fish, Calendar, Leaf, CheckCircle2, BookOpen } from 'lucide-react';
+import { Tractor, Fish, Calendar, Leaf, CheckCircle2, BookOpen, Compass } from 'lucide-react';
 import { useInView } from '@/hooks/use-in-view';
 
 const regions = ['North', 'South', 'East', 'West'];
