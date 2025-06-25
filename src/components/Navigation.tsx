@@ -289,11 +289,11 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
           </form>
           {/* Right: Dropdown and Auth Buttons */}
           <div className="flex items-center gap-2">
-            <div className="relative w-[140px]">
+            <div className="relative">
               <select
                 value={userType}
                 onChange={handleUserTypeChange}
-                className="px-4 pr-12 py-2 bg-white text-[#14274E] border border-gray-200 rounded-xl font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm appearance-none hover:shadow-md hover:border-blue-300 duration-200"
+                className="appearance-none px-4 py-2 bg-white text-[#14274E] border border-gray-200 rounded-xl font-figtree font-medium focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm hover:shadow-md hover:border-blue-300 duration-200 pr-10"
                 style={{ minWidth: 140, fontFamily: 'Figtree, Inter, sans-serif' }}
                 aria-label="Select user type"
               >
@@ -301,9 +301,20 @@ export const Navigation = ({ userType, setUserType }: NavigationProps) => {
                 <option value="visitor">I am a Visitor</option>
                 <option value="official">I am an Official</option>
               </select>
-              {/* Custom dropdown arrow for better visibility */}
-              <svg className="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ml-2 pr-12" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 8L10 12L14 8" stroke="#bcd7f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              {/* Custom dropdown arrow */}
+              <svg
+                className="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 8L10 12L14 8"
+                  stroke="#bcd7f6"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
             <a href="/login" className="px-4 py-2 bg-transparent text-[#14274E] hover:bg-[#eaf3fb] transition-colors rounded-md font-medium">Sign In</a>
